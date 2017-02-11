@@ -8,10 +8,14 @@ namespace Aurora
 	class Camera
 	{
 	public:
-
+		
 	private:
 		float fov_;
 		float aspect_;
+		Point4D_T<float> position_;
+		Point4D_T<float> up_;
+		Point4D_T<float> front_;
+		Point4D_T<float> right_;
 	}
 }
 

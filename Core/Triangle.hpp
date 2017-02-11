@@ -8,9 +8,10 @@ namespace Aurora
 	class Triangle
 	{
 	public:
-
 	private:
-		
+		Point4D_T<float> point_[3];
+		Point2D_T<float> uv_;
+		Point4D_T<float> normal_;
 	}
 }
 

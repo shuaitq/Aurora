@@ -1,6 +1,9 @@
 #ifndef AURORA_RENDERER_HPP_
 #define AURORA_RENDERER_HPP_
 
+#include "Camera.hpp"
+#include "Color.hpp"
+
 namespace Aurora
 {
 	class Renderer
@@ -8,6 +11,10 @@ namespace Aurora
 	public:
 
 	private:
+		Camera *camera_;
+		RGB<float> *screen_;
+		size_t width;
+		size_t height;
 
 	}
 }

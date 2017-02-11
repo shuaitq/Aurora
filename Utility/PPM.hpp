@@ -1,8 +1,9 @@
 #ifndef AURORA_PPM_HPP_
 #define AURORA_PPM_HPP_
 
-#include <cstdio>
 #include "../Core/Color.hpp"
+
+#include <cstdio>
 
 namespace Aurora
 {

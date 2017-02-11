@@ -63,6 +63,13 @@ namespace Aurora
 		{
 			return col_[index];
 		}
+
+		const static RGB_T<T> black;
+		const static RGB_T<T> white;
+		const static RGB_T<T> red;
+		const static RGB_T<T> green;
+		const static RGB_T<T> blue;
+
 	private:
 		union
 		{
@@ -73,6 +80,16 @@ namespace Aurora
 			T col_[3];
 		};
 	};
+	template <>
+	const RGB_T<float> RGB_T<float>::black(0, 0, 0);
+	template <>
+	const RGB_T<float> RGB_T<float>::white(1, 1, 1);
+	template <>
+	const RGB_T<float> RGB_T<float>::red(1, 0, 0);
+	template <>
+	const RGB_T<float> RGB_T<float>::green(0, 1, 0);
+	template <>
+	const RGB_T<float> RGB_T<float>::blue(0, 0, 1);
 
 	template <typename T>
 	class RGBA_T
@@ -109,6 +126,7 @@ namespace Aurora
 		{
 			return operator*(T(1)/u);
 		}
+		template <typename U>
 		RGBA_T<T>& operator/=(const U u)
 		{
 			return operator*=(T(1)/u);
@@ -122,6 +140,13 @@ namespace Aurora
 		{
 			return col_[index];
 		}
+
+		const static RGBA_T<T> black;
+		const static RGBA_T<T> white;
+		const static RGBA_T<T> red;
+		const static RGBA_T<T> green;
+		const static RGBA_T<T> blue;
+
 	private:
 		union
 		{
@@ -131,8 +156,19 @@ namespace Aurora
 			};
 			T col_[4];
 		};
-		T red_, green_, blue_, alpha_;
 	};
+
+	template <>
+	const RGBA_T<float> RGBA_T<float>::black(0, 0, 0, 1);
+	template <>
+	const RGBA_T<float> RGBA_T<float>::white(1, 1, 1, 1);
+	template <>
+	const RGBA_T<float> RGBA_T<float>::red(1, 0, 0, 1);
+	template <>
+	const RGBA_T<float> RGBA_T<float>::green(0, 1, 0, 1);
+	template <>
+	const RGBA_T<float> RGBA_T<float>::blue(0, 0, 1, 1);
+
 }
 
 #endif //AURORA_COLOR_HPP_

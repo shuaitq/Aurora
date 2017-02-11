@@ -1,5 +1,6 @@
-#include <cstdio>
 #include "Utility/PPM.hpp"
+
+#include <cstdio>
 int main(int argc, char *argv[])
 {
 	using namespace Aurora;
