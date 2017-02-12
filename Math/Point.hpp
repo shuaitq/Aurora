@@ -72,6 +72,7 @@ namespace Aurora
 		{
 			return operator*(T(1) / u);
 		}
+		template <typename U>
 		Point2D_T<T>& operator/=(const U u)
 		{
 			return operator*=(T(1) / u);
@@ -155,6 +156,7 @@ namespace Aurora
 		{
 			return operator*(T(1) / u);
 		}
+		template <typename U>
 		Point3D_T<T>& operator/=(const U u)
 		{
 			return operator*=(T(1) / u);
@@ -240,6 +242,7 @@ namespace Aurora
 		{
 			return operator*(T(1) / u);
 		}
+		template <typename U>
 		Point4D_T<T>& operator/=(const U u)
 		{
 			return operator*=(T(1) / u);

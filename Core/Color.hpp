@@ -1,6 +1,8 @@
 #ifndef AURORA_COLOR_HPP_
 #define AURORA_COLOR_HPP_
 
+#include <cstdio>
+
 namespace Aurora
 {
 	template <typename T>
@@ -63,12 +65,33 @@ namespace Aurora
 		{
 			return col_[index];
 		}
+		T& red()
+		{
+			return red_;
+		}
+		const T& red() const
+		{
+			return red_;
+		}
+		T& green()
+		{
+			return green_;
+		}
+		const T& green() const
+		{
+			return green_;
+		}
+		T& blue()
+		{
+			return blue_;
+		}
+		const T& blue() const
+		{
+			return blue_;
+		}
 
 		const static RGB_T<T> black;
 		const static RGB_T<T> white;
-		const static RGB_T<T> red;
-		const static RGB_T<T> green;
-		const static RGB_T<T> blue;
 
 	private:
 		union
@@ -84,12 +107,6 @@ namespace Aurora
 	const RGB_T<float> RGB_T<float>::black(0, 0, 0);
 	template <>
 	const RGB_T<float> RGB_T<float>::white(1, 1, 1);
-	template <>
-	const RGB_T<float> RGB_T<float>::red(1, 0, 0);
-	template <>
-	const RGB_T<float> RGB_T<float>::green(0, 1, 0);
-	template <>
-	const RGB_T<float> RGB_T<float>::blue(0, 0, 1);
 
 	template <typename T>
 	class RGBA_T
@@ -140,12 +157,41 @@ namespace Aurora
 		{
 			return col_[index];
 		}
+		T& red()
+		{
+			return red_;
+		}
+		const T& red() const
+		{
+			return red_;
+		}
+		T& green()
+		{
+			return green_;
+		}
+		const T& green() const
+		{
+			return green_;
+		}
+		T& blue()
+		{
+			return blue_;
+		}
+		const T& blue() const
+		{
+			return blue_;
+		}
+		T& alpha()
+		{
+			return alpha_;
+		}
+		const T& alpha() const
+		{
+			return alpha_;
+		}
 
 		const static RGBA_T<T> black;
 		const static RGBA_T<T> white;
-		const static RGBA_T<T> red;
-		const static RGBA_T<T> green;
-		const static RGBA_T<T> blue;
 
 	private:
 		union
@@ -162,12 +208,6 @@ namespace Aurora
 	const RGBA_T<float> RGBA_T<float>::black(0, 0, 0, 1);
 	template <>
 	const RGBA_T<float> RGBA_T<float>::white(1, 1, 1, 1);
-	template <>
-	const RGBA_T<float> RGBA_T<float>::red(1, 0, 0, 1);
-	template <>
-	const RGBA_T<float> RGBA_T<float>::green(0, 1, 0, 1);
-	template <>
-	const RGBA_T<float> RGBA_T<float>::blue(0, 0, 1, 1);
 
 }
 

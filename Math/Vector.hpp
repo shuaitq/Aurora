@@ -29,7 +29,7 @@ namespace Aurora
 
 		Vector2D_T<T> operator+(const Vector2D_T<T> &v) const
 		{
-			return Vecotr2D_T<T>(x_ + v.x_, y_ + v.y_);
+			return Vector2D_T<T>(x_ + v.x_, y_ + v.y_);
 		}
 		Vector2D_T<T>& operator+=(const Vector2D_T<T> &v)
 		{
@@ -58,10 +58,12 @@ namespace Aurora
 			y_ *= u;
 			return *this;
 		}
+		template <typename U>
 		Vector2D_T<T> operator/(const U u) const
 		{
 			return operator*(T(1) / u);
 		}
+		template <typename U>
 		Vector2D_T<T>& operator/=(const U u)
 		{
 			return operator*=(T(1) / u);
@@ -73,7 +75,7 @@ namespace Aurora
 		}
 	private:
 		T x_, y_;
-	}
+	};
 
 	template <typename T>
 	class Vector3D_T
@@ -102,7 +104,7 @@ namespace Aurora
 
 		Vector3D_T<T> operator+(const Vector3D_T<T> &v) const
 		{
-			return Vecotr3D_T<T>(x_ + v.x_, y_ + v.y_, z_ + v.z_);
+			return Vector3D_T<T>(x_ + v.x_, y_ + v.y_, z_ + v.z_);
 		}
 		Vector3D_T<T>& operator+=(const Vector3D_T<T> &v)
 		{
@@ -133,10 +135,12 @@ namespace Aurora
 			z_ *= u;
 			return *this;
 		}
+		template <typename U>
 		Vector3D_T<T> operator/(const U u) const
 		{
 			return operator*(T(1) / u);
 		}
+		template <typename U>
 		Vector3D_T<T>& operator/=(const U u)
 		{
 			return operator*=(T(1) / u);
@@ -148,7 +152,7 @@ namespace Aurora
 		}
 	private:
 		T x_, y_, z_;
-	}
+	};
 
 	template <typename T>
 	class Vector4D_T
@@ -156,9 +160,9 @@ namespace Aurora
 	public:
 		Vector4D_T():x_(0), y_(0), z_(0), w_(0){}
 		Vector4D_T(const T t):x_(t), y_(t), z_(t), w_(0){}
-		Vector4D_T(const T x, const T y, const T z):x_(x), y_(y), z_(z), w_(0){}
+		Vector4D_T(const T x, const T y, const T z, const T w = 0):x_(x), y_(y), z_(z), w_(w){}
 		Vector4D_T(const Vector4D_T<T> &v):x_(v.x_), y_(v.y_), z_(v.z_), w_(0){}
-		Vector4D_T<T>& operator=(const Vector4D_T<T>)
+		Vector4D_T<T>& operator=(const Vector4D_T<T> &v)
 		{
 			x_ = v.x_;
 			y_ = v.y_;
@@ -171,7 +175,7 @@ namespace Aurora
 		{
 			return x_ == v.x_ && y_ == v.y_ && z_ == v.z_ && w_ == v.w_;
 		}
-		bool operator!=(const Vector4D_T<T>)
+		bool operator!=(const Vector4D_T<T> &v)
 		{
 			return !operator==(v);
 		}
@@ -226,7 +230,7 @@ namespace Aurora
 		}
 	private:
 		T x_, y_, z_, w_;
-	}
+	};
 }
 
 #endif //AURORA_VECTOR_HPP_

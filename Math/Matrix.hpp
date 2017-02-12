@@ -24,7 +24,7 @@ namespace Aurora
 		{
 			memcpy(this -> _m, matrix.begin(), sizeof(_m));
 		}
-		Martix4_T<T> operator=(const Matrix4_T<T> &matrix)
+		Matrix4_T<T>& operator=(const Matrix4_T<T> &matrix)
 		{
 			memcpy(_m, matrix.begin(), sizeof(_m));
 		}
@@ -54,11 +54,11 @@ namespace Aurora
 			return *this = operator*(matrix);
 		}
 		
-		T& operator[](size_t row, size_t col)
+		T& operator()(size_t row, size_t col)
 		{
 			return m_[row][col];
 		}
-		const T& operator[](size_t row, size_t col) const
+		const T& operator()(size_t row, size_t col) const
 		{
 			return m_[row][col];
 		}
