@@ -103,10 +103,6 @@ namespace Aurora
 			T col_[3];
 		};
 	};
-	template <>
-	const RGB_T<float> RGB_T<float>::black(0, 0, 0);
-	template <>
-	const RGB_T<float> RGB_T<float>::white(1, 1, 1);
 
 	template <typename T>
 	class RGBA_T
@@ -203,12 +199,6 @@ namespace Aurora
 			T col_[4];
 		};
 	};
-
-	template <>
-	const RGBA_T<float> RGBA_T<float>::black(0, 0, 0, 1);
-	template <>
-	const RGBA_T<float> RGBA_T<float>::white(1, 1, 1, 1);
-
 }
 
 #endif //AURORA_COLOR_HPP_

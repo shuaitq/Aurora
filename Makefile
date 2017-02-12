@@ -7,13 +7,14 @@ else
 CPPFLAGS += -O2
 endif
 SRCS = Aurora.cpp \
-Utility/PPM.cpp Utility/ObjectFile.cpp
+       Core/Color.cpp \
+       Utility/PPM.cpp Utility/ObjectFile.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 $(PROJECT): $(OBJS)
 	$(CPP) $(CPPFLAGS) -o $@ $^
 
-%.o: %.cpp %.hpp
+%.o: %.cpp
 	$(CPP) $(CPPFLAGS) -c -o $@ $<
 
 .PHONY: clean
