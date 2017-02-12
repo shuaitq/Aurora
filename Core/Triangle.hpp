@@ -5,6 +5,7 @@
 #include "Vertex.hpp"
 
 #include <cstdio>
+#include <vector>
 
 namespace Aurora
 {

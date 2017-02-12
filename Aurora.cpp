@@ -8,6 +8,6 @@ int main(int argc, char *argv[])
 {
 	using namespace Aurora;
 	Object obj;
-	object.Load("Object/cube.obj");
+	obj.Load("Object/cube.obj");
 	return 0;
 }
