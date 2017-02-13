@@ -18,6 +18,9 @@ namespace Aurora
 				return false;
 			}
 			char str[16];
+			std::vector<Point4D_T<float>> PointMap;
+			std::vector<Point2D_T<float>> UVMap;
+			std::vector<Vector4D_T<float>> NormalMap;
 			float x, y, z;
 			while(fscanf(fp, "%s", str) != EOF)
 			{

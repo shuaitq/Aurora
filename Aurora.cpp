@@ -42,16 +42,17 @@ int main(int argc, char *argv[])
                 else if(str[0] == 'f')
                 {
                 	int v, u, n;
-                        std::vector<Vertex> temp;
+                        std::vector<int> temp;
                         for(size_t i = 0; i < 3; ++ i)
                         {
                         	fscanf(fp, "%d/%d/%d", &v, &u, &n);
 				-- v;
 				-- u;
 				-- n;
-                                temp.push_back(Vertex(PointMap[v], UVMap[u], NormalMap[n]));
+				temp.push_back(v);
+                                //temp.push_back(Vertex(PointMap[v], UVMap[u], NormalMap[n]));
                         }
-			printf("\n");
+			Vector4D_T<float> Normal;
                 }
                 else
                 {

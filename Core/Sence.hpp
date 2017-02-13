@@ -11,7 +11,10 @@ namespace Aurora
 	class Sence
 	{
 	public:
-
+		bool Load(const char *path)
+		{
+			
+		}
 	private:
 		std::vector<Vertex> vertex_;
 		std::vector<Object> object_;

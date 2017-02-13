@@ -29,7 +29,7 @@ namespace Aurora
 
 		bool Load(const char *path)
 		{
-			//return ObjectFile::Load(path, triangle_);
+			return ObjectFile::Load(path, triangle_, triangle_, texture_);
 		}
 	private:
 		std::vector<Triangle> triangle_;

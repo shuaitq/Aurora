@@ -15,7 +15,7 @@ namespace Aurora
 			int red, green, blue;
 			for(size_t i = 0; i < height * width; ++ i)
 			{
-				fscanf(fp, "%d %d %d ", &red, &green, &blue);
+				fscanf(fp, "%d%d%d ", &red, &green, &blue);
 				ppm.push_back(RGB_T<float>(red / 255.0, green / 255.0, blue / 255.0));
 			}
 			return true;
