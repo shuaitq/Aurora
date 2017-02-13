@@ -3,16 +3,18 @@
 
 #include "../Core/Color.hpp"
 
-#include <cstdio>
 #include <vector>
+#include <string>
+#include <fstream>
+#include <limits>
 
 namespace Aurora
 {
 	namespace PPM
 	{
-		bool Load(const char *path, size_t &width, size_t &height, std::vector<RGB_T<float>> &ppm);
+		void Load(const std::string &path, size_t &width, size_t &height, std::vector<RGB_T<float>> &ppm);
 
-		bool Save(const char *path, const size_t width, const size_t height, const std::vector<RGB_T<float>> &ppm);
+		void Save(const std::string &path, const size_t width, const size_t height, const std::vector<RGB_T<float>> &ppm);
 	}
 }
 

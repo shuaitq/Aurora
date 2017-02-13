@@ -20,6 +20,11 @@ namespace Aurora
 			normal_ = ver.normal_;
 			return *this;
 		}
+
+		void push_back(const size_t triangle)
+		{
+			index_.push_back(triangle);
+		}
 	private:
 		Point4D_T<float> point_;
 		Point2D_T<float> uv_;

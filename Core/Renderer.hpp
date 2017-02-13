@@ -13,9 +13,9 @@ namespace Aurora
 	private:
 		Camera *camera_;
 		RGB<float> *screen_;
+		vector<float> ZBuffer;
 		size_t width;
 		size_t height;
-
 	}
 }
 

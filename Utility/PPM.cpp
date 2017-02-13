@@ -1,39 +1,42 @@
 #include "PPM.hpp"
 
+#include <stdexcept>
+
 namespace Aurora
 {
 	namespace PPM
 	{
-		bool Load(const char *path, size_t &width, size_t &height, std::vector<RGB_T<float>> &ppm)
+		void Load(const std::string &path, size_t &width, size_t &height, std::vector<RGB_T<float>> &ppm)
 		{
-			FILE *fp = fopen(path, "r");
-			if(fp == nullptr)
+			std::ifstream in(path);
+			if(!in.is_open())
 			{
-				return false;
+				throw std::runtime_error("PPM file " + path + " doesnt't exist!");
 			}
-			fscanf(fp, "P3\n%zu%zu\n255\n", &width, &height);
+			in.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			in >> width >> height;
+			in.ignore(std::numeric_limits<std::streamsize>::max(), '\n');	
 			int red, green, blue;
 			for(size_t i = 0; i < height * width; ++ i)
 			{
-				fscanf(fp, "%d%d%d ", &red, &green, &blue);
+				in >> red >> green >> blue;
 				ppm.push_back(RGB_T<float>(red / 255.0, green / 255.0, blue / 255.0));
 			}
-			return true;
+			in.close();
 		}
-		bool Save(const char *path, const size_t width, const size_t height, const std::vector<RGB_T<float>> &ppm)
+		void Save(const std::string &path, const size_t width, const size_t height, const std::vector<RGB_T<float>> &ppm)
 		{
-			FILE *fp = fopen(path, "w");
-			if(fp == nullptr)
+			std::ofstream in(path);
+			if(!in.is_open())
 			{
-				return false;
+				throw std::runtime_error("Can't open file " + path);
 			}
-			fprintf(fp, "P3\n%zu %zu\n255\n", width, height);
+			in << "P3" << std::endl << width << ' ' << height << std::endl << "255" << std::endl;
 			for(auto it = ppm.begin(); it != ppm.end(); ++ it)
 			{
-				fprintf(fp, "%d %d %d ", (int)(*it).red()*255, (int)(*it).green()*255, (int)(*it).blue()*255);
+				in << (int)it->red()*255 << ' ' << (int)it->green()*255 << ' ' << (int)it->blue()*255 << ' ';
 			}
-			fclose(fp);
-			return true;
+			in.close();
 		}
 	}
 }

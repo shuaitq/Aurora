@@ -4,44 +4,46 @@ namespace Aurora
 {
 	namespace ObjectFile
 	{
-		bool Load(const char *path, std::vector<Vertex> &vertex, std::vecter<Triangle> &triangle, Texture &texture)
+		void Load(const std::string &path, std::vector<Vertex> &vertex, std::vector<Triangle> &triangle, Texture &texture)
 		{
-			FILE *fp = fopen(path, "r");
-			if(fp == nullptr)
+			std::ifstream in(path);
+			if(!in.is_open())
 			{
-				return false;
+				throw std::runtime_error("Object " + path + " doesn't exist!");
 			}
-			char usemtl[16];
-			fscanf(fp, "usemtl %s", usemtl);
-			if(!texture.Load(usemtl))
+			std::string usemtl;
+			in >> usemtl;
+			if(usemtl != "usemtl")
 			{
-				return false;
+				throw std::runtime_error("Error! Unexpect Value! usemtl:" + usemtl);
 			}
-			char str[16];
+			in >> usemtl;
+			texture.Load(usemtl);
+			std::string str;
 			std::vector<Point4D_T<float>> PointMap;
 			std::vector<Point2D_T<float>> UVMap;
 			std::vector<Vector4D_T<float>> NormalMap;
 			float x, y, z;
-			while(fscanf(fp, "%s", str) != EOF)
+			while(!in.eof())
 			{
+				in >> str;
 				if(str[0] == 'v'){
 					switch(str[1])
 					{
 						case '\0': //Vector
-							fscanf(fp, "%f%f%f", &x, &y, &z);
+							in >> x >> y >> z;
 							PointMap.push_back(Point4D_T<float>(x, y, z));
 							break;
 						case 't': //Texture
-							fscanf(fp, "%f%f", &x, &y);
+							in >> x >> y;
 							UVMap.push_back(Point2D_T<float>(x, y));
 							break;
 						case 'n': //Normal
-							fscanf(fp, "%f%f%f", &x, &y, &z);
+							in >> x >> y >> z;
 							NormalMap.push_back(Vector4D_T<float>(x, y, z));
 							break;
 						default:
-							printf("Error! Unexpect Value! %c\n", str[1]);
-							return false;
+							throw std::runtime_error("Error! Unexpect Value! ");
 							break;
 					}
 				}
@@ -49,20 +51,28 @@ namespace Aurora
 				{
 					int v, u, n;
 					std::vector<Vertex> temp;
+					size_t IndexVertex = temp.size();
 					for(size_t i = 0; i < 3; ++ i)
 					{
-						fscanf(fp, "%d/%d/%d", &v, &u, &n);
-						temp.push_back(Vertex(PointMap[v - 1], UVMap[u - 1], NormalMap[n - 1]));
+						char div;
+						in >> v >> div >> u >> div >> n;
+						-- v;
+						-- u;
+						-- n;
+						temp.push_back(Vertex(PointMap[v], UVMap[u], NormalMap[n]));
 					}
-					tri.push_back(Triangle(temp));
+					size_t IndexTriangle = triangle.size();
+					temp[temp.size()-1].push_back(IndexTriangle);
+					temp[temp.size()-2].push_back(IndexTriangle);
+					temp[temp.size()-3].push_back(IndexTriangle);
+					triangle.push_back(Triangle(IndexVertex + 0,IndexVertex + 1,IndexVertex + 2));
 				}
 				else
 				{
-					printf("Error! Unexpect Value! %c\n", str[0]);
-					return false;
+					throw std::runtime_error("Error! Unexpect Value! ");
 				}
 			}
-			return true;
+			in.close();
 		}
 	}
 }

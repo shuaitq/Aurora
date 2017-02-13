@@ -5,18 +5,18 @@
 #include "Object.hpp"
 
 #include <vector>
+#include <string>
 
 namespace Aurora
 {
 	class Sence
 	{
 	public:
-		bool Load(const char *path)
+		void Load(const string &path)
 		{
-			
+				
 		}
 	private:
-		std::vector<Vertex> vertex_;
 		std::vector<Object> object_;
 	}
 }

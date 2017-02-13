@@ -5,24 +5,23 @@
 #include "../Utility/PPM.hpp"
 
 #include <vector>
+#include <string>
+#include <stdexcept>
 
 namespace Aurora
 {
 	class Texture
 	{
 	public:
-		bool Load(const char *path)
+		void Load(const std::string &path)
 		{
 			size_t width, height;
-			if(PPM::Load(path, width, height, texture_))
+			PPM::Load(path, width, height, texture_);
+			if(width != height)
 			{
-				if(width == height)
-				{
-					size_ = height;
-					return true;
-				}
+				throw std::runtime_error("Texture width not equal to height");
 			}
-			return false;
+			size_ = height;
 		}
 	private:
 		std::vector<RGB_T<float>> texture_;

@@ -6,6 +6,7 @@
 #include "../Utility/ObjectFile.hpp"
 
 #include <vector>
+#include <string>
 
 namespace Aurora
 {
@@ -13,7 +14,7 @@ namespace Aurora
 	{
 	public:
 		Object() = default;
-
+		Object(Point4D_T<float> position, Point4D_T<float> up, Point4D_T<float> front, Point4D_T<float> right):position_(position), up_(up), front_(front), right_(right){}
 		Triangle& operator[](size_t index)
 		{
 			return triangle_[index];
@@ -27,13 +28,18 @@ namespace Aurora
 			triangle_.push_back(triangle);
 		}
 
-		bool Load(const char *path)
+		void Load(const std::string &path)
 		{
-			return ObjectFile::Load(path, triangle_, triangle_, texture_);
+			ObjectFile::Load(path, vertex_, triangle_, texture_);
 		}
 	private:
 		std::vector<Triangle> triangle_;
+		std::vector<Vertex> vertex_;
 		Texture texture_;
+		Point4D_T<float> position_;
+		Point4D_T<float> up_;
+		Point4D_T<float> front_;
+		Point4D_T<float> right_;
 	};
 }
 
