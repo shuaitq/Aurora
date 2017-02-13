@@ -171,6 +171,12 @@ namespace Aurora
 	};
 
 	template <typename T>
+	Vector3D_T<T> CalcNormal(const Point3D_T<T> &p1, const Point3D_T<T> &p2, const Point3D_T<T> &p3)
+	{
+		return Cross(p3 - p2, p2 - p1);
+	}
+
+	template <typename T>
 	class Point4D_T
 	{
 	public:
@@ -255,6 +261,12 @@ namespace Aurora
 	private:
 		T x_, y_, z_, w_;
 	};
+
+	template <typename T>
+	Vector4D_T<T> CalcNormal(const Point4D_T<T> &p1, const Point4D_T<T> &p2, const Point4D_T<T> &p3)
+	{
+		return Cross(p3 - p2, p2 - p1);
+	}
 }
 
 #endif //AURORA_POINT_H_

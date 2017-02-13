@@ -4,21 +4,14 @@ namespace Aurora
 {
 	namespace PPM
 	{
-		bool Load(const char *path, size_t &size, std::vector<RGB_T<float>> &ppm)
+		bool Load(const char *path, size_t &width, size_t &height, std::vector<RGB_T<float>> &ppm)
 		{
 			FILE *fp = fopen(path, "r");
 			if(fp == nullptr)
 			{
 				return false;
 			}
-			size_t width;
-			size_t height;
 			fscanf(fp, "P3\n%zu%zu\n255\n", &width, &height);
-			if(width != height)
-			{
-				return false;
-			}
-			size = width;
 			int red, green, blue;
 			for(size_t i = 0; i < height * width; ++ i)
 			{
@@ -27,7 +20,7 @@ namespace Aurora
 			}
 			return true;
 		}
-		bool Save(const char *path,const std::vector<RGB_T<float>> &ppm, const size_t width, const size_t height)
+		bool Save(const char *path, const size_t width, const size_t height, const std::vector<RGB_T<float>> &ppm)
 		{
 			FILE *fp = fopen(path, "w");
 			if(fp == nullptr)

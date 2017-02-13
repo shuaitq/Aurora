@@ -13,9 +13,23 @@ namespace Aurora
 	{
 	public:
 		Object() = default;
+
+		Triangle& operator[](size_t index)
+		{
+			return triangle_[index];
+		}
+		const Triangle& operator[](size_t index) const
+		{
+			return triangle_[index];
+		}
+		void push_back(const Triangle &triangle)
+		{
+			triangle_.push_back(triangle);
+		}
+
 		bool Load(const char *path)
 		{
-			return ObjectFile::Load(path, triangle_);
+			//return ObjectFile::Load(path, triangle_);
 		}
 	private:
 		std::vector<Triangle> triangle_;

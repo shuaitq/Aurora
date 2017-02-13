@@ -1,6 +1,8 @@
 #ifndef AURORA_VECTOR_HPP_
 #define AURORA_VECTOR_HPP_
 
+#include <cmath>
+
 namespace Aurora
 {
 	template <typename T>
@@ -73,9 +75,46 @@ namespace Aurora
 		{
 			return Vector2D_T<T> (-x_, -y_);
 		}
+
+		T& x()
+		{
+			return x_;
+		}
+		const T& x() const
+		{
+			return x_;
+		}
+		T& y()
+		{
+			return y_;
+		}
+		const T& y() const
+		{
+			return y_;
+		}
+
+		T Length2() const
+		{
+			return x_ * x_ + y_ * y_;
+		}
+		T Length() const
+		{
+			return sqrt(Length());
+		}
 	private:
 		T x_, y_;
 	};
+
+	template <typename T>
+	Vector2D_T<T> Normalize(const Vector2D_T<T> &v)
+	{
+		return v / v.Length2();
+	}
+	template <typename T>
+	T Dot(const Vector2D_T<T> &lhs, const Vector2D_T<T> &rhs)
+	{
+		return lhs.x() * rhs.x() + lhs.y() * rhs.y();
+	}
 
 	template <typename T>
 	class Vector3D_T
@@ -150,9 +189,62 @@ namespace Aurora
 		{
 			return Vector3D_T<T> (-x_, -y_, -z_);
 		}
+
+		T& x()
+		{
+			return x_;
+		}
+		const T& x() const
+		{
+			return x_;
+		}
+		T& y()
+		{
+			return y_;
+		}
+		const T& y() const
+		{
+			return y_;
+		}
+		T& z()
+		{
+			return z_;
+		}
+		const T& z() const
+		{
+			return z_;
+		}
+
+		T Length2() const
+		{
+			return x_ * x_ + y_ * y_ + z_ * z_;
+		}
+		T Length() const
+		{
+			return sqrt(Length2());
+		}
 	private:
 		T x_, y_, z_;
 	};
+
+	template <typename T>
+	Vector3D_T<T> Normalize(const Vector3D_T<T> &v)
+	{
+		return v / v.Length();
+	}
+	template <typename T>
+	Vector3D_T<T> Cross(const Vector3D_T<T> &lhs, const Vector3D_T<T> &rhs)
+	{
+		return Vector3D_T<T>(
+			lhs.y() * rhs.z() - lhs.z() * rhs.y(),
+			lhs.z() * rhs.x() - lhs.x() * rhs.z(),
+			lhs.x() * rhs.y() - lhs.y() * rhs.x());
+	}
+	template <typename T>
+	T Dot(const Vector3D_T<T> &lhs, const Vector3D_T<T> &rhs)
+	{
+		return lhs.x() * rhs.x() + lhs.y() * rhs.y() + lhs.z() * rhs.z();
+	}
 
 	template <typename T>
 	class Vector4D_T
@@ -228,9 +320,63 @@ namespace Aurora
 		{
 			return Vector4D_T<T>(-x_, -y_, -z_, 0);
 		}
+
+		T& x()
+		{
+			return x_;
+		}
+		const T& x() const
+		{
+			return x_;
+		}
+		T& y()
+		{
+			return y_;
+		}
+		const T& y() const
+		{
+			return y_;
+		}
+		T& z()
+		{
+			return z_;
+		}
+		const T& z() const
+		{
+			return z_;
+		}
+
+		T Length2() const
+		{
+			return x_ * x_ + y_ * y_ + z_ * z_;
+		}
+		T Length() const
+		{
+			return sqrt(Length2());
+		}
 	private:
 		T x_, y_, z_, w_;
 	};
+
+	template <typename T>
+	Vector4D_T<T> Normalize(const Vector4D_T<T> &v)
+	{
+		return v / v.Length();
+	}
+	template <typename T>
+	Vector4D_T<T> Cross(const Vector4D_T<T> &lhs, const Vector4D_T<T> &rhs)
+	{
+		return Vector4D_T<T>(
+			lhs.y() * rhs.z() - lhs.z() * rhs.y(),
+			lhs.z() * rhs.x() - lhs.x() * rhs.z(),
+			lhs.x() * rhs.y() - lhs.y() * rhs.x());
+
+	}
+	template <typename T>
+	T Dot(const Vector4D_T<T> &lhs, const Vector4D_T<T> &rhs)
+	{
+		return lhs.x() * rhs.x() + lhs.y() * rhs.y() + lhs.z() * rhs.z();
+	}
 }
 
 #endif //AURORA_VECTOR_HPP_

@@ -4,7 +4,7 @@ namespace Aurora
 {
 	namespace ObjectFile
 	{
-		bool Load(const char *path, std::vector<Triangle> &tri)
+		bool Load(const char *path, std::vector<Vertex> &vertex, std::vecter<Triangle> &triangle, Texture &texture)
 		{
 			FILE *fp = fopen(path, "r");
 			if(fp == nullptr)
@@ -13,10 +13,11 @@ namespace Aurora
 			}
 			char usemtl[16];
 			fscanf(fp, "usemtl %s", usemtl);
+			if(!texture.Load(usemtl))
+			{
+				return false;
+			}
 			char str[16];
-			std::vector<Point4D_T<float>> PointMap;
-			std::vector<Point2D_T<float>> UVMap;
-			std::vector<Vector4D_T<float>> NormalMap;
 			float x, y, z;
 			while(fscanf(fp, "%s", str) != EOF)
 			{

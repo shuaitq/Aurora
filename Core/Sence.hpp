@@ -2,6 +2,7 @@
 #define AURORA_SENCE_HPP_
 
 #include "../Math/Math.hpp"
+#include "Object.hpp"
 
 #include <vector>
 
@@ -12,8 +13,8 @@ namespace Aurora
 	public:
 
 	private:
-		std::vector<Point4D_T> point_;
-		std::
+		std::vector<Vertex> vertex_;
+		std::vector<Object> object_;
 	}
 }
 

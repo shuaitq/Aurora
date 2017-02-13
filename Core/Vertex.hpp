@@ -3,6 +3,8 @@
 
 #include "../Math/Math.hpp"
 
+#include <vector>
+
 namespace Aurora
 {
 	class Vertex
@@ -22,6 +24,7 @@ namespace Aurora
 		Point4D_T<float> point_;
 		Point2D_T<float> uv_;
 		Vector4D_T<float> normal_;
+		std::vector<size_t> index_;
 	};
 }
 

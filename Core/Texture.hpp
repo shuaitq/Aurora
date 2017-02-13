@@ -13,11 +13,16 @@ namespace Aurora
 	public:
 		bool Load(const char *path)
 		{
-			return PPM::Load(path, size_, texture_);
-		}
-		bool Save(const char *path)
-		{
-			return PPM::Save(path, texture_, size_, size_);
+			size_t width, height;
+			if(PPM::Load(path, width, height, texture_))
+			{
+				if(width == height)
+				{
+					size_ = height;
+					return true;
+				}
+			}
+			return false;
 		}
 	private:
 		std::vector<RGB_T<float>> texture_;

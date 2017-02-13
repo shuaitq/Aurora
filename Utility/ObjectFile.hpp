@@ -1,7 +1,6 @@
 #ifndef AURORA_OBJECT_FILE_HPP_
 #define AURORA_OBJECT_FILE_HPP_
 
-#include "../Core/Triangle.hpp"
 #include "../Math/Math.hpp"
 #include "../Core/Vertex.hpp"
 
@@ -12,7 +11,7 @@ namespace Aurora
 {
 	namespace ObjectFile
 	{
-		bool Load(const char *path, std::vector<Triangle> &tri);
+		bool Load(const char *path, std::vector<Vertex> &vertex, std::vector<Triangle> &triangle, Texture texture);
 	}
 }
 
