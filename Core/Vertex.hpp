@@ -4,6 +4,7 @@
 #include "../Math/Math.hpp"
 
 #include <vector>
+#include <iostream>
 
 namespace Aurora
 {
@@ -24,6 +25,62 @@ namespace Aurora
 		void push_back(const size_t triangle)
 		{
 			index_.push_back(triangle);
+		}
+
+		Point4D_T<float>& point()
+		{
+			return point_;
+		}
+		const Point4D_T<float>& point() const
+		{
+			return point_;
+		}
+		Point2D_T<float>& uv()
+		{
+			return uv_;
+		}
+		const Point2D_T<float>& uv() const
+		{
+			return uv_;
+		}
+		Vector4D_T<float>& normal()
+		{
+			return normal_;
+		}
+		const Vector4D_T<float>& normal() const
+		{
+			return normal_;
+		}
+		std::vector<size_t>& index()
+		{
+			return index_;
+		}
+		const std::vector<size_t>& index() const
+		{
+			return index_;
+		}
+
+		friend std::ostream& operator << (std::ostream &out, const Vertex &vertex)
+		{
+			out << "# Vertex" << std::endl;
+			out << "# point" << std::endl;
+			out << vertex.point();
+			out << "# uv" << std::endl;
+			out << vertex.uv();
+			out << "# normal" << std::endl;
+			out << vertex.normal();
+			out << "# triangle index" << std::endl;
+			for(auto it = vertex.index().begin(); it != vertex.index().end(); ++ it)
+			{
+				out << *it << ' ';
+			}
+			out << std::endl;
+			return out;
+		}
+		friend std::istream& operator >> (std::istream &in, Vertex &vertex)
+		{
+			in >> vertex.point() >> vertex.uv() >> vertex.normal();
+			return in;
 		}
 	private:
 		Point4D_T<float> point_;

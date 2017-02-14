@@ -84,6 +84,24 @@ namespace Aurora
 		{
 			return Point2D_T<T>(-x_, -y_);
 		}
+
+		T& x()
+		{
+			return x_;
+		}
+		const T& x() const
+		{
+			return x_;
+		}
+		T& y()
+		{
+			return y_;
+		}
+		const T& y() const
+		{
+			return y_;
+		}
+
 		friend std::ostream& operator << (std::ostream &out, const Point2D_T<T> &p)
 		{
 			out << p.x() << ' ' << p.y() << std::endl;
@@ -177,6 +195,31 @@ namespace Aurora
 		Point3D_T<T> operator - () const
 		{
 			return Point3D_T<T>(-x_, -y_, -z_);
+		}
+
+		T& x()
+		{
+			return x_;
+		}
+		const T& x() const
+		{
+			return x_;
+		}
+		T& y()
+		{
+			return y_;
+		}
+		const T& y() const
+		{
+			return y_;
+		}
+		T& z()
+		{
+			return z_;
+		}
+		const T& z() const
+		{
+			return z_;
 		}
 
 		friend std::ostream& operator << (std::ostream &out, const Point3D_T<T> &p)
@@ -280,6 +323,39 @@ namespace Aurora
 		Point4D_T<T> operator - () const
 		{
 			return Point4D_T<T>(-x_, -y_, -z_, 1);
+		}
+
+		T& x()
+		{
+			return x_;
+		}
+		const T& x() const
+		{
+			return x_;
+		}
+		T& y()
+		{
+			return y_;
+		}
+		const T& y() const
+		{
+			return y_;
+		}
+		T& z()
+		{
+			return z_;
+		}
+		const T& z() const
+		{
+			return z_;
+		}
+		T& w()
+		{
+			return w_;
+		}
+		const T& w() const
+		{
+			return w_;
 		}
 
 		friend std::ostream& operator << (std::ostream &out, const Point4D_T<T> &p)
