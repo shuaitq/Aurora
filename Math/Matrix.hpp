@@ -75,17 +75,17 @@ namespace Aurora
 
 		friend std::ostream& operator << (std::ostream &out, const Matrix4_T<T> &m)
 		{
-			out << m11_ << ' ' << m12_ << ' ' << m13_ << ' ' << m14_ << std::endl;
-			out << m21_ << ' ' << m22_ << ' ' << m23_ << ' ' << m24_ << std::endl;
-			out << m31_ << ' ' << m32_ << ' ' << m33_ << ' ' << m34_ << std::endl;
-			out << m41_ << ' ' << m42_ << ' ' << m43_ << ' ' << m44_ << std::endl;
+			out << m(0, 0) << ' ' << m(0, 1) << ' ' << m(0, 2) << ' ' << m(0, 3) << std::endl;
+			out << m(1, 0) << ' ' << m(1, 1) << ' ' << m(1, 2) << ' ' << m(1, 3) << std::endl;
+			out << m(2, 0) << ' ' << m(2, 1) << ' ' << m(2, 2) << ' ' << m(2, 3) << std::endl;
+			out << m(3, 0) << ' ' << m(3, 1) << ' ' << m(3, 2) << ' ' << m(3, 3) << std::endl;
 		}
 		friend std::istream& operator >> (std::ostream &in, Matrix4_T<T> &m)
 		{
-			in >> m11_ >> m12_ >> m13_ >> m14_;
-			in >> m21_ >> m22_ >> m23_ >> m24_;
-			in >> m31_ >> m32_ >> m33_ >> m34_;
-			in >> m41_ >> m42_ >> m43_ >> m44_;
+			in >> m(0, 0) >> m(0, 1) >> m(0, 2) >> m(0, 3);
+			in >> m(1, 0) >> m(1, 1) >> m(1, 2) >> m(1, 3);
+			in >> m(2, 0) >> m(2, 1) >> m(2, 2) >> m(2, 3);
+			in >> m(3, 0) >> m(3, 1) >> m(3, 2) >> m(3, 3);
 		}
 	private:
 		union

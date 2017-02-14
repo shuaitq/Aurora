@@ -2,6 +2,7 @@
 #define AURORA_COLOR_HPP_
 
 #include <cstdio>
+#include <iostream>
 
 namespace Aurora
 {
@@ -13,7 +14,7 @@ namespace Aurora
 		RGB_T(const T t):red_(t), green_(t), blue_(t){}
 		RGB_T(const T red, const T green, const T blue):red_(red), green_(green), blue_(blue){}
 		RGB_T(const RGB_T<T> &rgb):red_(rgb.red_), green_(rgb.green_), blue_(rgb.blue_){}
-		RGB_T<T>& operator=(const RGB_T<T> &rgb)
+		RGB_T<T>& operator = (const RGB_T<T> &rgb)
 		{
 			red_ = rgb.red_;
 			green_ = rgb.green_;
@@ -21,11 +22,11 @@ namespace Aurora
 			return *this;
 		}
 
-		RGB_T<T> operator*(RGB_T<T> &rgb) const
+		RGB_T<T> operator * (RGB_T<T> &rgb) const
 		{
 			return RGB_T<T>(red_ * rgb.red_, green_ * rgb.green_, blue_ * rgb.blue_);
 		}
-		RGB_T<T>& operator*=(RGB_T<T> &rgb)
+		RGB_T<T>& operator *= (RGB_T<T> &rgb)
 		{
 			red_ *= rgb.red_;
 			green_ *= rgb.green_;
@@ -34,12 +35,12 @@ namespace Aurora
 		}
 
 		template <typename U>
-		RGB_T<T> operator*(const U u) const
+		RGB_T<T> operator * (const U u) const
 		{
 			return RGB_T<T>(red_ * u, green_ * u, blue_ * u);
 		}
 		template <typename U>
-		RGB_T<T>& operator*=(const U u)
+		RGB_T<T>& operator *= (const U u)
 		{
 			red_ *= u;
 			green_ *= u;
@@ -47,21 +48,21 @@ namespace Aurora
 			return *this;
 		}
 		template <typename U>
-		RGB_T<T> operator/(const U u) const
+		RGB_T<T> operator / (const U u) const
 		{
-			return operator*(T(1)/u);
+			return operator * (T(1) / u);
 		}
 		template <typename U>
-		RGB_T<T>& operator/=(const U u)
+		RGB_T<T>& operator /= (const U u)
 		{
-			return operator*=(T(1)/u);
+			return operator *= (T(1) / u);
 		}
 
-		T& operator[](size_t index)
+		T& operator [] (size_t index)
 		{
 			return col_[index];
 		}
-		const T& operator[](size_t index) const
+		const T& operator [] (size_t index) const
 		{
 			return col_[index];
 		}
@@ -90,6 +91,15 @@ namespace Aurora
 			return blue_;
 		}
 
+		friend std::ostream& operator << (std::ostream &out, const RGB_T<T> &rgb)
+		{
+			out << rgb.red() << ' ' << rgb.green() << ' ' << rgb.blue() << std::endl;
+		}
+		friend std::istream& operator >> (std::istream &in, RGB_T<T> &rgb)
+		{
+			in >> rgb.red() >> rgb.green() >> rgb.blue();
+		}
+
 		const static RGB_T<T> black;
 		const static RGB_T<T> white;
 
@@ -112,7 +122,7 @@ namespace Aurora
 		RGBA_T(const T t, const T alpha = 1):red_(t), green_(t), blue_(t), alpha_(alpha){}
 		RGBA_T(const T red, const T green, const T blue, const T alpha = 1):red_(red), green_(green), blue_(blue), alpha_(alpha){}
 		RGBA_T(const RGBA_T<T> &rgba):red_(rgba.red_), green_(rgba.green_), blue_(rgba.blue_), alpha_(rgba.alpha_){}
-		RGBA_T<T>& operator=(const RGBA_T<T> &rgba)
+		RGBA_T<T>& operator = (const RGBA_T<T> &rgba)
 		{
 			red_ = rgba.red_;
 			green_ = rgba.green_;
@@ -122,12 +132,12 @@ namespace Aurora
 		}
 
 		template <typename U>
-		RGBA_T<T> operator*(const U u) const
+		RGBA_T<T> operator * (const U u) const
 		{
 			return RGBA_T<T>(red_ * u, green_ * u, blue_ * u, alpha_);
 		}
 		template <typename U>
-		RGBA_T<T>& operator*(const U u)
+		RGBA_T<T>& operator * (const U u)
 		{
 			red_ *= u;
 			green_ *= u;
@@ -135,21 +145,21 @@ namespace Aurora
 			return *this;
 		}
 		template <typename U>
-		RGBA_T<T> operator/(const U u) const
+		RGBA_T<T> operator / (const U u) const
 		{
-			return operator*(T(1)/u);
+			return operator * (T(1) / u);
 		}
 		template <typename U>
-		RGBA_T<T>& operator/=(const U u)
+		RGBA_T<T>& operator /= (const U u)
 		{
-			return operator*=(T(1)/u);
+			return operator *= (T(1) / u);
 		}
 
-		T& operator[](size_t index)
+		T& operator [] (size_t index)
 		{
 			return col_[index];
 		}
-		const T& operator[](size_t index) const
+		const T& operator [] (size_t index) const
 		{
 			return col_[index];
 		}
@@ -184,6 +194,15 @@ namespace Aurora
 		const T& alpha() const
 		{
 			return alpha_;
+		}
+
+		friend std::ostream& operator << (std::ostream &out, const RGBA_T<T> &rgba)
+		{
+			out << rgba.red() << ' ' << rgba.green() << ' ' << rgba.blue() << ' ' << rgba.alpha() << std::endl;
+		}
+		friend std::istream& operator >> (std::istream &in, RGBA_T<T> &rgba)
+		{
+			in >> rgba.red() >> rgba.green() >> rgba.blue() >> rgba.alpha();
 		}
 
 		const static RGBA_T<T> black;
