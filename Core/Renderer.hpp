@@ -14,7 +14,7 @@ namespace Aurora
 	public:
 
 	private:
-		std::shared_ptr<Camera> camera_;
+		Camera camera_;
 		std::shared_ptr<RGB<float>> screen_;
 		vector<float> ZBuffer;
 		Sence sence_;

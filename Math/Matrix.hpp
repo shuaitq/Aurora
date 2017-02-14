@@ -79,13 +79,15 @@ namespace Aurora
 			out << m(1, 0) << ' ' << m(1, 1) << ' ' << m(1, 2) << ' ' << m(1, 3) << std::endl;
 			out << m(2, 0) << ' ' << m(2, 1) << ' ' << m(2, 2) << ' ' << m(2, 3) << std::endl;
 			out << m(3, 0) << ' ' << m(3, 1) << ' ' << m(3, 2) << ' ' << m(3, 3) << std::endl;
+			return out;
 		}
-		friend std::istream& operator >> (std::ostream &in, Matrix4_T<T> &m)
+		friend std::istream& operator >> (std::istream &in, Matrix4_T<T> &m)
 		{
 			in >> m(0, 0) >> m(0, 1) >> m(0, 2) >> m(0, 3);
 			in >> m(1, 0) >> m(1, 1) >> m(1, 2) >> m(1, 3);
 			in >> m(2, 0) >> m(2, 1) >> m(2, 2) >> m(2, 3);
 			in >> m(3, 0) >> m(3, 1) >> m(3, 2) >> m(3, 3);
+			return in;
 		}
 	private:
 		union

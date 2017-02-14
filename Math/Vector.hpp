@@ -106,10 +106,12 @@ namespace Aurora
 		friend std::ostream& operator << (std::ostream &out, const Vector2D_T<T> &v)
 		{
 			out << v.x() << ' ' << v.y() << std::endl;
+			return out;
 		}
 		friend std::istream& operator >> (std::istream &in, Vector2D_T<T> &v)
 		{
 			in >> v.x() >> v.y();
+			return in;
 		}
 	private:
 		T x_, y_;
@@ -237,10 +239,12 @@ namespace Aurora
 		friend std::ostream& operator << (std::ostream &out, const Vector3D_T<T> &v)
 		{
 			out << v.x() << ' ' << v.y() << ' ' << v.z() << std::endl;
+			return out;
 		}
 		friend std::istream& operator >> (std::istream &in, Vector3D_T<T> &v)
 		{
 			in >> v.x() >> v.y() >> v.z();
+			return in;
 		}
 	private:
 		T x_, y_, z_;
@@ -385,10 +389,12 @@ namespace Aurora
 		friend std::ostream& operator << (std::ostream &out, const Vector4D_T<T> &v)
 		{
 			out << v.x() << ' ' << v.y() << ' ' << v.z() << ' ' << v.w() << std::endl;
+			return out;
 		}
 		friend std::istream& operator >> (std::istream &in, Vector4D_T<T> &v)
 		{
 			in >> v.x() >> v.y() >> v.z();
+			return in;
 		}
 	private:
 		T x_, y_, z_, w_;
