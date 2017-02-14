@@ -2,6 +2,7 @@
 #define AURORA_MATRIX_HPP_
 
 #include <cstring>
+#include <iostream>
 
 namespace Aurora
 {
@@ -63,9 +64,28 @@ namespace Aurora
 			return m_[row][col];
 		}
 
-		T* begin() const
+		T* begin()
 		{
 			return &_m[0];
+		}
+		const T* begin() const
+		{
+			return &_m[0];
+		}
+
+		friend std::ostream& operator << (std::ostream &out, const Matrix4_T<T> &m)
+		{
+			out << m11_ << ' ' << m12_ << ' ' << m13_ << ' ' << m14_ << std::endl;
+			out << m21_ << ' ' << m22_ << ' ' << m23_ << ' ' << m24_ << std::endl;
+			out << m31_ << ' ' << m32_ << ' ' << m33_ << ' ' << m34_ << std::endl;
+			out << m41_ << ' ' << m42_ << ' ' << m43_ << ' ' << m44_ << std::endl;
+		}
+		friend std::istream& operator >> (std::ostream &in, Matrix4_T<T> &m)
+		{
+			in >> m11_ >> m12_ >> m13_ >> m14_;
+			in >> m21_ >> m22_ >> m23_ >> m24_;
+			in >> m31_ >> m32_ >> m33_ >> m34_;
+			in >> m41_ >> m42_ >> m43_ >> m44_;
 		}
 	private:
 		union

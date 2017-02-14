@@ -3,6 +3,7 @@
 
 #include "../Math/Math.hpp"
 #include "Object.hpp"
+#include "../Utility/SenceFile.hpp"
 
 #include <vector>
 #include <string>
@@ -14,7 +15,7 @@ namespace Aurora
 	public:
 		void Load(const string &path)
 		{
-				
+			SenceFile::Load(path, object_);
 		}
 	private:
 		std::vector<Object> object_;

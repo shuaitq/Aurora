@@ -3,6 +3,9 @@
 
 #include "Camera.hpp"
 #include "Color.hpp"
+#include "Sence.hpp"
+
+#include <memery>
 
 namespace Aurora
 {
@@ -11,9 +14,10 @@ namespace Aurora
 	public:
 
 	private:
-		Camera *camera_;
-		RGB<float> *screen_;
+		std::shared_ptr<Camera> camera_;
+		std::shared_ptr<RGB<float>> screen_;
 		vector<float> ZBuffer;
+		Sence sence_;
 		size_t width;
 		size_t height;
 	}

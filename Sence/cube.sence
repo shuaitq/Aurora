@@ -1,1 +1,6 @@
-Object/cube.obj 
+# Renderer width height
+r
+# Camera Position Up Front Right Fov
+c
+# Object ObjectPath Position Up Front Right
+o Object/cube.obj

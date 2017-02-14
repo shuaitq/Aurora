@@ -12,7 +12,7 @@ namespace Aurora
 {
 	namespace SenceFile
 	{
-		void Load(const string &path, std::vector<Object> &object);
+		void Load(const string &path, size_t &width, size_t height, Camera &camera, std::vector<Object> &object);
 	}
 }
 
