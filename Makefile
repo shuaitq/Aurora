@@ -8,7 +8,7 @@ CPPFLAGS += -O2
 endif
 SRCS = Aurora.cpp \
        Core/Color.cpp \
-       Utility/PPM.cpp Utility/ObjectFile.cpp
+       Utility/PPM.cpp Utility/ObjectFile.cpp Utility/SenceFile.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 $(PROJECT): $(OBJS)

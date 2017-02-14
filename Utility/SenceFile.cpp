@@ -11,40 +11,30 @@ namespace Aurora
 			{
 				throw std::runtime_error("Sence file " + path + "doesn't exist!");
 			}
-			std::string line;
-			while(!in.eof())
+			std::string sign;
+			while(in >> sign)
 			{
-				std::getline(in, line);
-				switch(line[0])
+				switch(sign[0])
 				{
 					case '#': //continue;
+						in.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 						break;
 					case 'r': //Renderer width height
 						in >> width >> height;
+						camera.aspect() = (float)width / height;
 						break;
 					case 'c': //Camera Position Up Front Right Fov
-						in >> camera
+						in >> camera;
 						break;
 					case 'o':
+						Object temp;
+						std::string ObjectPath;
+						in >> ObjectPath;
+						temp.Load(ObjectPath);
+						in >> temp;
+						object.push_back(temp);
 						break;
 				}
-			}
-			// Renderer width height
-			in >> width >> height;
-			std::string ObjectName;
-			Point4D_T<float> position;
-			Point4D_T<float> up;
-			Point4D_T<float> front;
-			Point4D_T<float> right;
-			while(!in.eof())
-			{
-				in >> ObjectName;
-				in >> position.x() >> position.y() >> position.z();
-				in >> up.x() >> up.y() >> up.z();
-				in >> front.x() >> front.y() >> front.z();
-				in >> right.x() >> right.y() >> right.z();
-				object.push_back(Object(position, up, front, right));
-				object.back().Load(ObjectName);
 			}
 			in.close();
 		}

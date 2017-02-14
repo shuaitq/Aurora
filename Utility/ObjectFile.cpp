@@ -24,9 +24,8 @@ namespace Aurora
 			std::vector<Point2D_T<float>> UVMap;
 			std::vector<Vector4D_T<float>> NormalMap;
 			float x, y, z;
-			while(!in.eof())
+			while(in >> str)
 			{
-				in >> str;
 				if(str[0] == 'v'){
 					switch(str[1])
 					{
@@ -50,8 +49,7 @@ namespace Aurora
 				else if(str[0] == 'f')
 				{
 					int v, u, n;
-					std::vector<Vertex> temp;
-					size_t IndexVertex = temp.size();
+					size_t IndexVertex = vertex.size();
 					for(size_t i = 0; i < 3; ++ i)
 					{
 						char div;
@@ -59,12 +57,12 @@ namespace Aurora
 						-- v;
 						-- u;
 						-- n;
-						temp.push_back(Vertex(PointMap[v], UVMap[u], NormalMap[n]));
+						vertex.push_back(Vertex(PointMap[v], UVMap[u], NormalMap[n]));
 					}
 					size_t IndexTriangle = triangle.size();
-					temp[temp.size()-1].push_back(IndexTriangle);
-					temp[temp.size()-2].push_back(IndexTriangle);
-					temp[temp.size()-3].push_back(IndexTriangle);
+					vertex[IndexVertex + 0].index().push_back(IndexTriangle);
+					vertex[IndexVertex + 1].index().push_back(IndexTriangle);
+					vertex[IndexVertex + 2].index().push_back(IndexTriangle);
 					triangle.push_back(Triangle(IndexVertex + 0,IndexVertex + 1,IndexVertex + 2));
 				}
 				else

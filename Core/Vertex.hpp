@@ -74,7 +74,6 @@ namespace Aurora
 			{
 				out << *it << ' ';
 			}
-			out << std::endl;
 			return out;
 		}
 		friend std::istream& operator >> (std::istream &in, Vertex &vertex)

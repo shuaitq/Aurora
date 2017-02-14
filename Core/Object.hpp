@@ -15,8 +15,18 @@ namespace Aurora
 	{
 	public:
 		Object() = default;
-		Object(Point4D_T<float> position, Point4D_T<float> up, Point4D_T<float> front, Point4D_T<float> right):position_(position), up_(up), front_(front), right_(right){}
-
+		Object(Point4D_T<float> position, Vector4D_T<float> up, Vector4D_T<float> front, Vector4D_T<float> right):position_(position), up_(up), front_(front), right_(right){}
+		Object& operator = (const Object &object)
+		{
+			position_ = object.position_;
+			up_ = object.up_;
+			front_ = object.front_;
+			right_ = object.right_;
+			triangle_ = object.triangle_;
+			vertex_ = object.vertex_;
+			texture_ = object.texture_;
+			return *this;
+		}
 		void Load(const std::string &path)
 		{
 			ObjectFile::Load(path, vertex_, triangle_, texture_);
@@ -54,27 +64,27 @@ namespace Aurora
 		{
 			return position_;
 		}
-		Point4D_T<float>& up()
+		Vector4D_T<float>& up()
 		{
 			return up_;
 		}
-		const Point4D_T<float>& up() const
+		const Vector4D_T<float>& up() const
 		{
 			return up_;
 		}
-		Point4D_T<float>& front()
+		Vector4D_T<float>& front()
 		{
 			return front_;
 		}
-		const Point4D_T<float>& front() const
+		const Vector4D_T<float>& front() const
 		{
 			return front_;
 		}
-		Point4D_T<float>& right()
+		Vector4D_T<float>& right()
 		{
 			return right_;
 		}
-		const Point4D_T<float>& right() const
+		const Vector4D_T<float>& right() const
 		{
 			return right_;
 		}
@@ -109,9 +119,9 @@ namespace Aurora
 		}
 	private:
 		Point4D_T<float> position_;
-		Point4D_T<float> up_;
-		Point4D_T<float> front_;
-		Point4D_T<float> right_;
+		Vector4D_T<float> up_;
+		Vector4D_T<float> front_;
+		Vector4D_T<float> right_;
 		std::vector<Triangle> triangle_;
 		std::vector<Vertex> vertex_;
 		Texture texture_;

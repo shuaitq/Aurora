@@ -2,6 +2,7 @@
 #define AURORA_SENCE_FILE_HPP_
 
 #include "../Core/Object.hpp"
+#include "../Core/Camera.hpp"
 
 #include <string>
 #include <vector>
@@ -12,7 +13,7 @@ namespace Aurora
 {
 	namespace SenceFile
 	{
-		void Load(const string &path, size_t &width, size_t height, Camera &camera, std::vector<Object> &object);
+		void Load(const std::string &path, size_t &width, size_t &height, Camera &camera, std::vector<Object> &object);
 	}
 }
 

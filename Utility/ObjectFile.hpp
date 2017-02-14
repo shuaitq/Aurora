@@ -14,7 +14,7 @@ namespace Aurora
 {
 	namespace ObjectFile
 	{
-		void Load(const std::string &path, std::vector<Vertex> &vertex, std::vector<Triangle> &triangle, Texture texture);
+		void Load(const std::string &path, std::vector<Vertex> &vertex, std::vector<Triangle> &triangle, Texture &texture);
 	}
 }
 
