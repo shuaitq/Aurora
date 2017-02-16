@@ -1,7 +1,8 @@
-#ifndef AURORA_POINT_H_
-#define AURORA_POINT_H_
+#ifndef AURORA_POINT_HPP_
+#define AURORA_POINT_HPP_
 
 #include "Vector.hpp"
+#include "Matrix.hpp"
 
 #include <iostream>
 
@@ -11,8 +12,7 @@ namespace Aurora
 	class Point2D_T
 	{
 	public:
-		Point2D_T():x_(0), y_(0){}
-		Point2D_T(const T t):x_(t), y_(t){}
+		Point2D_T(const T t = 0):x_(t), y_(t){}
 		Point2D_T(const T x, const T y):x_(x), y_(y){}
 		Point2D_T(const Point2D_T<T> &p):x_(p.x_), y_(p.y_){}
 		Point2D_T<T>& operator = (const Point2D_T<T> &p)
@@ -120,8 +120,7 @@ namespace Aurora
 	class Point3D_T
 	{
 	public:
-		Point3D_T():x_(0), y_(0), z_(0){}
-		Point3D_T(const T t):x_(t), y_(t), z_(t){}
+		Point3D_T(const T t = 0):x_(t), y_(t), z_(t){}
 		Point3D_T(const T x, const T y, const T z):x_(x), y_(y), z_(z){}
 		Point3D_T(const Point3D_T<T> &p):x_(p.x_), y_(p.y_), z_(p.z_){}
 		Point3D_T<T>& operator = (const Point3D_T<T> &p)
@@ -246,8 +245,7 @@ namespace Aurora
 	class Point4D_T
 	{
 	public:
-		Point4D_T():x_(0), y_(0), z_(0), w_(1){}
-		Point4D_T(const T t, const T w = 1):x_(t), y_(t), z_(t), w_(w){}
+		Point4D_T(const T t = 0, const T w = 1):x_(t), y_(t), z_(t), w_(w){}
 		Point4D_T(const T x, const T y, const T z, const T w = 1):x_(x), y_(y), z_(z), w_(w){}
 		Point4D_T(const Point4D_T<T> &p):x_(p.x_), y_(p.y_), z_(p.z_), w_(p.w_){}
 		Point4D_T<T>& operator = (const Point4D_T<T> &p)
@@ -270,22 +268,23 @@ namespace Aurora
 
 		Point4D_T<T> operator + (const Point4D_T<T> &p) const
 		{
-			return Point4D_T<T>(x_ + p.x_, y_ + p.y_, z_ + p.z_, 1);
+			return Point4D_T<T>(x_ + p.x_, y_ + p.y_, z_ + p.z_, w_ + p.w_);
 		}
 		Point4D_T<T> operator + (const Vector4D_T<T> &v) const
 		{
-			return Point4D_T<T>(x_ + v.x_, y_ + v.y_ ,z_ + v.z_, 1);
+			return Point4D_T<T>(x_ + v.x_, y_ + v.y_ ,z_ + v.z_, w_ + v.w_);
 		}
 		Point4D_T<T>& operator += (const Vector4D_T<T> &v)
 		{
 			x_ += v.x_;
 			y_ += v.y_;
 			z_ += v.z_;
+			w_ += v.w_;
 			return *this;
 		}
 		Vector4D_T<T> operator - (const Point4D_T<T> &p) const
 		{
-			return Vector4D_T<T>(x_ - p.x_, y_ - p.y_, z_ - p.z_, 0);
+			return Vector4D_T<T>(x_ - p.x_, y_ - p.y_, z_ - p.z_, w_ - p.w_);
 		}
 		Point4D_T<T> operator - (const Vector4D_T<T> &v) const
 		{
@@ -296,10 +295,25 @@ namespace Aurora
 			return *this += (-v);
 		}
 
+		Point4D_T<T> operator * (const Matrix4_T<T> &m) const
+		{
+			return Point4D_T<T>(
+					x_ * m(0, 0) + y_ * m(1, 0) + z_ * m(2, 0) + w_ * m(3, 0),
+					x_ * m(0, 1) + y_ * m(1, 1) + z_ * m(2, 1) + w_ * m(3, 1),
+					x_ * m(0, 2) + y_ * m(1, 2) + z_ * m(2, 2) + w_ * m(3, 2),
+					x_ * m(0, 3) + y_ * m(1, 3) + z_ * m(2, 3) + w_ * m(3, 3)
+					);
+		}
+		Point4D_T<T>& operator *= (const Matrix4_T<T> &m)
+		{
+			*this = operator * (m);
+			return *this;
+		}
+
 		template <typename U>
 		Point4D_T<T> operator * (const U u) const
 		{
-			return Point4D_T<T>(x_ * u, y_ * u, z_ * u, 1);
+			return Point4D_T<T>(x_ * u, y_ * u, z_ * u, w_);
 		}
 		template <typename U>
 		Point4D_T<T>& operator *= (const U u)
@@ -322,7 +336,7 @@ namespace Aurora
 
 		Point4D_T<T> operator - () const
 		{
-			return Point4D_T<T>(-x_, -y_, -z_, 1);
+			return Point4D_T<T>(-x_, -y_, -z_, -w_);
 		}
 
 		T& x()
@@ -379,4 +393,4 @@ namespace Aurora
 	}
 }
 
-#endif //AURORA_POINT_H_
+#endif //AURORA_POINT_HPP_

@@ -3,6 +3,7 @@
 
 #include <cmath>
 #include <iostream>
+#include <utility>
 
 namespace Aurora
 {
@@ -10,8 +11,7 @@ namespace Aurora
 	class Vector2D_T
 	{
 	public:
-		Vector2D_T():x_(0), y_(0){}
-		Vector2D_T(const T t):x_(t), y_(t){}
+		Vector2D_T(const T t = 0):x_(t), y_(t){}
 		Vector2D_T(const T x, const T y):x_(x), y_(y){}
 		Vector2D_T(const Vector2D_T<T> &v):x_(v.x_), y_(v.y_){}
 		Vector2D_T<T>& operator = (const Vector2D_T<T> &v)
@@ -132,8 +132,7 @@ namespace Aurora
 	class Vector3D_T
 	{
 	public:
-		Vector3D_T():x_(0), y_(0), z_(0){}
-		Vector3D_T(const T t):x_(t), y_(t), z_(t){}
+		Vector3D_T(const T t = 0):x_(t), y_(t), z_(t){}
 		Vector3D_T(const T x, const T y, const T z):x_(x), y_(y), z_(z){}
 		Vector3D_T(const Vector3D_T<T> &v):x_(v.x_), y_(v.y_), z_(v.z_){}
 		Vector3D_T<T>& operator = (const Vector3D_T<T> &v)
@@ -273,16 +272,15 @@ namespace Aurora
 	class Vector4D_T
 	{
 	public:
-		Vector4D_T():x_(0), y_(0), z_(0), w_(0){}
-		Vector4D_T(const T t):x_(t), y_(t), z_(t), w_(0){}
+		Vector4D_T(const T t = 0, const T w = 0):x_(t), y_(t), z_(t), w_(w){}
 		Vector4D_T(const T x, const T y, const T z, const T w = 0):x_(x), y_(y), z_(z), w_(w){}
-		Vector4D_T(const Vector4D_T<T> &v):x_(v.x_), y_(v.y_), z_(v.z_), w_(0){}
+		Vector4D_T(const Vector4D_T<T> &v):x_(v.x_), y_(v.y_), z_(v.z_), w_(v.w_){}
 		Vector4D_T<T>& operator = (const Vector4D_T<T> &v)
 		{
 			x_ = v.x_;
 			y_ = v.y_;
 			z_ = v.z_;
-			w_ = 0;
+			w_ = v.w_;
 			return *this;
 		}
 
@@ -297,13 +295,14 @@ namespace Aurora
 
 		Vector4D_T<T> operator + (const Vector4D_T<T> &v) const
 		{
-			return Vector4D_T<T>(x_ + v.x_, y_ + v.y_, z_ + v.z_, 0);
+			return Vector4D_T<T>(x_ + v.x_, y_ + v.y_, z_ + v.z_, w_ + v.w_);
 		}
 		Vector4D_T<T>& operator += (const Vector4D_T<T> &v)
 		{
 			x_ += v.x_;
 			y_ += v.y_;
 			z_ += v.z_;
+			w_ += v.w_;
 			return *this;
 		}
 		Vector4D_T<T> operator - (const Vector4D_T<T> &v) const
@@ -318,7 +317,7 @@ namespace Aurora
 		template <typename U>
 		Vector4D_T<T> operator * (const U u) const
 		{
-			return Vector4D_T<T>(x_ * u, y_ * u, z_ * u);
+			return Vector4D_T<T>(x_ * u, y_ * u, z_ * u, w_ * u);
 		}
 		template <typename U>
 		Vector4D_T<T>& operator *= (const U u)
@@ -326,6 +325,7 @@ namespace Aurora
 			x_ *= u;
 			y_ *= u;
 			z_ *= u;
+			w_ *= u;
 			return *this;
 		}
 		template <typename U>
@@ -341,7 +341,7 @@ namespace Aurora
 
 		Vector4D_T<T> operator - () const
 		{
-			return Vector4D_T<T>(-x_, -y_, -z_, 0);
+			return Vector4D_T<T>(-x_, -y_, -z_, -w_);
 		}
 
 		T& x()

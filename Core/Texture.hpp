@@ -13,6 +13,10 @@ namespace Aurora
 	class Texture
 	{
 	public:
+		RGB_T<float> Sample(float u, float v) const
+		{
+			return texture_[v / 1.0f * size_ * size_ + u / 1.0f * size_];
+		}
 		void Load(const std::string &path)
 		{
 			size_t width, height;

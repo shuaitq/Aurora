@@ -9,7 +9,21 @@ namespace Aurora
 {
 	class Camera
 	{
-	public:
+	public:	
+		Matrix4_T<float>& MakeMatrix()
+		{
+			float PdotR = position_.x() * right_.x() + position_.y() * right_.y() + position_.z() * right_.z();
+			float PdotU = position_.x() * up_.x() + position_.y() * up_.y() + position_.z() * up_.z();
+			float PdotF = position_.x() * front_.x() + position_.y() * front_.y() + position_.z() * front_.z();
+			WorldToCamera_ = Matrix4_T<float>(
+							right_.x(), up_.x(), front_.x(), 0,
+							right_.y(), up_.y(), front_.y(), 0,
+							right_.z(), up_.z(), front_.z(), 0,
+							-PdotR, -PdotU, -PdotF, 1
+							);
+			return WorldToCamera_;
+		}
+
 		Point4D_T<float>& position()
 		{
 			return position_;
@@ -42,11 +56,11 @@ namespace Aurora
 		{
 			return right_;
 		}
-		Matrix4_T& WorldToCamera()
+		Matrix4_T<float>& WorldToCamera()
 		{
 			return WorldToCamera_;
 		}
-		const Matrix4_T& WorldToCamera() const
+		const Matrix4_T<float>& WorldToCamera() const
 		{
 			return WorldToCamera_;
 		}

@@ -25,21 +25,22 @@ namespace Aurora
 		{
 			memcpy(this -> _m, matrix.begin(), sizeof(_m));
 		}
-		Matrix4_T<T>& operator=(const Matrix4_T<T> &matrix)
+		Matrix4_T<T>& operator = (const Matrix4_T<T> &matrix)
 		{
 			memcpy(_m, matrix.begin(), sizeof(_m));
+			return *this;
 		}
 
-		bool operator==(const Matrix4_T<T> &matrix) const
+		bool operator == (const Matrix4_T<T> &matrix) const
 		{
 			return memcmp(_m, matrix.begin(), sizeof(_m)) == 0;
 		}
-		bool operator!=(const Matrix4_T<T> &matrix) const
+		bool operator != (const Matrix4_T<T> &matrix) const
 		{
-			return !operator==(matrix);
+			return !operator == (matrix);
 		}
 
-		Matrix4_T<T> operator*(const Matrix4_T<T> &matrix) const
+		Matrix4_T<T> operator * (const Matrix4_T<T> &matrix) const
 		{
 			Matrix4_T<T> m;
 			for(size_t i = 0; i < 4; ++ i)
@@ -49,17 +50,18 @@ namespace Aurora
 					 m[i][j] = m_[i][0] * matrix[0][j] + m_[i][1] * matrix[1][j] + m_[i][2] * matrix[2][j] + m_[i][3] * matrix[3][j];
 				}
 			}
+			return m;
 		}
-		Matrix4_T<T>& operator*=(const Matrix4_T<T> &matrix)
+		Matrix4_T<T>& operator *= (const Matrix4_T<T> &matrix)
 		{
-			return *this = operator*(matrix);
+			return *this = operator * (matrix);
 		}
 		
 		T& operator()(size_t row, size_t col)
 		{
 			return m_[row][col];
 		}
-		const T& operator()(size_t row, size_t col) const
+		const T& operator () (size_t row, size_t col) const
 		{
 			return m_[row][col];
 		}
