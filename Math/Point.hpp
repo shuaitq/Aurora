@@ -112,6 +112,14 @@ namespace Aurora
 			in >> p.x() >> p.y();
 			return in;
 		}
+		bool operator > (const Point2D_T<T> &rhs) const
+		{
+			return y_ > rhs.y_;
+		}
+		bool operator < (const Point2D_T<T> &rhs) const
+		{
+			return y_ < rhs.y_;
+		}
 	private:
 		T x_, y_;
 	};

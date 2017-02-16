@@ -22,11 +22,6 @@ namespace Aurora
 			return *this;
 		}
 
-		void push_back(const size_t triangle)
-		{
-			index_.push_back(triangle);
-		}
-
 		Point4D_T<float>& point()
 		{
 			return point_;

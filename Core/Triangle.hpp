@@ -18,12 +18,6 @@ namespace Aurora
 			index_[1] = index2;
 			index_[2] = index3;
 		}
-		Triangle(const std::vector<size_t> &index)
-		{
-			index_[0] = index[0];
-			index_[1] = index[1];
-			index_[2] = index[2];
-		}
 		Triangle& operator=(const Triangle &tri)
 		{
 			index_[0] = tri.index_[0];

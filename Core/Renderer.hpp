@@ -9,6 +9,7 @@
 #include <memory>
 #include <vector>
 #include <string>
+#include <algorithm>
 
 namespace Aurora
 {
@@ -19,14 +20,21 @@ namespace Aurora
 		{
 			SenceFile::Load(path, width_, height_, camera_, object_);
 		}
+		
+		void DrawTriangle(const Point2D_T<float> &p1, const Point2D_T<float> &p2, const Point2D_T<float> &p3)
+		{
+		}
+
 		void Render(const std::string &path)
 		{
+			// init
 			screen_.resize(width_ * height_);
 			ZBuffer_.resize(width_ * height_);
-			PPM::Save(path, width_, height_, screen_);
+			// make camera matrix
 			Matrix4_T<float> &m = camera_.MakeMatrix();
 			std::cout << m << std::endl;
 			Object& object = object_[0];
+			// transform
 			for(auto it = object.vertex().begin(); it != object.vertex().end(); ++ it)
 			{
 				it->point() *= m;
@@ -38,12 +46,20 @@ namespace Aurora
 				Point4D_T<float> &p2 = object.vertex()[(*it)[2]].point();
 				if(0 > Dot(camera_.front() , CalcNormal(p0, p1, p2)))
 				{
-					Point2D_T<float> sp0(p0.x() / p0.z(), p0.y() / p0.z());
-					Point2D_T<float> sp1(p1.x() / p1.z(), p1.y() / p1.z());
-					Point2D_T<float> sp2(p2.x() / p2.z(), p2.y() / p2.z());
-					std::cout << sp0 << sp1 << sp2 << std::endl;
+					std::vector<Point2D_T<float>> screenpoint;
+					screenpoint.push_back(Point2D_T<float>(p0.x() / p0.z(), p0.y() / p0.z()));
+					screenpoint.push_back(Point2D_T<float>(p1.x() / p1.z(), p1.y() / p1.z()));
+					screenpoint.push_back(Point2D_T<float>(p2.x() / p2.z(), p2.y() / p2.z()));
+					std::sort(screenpoint.begin(), screenpoint.end());
+					Point2D_T<float> midpoint(screenpoint[0].x() + , screenpoint[1].y());
+					for(size_t i = 0; i < 3; ++ i)
+					{
+						std::cout << screenpoint[i];
+					}
 				}
 			}
+			// save ppm file
+			PPM::Save(path, width_, height_, screen_);
 		}
 
 		Camera& camera()

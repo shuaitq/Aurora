@@ -10,8 +10,7 @@ namespace Aurora
 	class RGB_T
 	{
 	public:
-		RGB_T():red_(0), green_(0), blue_(0){}
-		RGB_T(const T t):red_(t), green_(t), blue_(t){}
+		RGB_T(const T t = 0):red_(t), green_(t), blue_(t){}
 		RGB_T(const T red, const T green, const T blue):red_(red), green_(green), blue_(blue){}
 		RGB_T(const RGB_T<T> &rgb):red_(rgb.red_), green_(rgb.green_), blue_(rgb.blue_){}
 		RGB_T<T>& operator = (const RGB_T<T> &rgb)
@@ -120,8 +119,7 @@ namespace Aurora
 	class RGBA_T
 	{
 	public:
-		RGBA_T():red_(0), green_(0), blue_(0), alpha_(1){}
-		RGBA_T(const T t, const T alpha = 1):red_(t), green_(t), blue_(t), alpha_(alpha){}
+		RGBA_T(const T t = 0, const T alpha = 1):red_(t), green_(t), blue_(t), alpha_(alpha){}
 		RGBA_T(const T red, const T green, const T blue, const T alpha = 1):red_(red), green_(green), blue_(blue), alpha_(alpha){}
 		RGBA_T(const RGBA_T<T> &rgba):red_(rgba.red_), green_(rgba.green_), blue_(rgba.blue_), alpha_(rgba.alpha_){}
 		RGBA_T<T>& operator = (const RGBA_T<T> &rgba)
