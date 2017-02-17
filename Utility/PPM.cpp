@@ -34,7 +34,7 @@ namespace Aurora
 			in << "P3" << std::endl << width << ' ' << height << std::endl << "255" << std::endl;
 			for(auto it = ppm.begin(); it != ppm.end(); ++ it)
 			{
-				in << (int)it->red()*255 << ' ' << (int)it->green()*255 << ' ' << (int)it->blue()*255 << ' ';
+				in << (int)(it->red()*255) << ' ' << (int)(it->green()*255) << ' ' << (int)(it->blue()*255) << ' ';
 			}
 			in.close();
 		}

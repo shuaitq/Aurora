@@ -11,6 +11,7 @@ int main(int argc, char *argv[])
 	using namespace Aurora;
 	Renderer test;
 	test.Load("Sence/cube.sence");
+	test.Init();
 	test.Render("Image/test.ppm");
 	std::cout << test;
 	return 0;
