@@ -11,8 +11,8 @@ namespace Aurora
 	{
 	public:
 		virtual RGB_T<float> Sample(Point4D_T<float> &position, Vector4D_T<float> &normal) = 0;
-	priavate:
-	}
+	private:
+	};
 }
 
 #endif //AURORA_LIGHT_HPP_

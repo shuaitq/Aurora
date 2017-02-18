@@ -10,7 +10,15 @@ public:
 	{
 		RGB_T<float> Sample(Point4D_T<float> position, Vector4D_T<float> normal)
 		{
-			return color_ * * 
+			float NdotD = Dot(normal, direction_);
+			if(NdotD > 0)
+			{
+				return RGB_T<float> black();
+			}
+			else
+			{
+				return color_ * -NdotD;
+			}
 		}
 	}
 private:

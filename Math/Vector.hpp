@@ -1,6 +1,8 @@
 #ifndef AURORA_VECTOR_HPP_
 #define AURORA_VECTOR_HPP_
 
+#include "Matrix.hpp"
+
 #include <cmath>
 #include <iostream>
 #include <utility>
@@ -117,6 +119,16 @@ namespace Aurora
 		T x_, y_;
 	};
 
+	template <typename U, typename T>
+	Vector2D_T<T> operator * (const U u, const Vector2D_T<T> &v)
+	{
+		return v * u;
+	}
+	template <typename U, typename T>
+	Vector2D_T<T> operator / (const U u, const Vector2D_T<T> &v)
+	{
+		return v / u;
+	}
 	template <typename T>
 	Vector2D_T<T> Normalize(const Vector2D_T<T> &v)
 	{
@@ -249,6 +261,16 @@ namespace Aurora
 		T x_, y_, z_;
 	};
 
+	template <typename U, typename T>
+	Vector3D_T<T> operator * (const U u, const Vector3D_T<T> &v)
+	{
+		return v * u;
+	}
+	template <typename U, typename T>
+	Vector3D_T<T> operator / (const U u, const Vector3D_T<T> &v)
+	{
+		return v / u;
+	}
 	template <typename T>
 	Vector3D_T<T> Normalize(const Vector3D_T<T> &v)
 	{
@@ -314,6 +336,20 @@ namespace Aurora
 			return *this += (-v);
 		}
 
+		Vector4D_T<T> operator * (const Matrix4_T<T> &m) const
+                {
+                        return Vector4D_T<T>(
+                                        x_ * m(0, 0) + y_ * m(1, 0) + z_ * m(2, 0) + w_ * m(3, 0),
+                                        x_ * m(0, 1) + y_ * m(1, 1) + z_ * m(2, 1) + w_ * m(3, 1),
+                                        x_ * m(0, 2) + y_ * m(1, 2) + z_ * m(2, 2) + w_ * m(3, 2),
+                                        x_ * m(0, 3) + y_ * m(1, 3) + z_ * m(2, 3) + w_ * m(3, 3)
+                                        );
+                }
+		Vector4D_T<T>& operator *= (const Matrix4_T<T> &m)
+		{
+			*this = operator * (m);
+			return *this;
+		}
 		template <typename U>
 		Vector4D_T<T> operator * (const U u) const
 		{
@@ -400,6 +436,16 @@ namespace Aurora
 		T x_, y_, z_, w_;
 	};
 
+	template <typename U, typename T>
+	Vector4D_T<T> operator * (const U u, const Vector4D_T<T> &v)
+	{
+		return v * u;
+	}
+	template <typename U, typename T>
+	Vector4D_T<T> operator / (const U u, const Vector4D_T<T> &v)
+	{
+		return v * u;
+	}
 	template <typename T>
 	Vector4D_T<T> Normalize(const Vector4D_T<T> &v)
 	{

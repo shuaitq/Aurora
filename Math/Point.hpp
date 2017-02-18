@@ -37,11 +37,11 @@ namespace Aurora
 		}
 		Point2D_T<T> operator + (const Vector2D_T<T> &v) const
 		{
-			return Point2D_T<T>(x_ + v.x_, y_ + v.y_);
+			return Point2D_T<T>(x_ + v.x(), y_ + v.y());
 		}
 		Point2D_T<T>& operator += (const Vector2D_T<T> &v){
-			x_ += v.x_;
-			y_ += v.y_;
+			x_ += v.x();
+			y_ += v.y();
 			return *this;
 		}
 		Vector2D_T<T> operator - (const Point2D_T<T> &p) const
@@ -123,6 +123,16 @@ namespace Aurora
 	private:
 		T x_, y_;
 	};
+	template <typename U, typename T>
+	Point2D_T<T> operator * (const U u, const Point2D_T<T> &p)
+	{
+		return p * u;
+	}
+	template <typename U, typename T>
+	Point2D_T<T> operator / (const U u, const Point2D_T<T> &p)
+	{
+		return p / u;
+	}
 
 	template <typename T>
 	class Point3D_T
@@ -154,12 +164,12 @@ namespace Aurora
 		}
 		Point3D_T<T> operator + (const Vector3D_T<T> &v) const
 		{
-			return Point3D_T<T>(x_ + v.x_, y_ + v.y_, z_ + v.z_);
+			return Point3D_T<T>(x_ + v.x(), y_ + v.y(), z_ + v.z());
 		}
 		Point3D_T<T>& operator += (const Vector3D_T<T> &v){
-			x_ += v.x_;
-			y_ += v.y_;
-			z_ += v.z_;
+			x_ += v.x();
+			y_ += v.y();
+			z_ += v.z();
 			return *this;
 		}
 		Vector3D_T<T> operator - (const Point3D_T<T> &p) const
@@ -242,6 +252,16 @@ namespace Aurora
 	private:
 		T x_, y_, z_;
 	};
+	template <typename U, typename T>
+	Point3D_T<T> operator * (const U u, const Point3D_T<T> &p)
+	{
+		return p * u;
+	}
+	template <typename U, typename T>
+	Point3D_T<T> operator / (const U u, const Point3D_T<T> &p)
+	{
+		return p / u;
+	}
 
 	template <typename T>
 	Vector3D_T<T> CalcNormal(const Point3D_T<T> &p1, const Point3D_T<T> &p2, const Point3D_T<T> &p3)
@@ -280,14 +300,14 @@ namespace Aurora
 		}
 		Point4D_T<T> operator + (const Vector4D_T<T> &v) const
 		{
-			return Point4D_T<T>(x_ + v.x_, y_ + v.y_ ,z_ + v.z_, w_ + v.w_);
+			return Point4D_T<T>(x_ + v.x(), y_ + v.y() ,z_ + v.z(), w_ + v.w());
 		}
 		Point4D_T<T>& operator += (const Vector4D_T<T> &v)
 		{
-			x_ += v.x_;
-			y_ += v.y_;
-			z_ += v.z_;
-			w_ += v.w_;
+			x_ += v.x();
+			y_ += v.y();
+			z_ += v.z();
+			w_ += v.w();
 			return *this;
 		}
 		Vector4D_T<T> operator - (const Point4D_T<T> &p) const
@@ -393,6 +413,16 @@ namespace Aurora
 	private:
 		T x_, y_, z_, w_;
 	};
+	template <typename U, typename T>
+	Point4D_T<T> operator * (const U u, const Point4D_T<T> &p)
+	{
+		return p * u;
+	}
+	template <typename U, typename T>
+	Point4D_T<T> operator / (const U u, const Point4D_T<T> &p)
+	{
+		return p / u;
+	}
 
 	template <typename T>
 	Vector4D_T<T> CalcNormal(const Point4D_T<T> &p1, const Point4D_T<T> &p2, const Point4D_T<T> &p3)

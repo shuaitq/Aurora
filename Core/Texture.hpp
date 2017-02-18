@@ -23,7 +23,7 @@ namespace Aurora
 			PPM::Load(path, width, height, texture_);
 			if(width != height)
 			{
-				throw std::runtime_error("Texture width not equal to height");
+				throw std::runtime_error("Texture width not equals to height");
 			}
 			size_ = height;
 		}
