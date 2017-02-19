@@ -37,8 +37,8 @@ namespace Aurora
 				float xs = Interpolation(top.point().x(), left.point().x(), t);
 				float xe = Interpolation(top.point().x(), right.point().x(), t);
 				// normal
-				Vector4D_T<float> xns = Interpolation(top.normal(), left.normal(), t);
-				Vector4D_T<float> xne = Interpolation(top.normal(), right.normal(), t);
+				Vector4D_T<float> xns = Interpolation(top.normal() / top.point().z(), left.normal() / left.point().z(), t);
+				Vector4D_T<float> xne = Interpolation(top.normal() / top.point().z(), right.normal() / right.point().z(), t);
 				// 1 / z
 				float onezs = Interpolation(1 / top.point().z(), 1 / left.point().z(), t);
 				float oneze = Interpolation(1 / top.point().z(), 1 / right.point().z(), t);
@@ -50,6 +50,7 @@ namespace Aurora
 					float tt = (xe - 1 - j) / (xe - xs - 1);
 					// normal
 					Vector4D_T<float> point_normal = Interpolation(xns, xne, tt);
+					point_normal /= Interpolation(onezs, oneze, tt);
 					// uv
 					Point2D_T<float> point_uv = Interpolation(xuvs, xuve, tt);
 					point_uv /= Interpolation(onezs, oneze, tt);
@@ -77,8 +78,8 @@ namespace Aurora
 				float xs = Interpolation(left.point().x(), bottom.point().x(), t);
 				float xe = Interpolation(right.point().x(), bottom.point().x(), t);
 				// normal
-				Vector4D_T<float> xns = Interpolation(left.normal(), bottom.normal(), t);
-				Vector4D_T<float> xne = Interpolation(right.normal(), bottom.normal(), t);
+				Vector4D_T<float> xns = Interpolation(left.normal() / left.point().z(), bottom.normal() / bottom.point().z(), t);
+				Vector4D_T<float> xne = Interpolation(right.normal() / right.point().z(), bottom.normal() / bottom.point().z(), t);
 				// 1 / z
 				float onezs = Interpolation(1 / left.point().z(), 1 / bottom.point().z(), t);
 				float oneze = Interpolation(1 / right.point().z(), 1 / bottom.point().z(), t);
@@ -90,6 +91,7 @@ namespace Aurora
 					float tt = (xe - 1 - j) / (xe - xs - 1);
 					// normal
 					Vector4D_T<float> point_normal = Interpolation(xns, xne, tt);
+					point_normal /= Interpolation(onezs, oneze, tt);
 					// uv
 					Point2D_T<float> point_uv = Interpolation(xuvs, xuve, tt);
 					point_uv /= Interpolation(onezs, oneze, tt);
