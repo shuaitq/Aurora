@@ -29,78 +29,82 @@ namespace Aurora
 		}
 		void DrawTopTriangle(Vertex &top, Vertex &left, Vertex &right, Texture &texture)
 		{
-			// left and right must be the same height.
-			float dis = top.point().y() - left.point().y();
-			// point
-			float xs = top.point().x(), xe = top.point().x();
-			float slope_left = (top.point().x() - left.point().x()) / dis, slope_right = (top.point().x() - right.point().x()) / dis;
-			// normal
-			Vector4D_T<float> xns = top.normal(), xne = top.normal();
-			Vector4D_T<float> slope_left_normal = (top.normal() - left.normal()) / dis, slope_right_normal = (top.normal() - right.normal()) / dis;
-			// uv
-			Point2D_T<float> xuvs = top.uv(), xuve = top.uv();
-			Vector2D_T<float> slope_left_uv = (top.uv() - left.uv()) / dis, slope_right_uv = (top.uv() - right.uv()) / dis;
 			for(size_t i = top.point().y(); i < left.point().y(); ++ i)
 			{
-				float length = xe - xs;
-				std::cout << length << "length" << right.point().x() << std::endl;
-				std::cout << xs << "xs" << slope_left << std::endl;
-				std::cout << xe << "xe" << slope_right << std::endl;
+				// left and right must be the same height.
+				float t = (left.point().y() - 1 - i) / (left.point().y() - top.point().y() -1);
+				// point
+				float xs = Interpolation(top.point().x(), left.point().x(), t);
+				float xe = Interpolation(top.point().x(), right.point().x(), t);
+				// normal
+				Vector4D_T<float> xns = Interpolation(top.normal(), left.normal(), t);
+				Vector4D_T<float> xne = Interpolation(top.normal(), right.normal(), t);
+				// 1 / z
+				float onezs = Interpolation(1 / top.point().z(), 1 / left.point().z(), t);
+				float oneze = Interpolation(1 / top.point().z(), 1 / right.point().z(), t);
+				// uv
+				Point2D_T<float> xuvs = Interpolation(top.uv() / top.point().z(), left.uv() / left.point().z(), t);
+				Point2D_T<float> xuve = Interpolation(top.uv() / top.point().z(), right.uv() / right.point().z(), t);
 				for(size_t j = xs; j < xe; ++ j)
 				{
+					float tt = (xe - 1 - j) / (xe - xs - 1);
 					// normal
-					Vector4D_T<float> point_normal = ((xe - 1 - j) / length * xns) + ((j - xs) / length * xne);
+					Vector4D_T<float> point_normal = Interpolation(xns, xne, tt);
 					// uv
-					Point2D_T<float> point_uv = ((xe - 1 - j) / length * xuvs) + ((j - xs) / length * xuve);
+					Point2D_T<float> point_uv = Interpolation(xuvs, xuve, tt);
+					point_uv /= Interpolation(onezs, oneze, tt);
 					// color = texture.color * (normal * light)
-					// std::cout << point_normal;
-					screen_[i * width_ + j] =  texture.Sample(point_uv.x(), point_uv.y()) * -Dot(point_normal, directlight);
+					float PdotD = -Dot(point_normal, directlight);
+					if(PdotD < 0)
+					{
+						PdotD = 0;
+					}
+					if(PdotD > 1)
+					{
+						PdotD = 1;
+					}
+					screen_[i * width_ + j] =  texture.Sample(point_uv.x(), point_uv.y()) * (RGB_T<float>::white * PdotD);
 				}
-				// point
-				xs += slope_left;
-				xe += slope_right;
-				// normal
-				xns += slope_left_normal;
-				xne += slope_right_normal;
-				// uv
-				xuvs += slope_left_uv;
-				xuve += slope_right_uv;
 			}
 		}
 		void DrawBottomTriangle(Vertex &bottom, Vertex &left, Vertex &right, Texture &texture)
 		{
-			// left and right must be the same height.
-			float dis = left.point().y() - bottom.point().y();
-			// point
-			float xs = left.point().x(), xe = right.point().x();
-			float slope_left = (left.point().x() - bottom.point().x()) / dis, slope_right = (right.point().x() - bottom.point().x()) / dis;
-			// normal
-			Vector4D_T<float> xns = left.normal(), xne = right.normal();
-			Vector4D_T<float> slope_left_normal = (left.normal() - bottom.normal()) / dis, slope_right_normal = (right.normal() - bottom.normal()) / dis;
-			// uv
-			Point2D_T<float> xuvs = left.uv(), xuve = right.uv();
-			Vector2D_T<float> slope_left_uv = (left.uv() - bottom.uv()) / dis, slope_right_uv = (right.uv() - bottom.uv()) / dis;
 			for(size_t i = left.point().y(); i < bottom.point().y(); ++ i)
 			{
-				float length = xe - xs;
+				// left and right must be the same height.
+				float t = (bottom.point().y() - 1 - i) / (bottom.point().y() - left.point().y() -1);
+				// point
+				float xs = Interpolation(left.point().x(), bottom.point().x(), t);
+				float xe = Interpolation(right.point().x(), bottom.point().x(), t);
+				// normal
+				Vector4D_T<float> xns = Interpolation(left.normal(), bottom.normal(), t);
+				Vector4D_T<float> xne = Interpolation(right.normal(), bottom.normal(), t);
+				// 1 / z
+				float onezs = Interpolation(1 / left.point().z(), 1 / bottom.point().z(), t);
+				float oneze = Interpolation(1 / right.point().z(), 1 / bottom.point().z(), t);
+				// uv
+				Point2D_T<float> xuvs = Interpolation(left.uv() / left.point().z(), bottom.uv() / bottom.point().z(), t);
+				Point2D_T<float> xuve = Interpolation(right.uv() / right.point().z(), bottom.uv() / bottom.point().z(), t);
 				for(size_t j = xs; j < xe; ++ j)
 				{
+					float tt = (xe - 1 - j) / (xe - xs - 1);
 					// normal
-					Vector4D_T<float> point_normal = ((xe - 1 - j) / length * xns) + ((j - xs) / length * xne);
+					Vector4D_T<float> point_normal = Interpolation(xns, xne, tt);
 					// uv
-					Point2D_T<float> point_uv = ((xe - 1 - j) / length * xuvs) + ((j - xs) / length * xuve);
+					Point2D_T<float> point_uv = Interpolation(xuvs, xuve, tt);
+					point_uv /= Interpolation(onezs, oneze, tt);
+					float PdotD = -Dot(point_normal, directlight);
+					if(PdotD < 0)
+					{
+						PdotD = 0;
+					}
+					if(PdotD > 1)
+					{
+						PdotD = 1;
+					}
 					// color = texture.color * (normal * light)
-					screen_[i * width_ + j] =  texture.Sample(point_uv.x(), point_uv.y()) * -Dot(point_normal, directlight);
+					screen_[i * width_ + j] =  texture.Sample(point_uv.x(), point_uv.y()) * (RGB_T<float>::white * PdotD);
 				}
-				// point
-				xs += slope_left;
-				xe += slope_right;
-				// normal
-				xns += slope_left_normal;
-				xne += slope_right_normal;
-				// uv
-				xuvs += slope_left_uv;
-				xuve += slope_right_uv;
 			}
 		}
 
@@ -108,6 +112,7 @@ namespace Aurora
 		{
 			// make camera matrix
 			Matrix4_T<float> &m = camera_.MakeMatrix();
+			directlight *= m;
 			std::vector<Object> TempObject = object_;
 			for(auto &object : TempObject)
 			{
@@ -122,16 +127,6 @@ namespace Aurora
 					Vertex v[3] = {object.vertex()[triangle[0]],object.vertex()[triangle[1]],object.vertex()[triangle[2]]};
 					if(0 < Dot(Vector4D_T<float>(0, 0, 1), CalcNormal(v[0].point(), v[1].point(), v[2].point())))
 					{
-						for(size_t i = 0; i < 3; ++ i)
-						{
-							v[i].point().x() = v[i].point().x() / v[i].point().z();
-							v[i].point().y() = v[i].point().y() / v[i].point().z();
-							v[i].point().x() /= camera_.aspect();
-							v[i].point().x() *= (width_ / 2);
-							v[i].point().x() += (width_ / 2);
-							v[i].point().y() *= (height_ / 2);
-							v[i].point().y() += (height_ / 2);
-						}
 						if(v[0].point().y() > v[1].point().y())
 						{
 							std::swap(v[0], v[1]);
@@ -144,16 +139,35 @@ namespace Aurora
 						{
 							std::swap(v[0], v[1]);
 						}
+						for(size_t i = 0; i < 3; ++ i)
+						{
+							v[i].point().x() = v[i].point().x() / v[i].point().z();
+							v[i].point().y() = v[i].point().y() / v[i].point().z();
+							v[i].point().x() /= camera_.aspect();
+							v[i].point().x() *= (width_ / 2);
+							v[i].point().x() += (width_ / 2);
+							v[i].point().y() *= (height_ / 2);
+							v[i].point().y() += (height_ / 2);
+						}
 						std::cout << v[0] << std::endl;
 						std::cout << v[1] << std::endl;
 						std::cout << v[2] << std::endl;
 						std::cout << "Vertex" << std::endl;
 						Point4D_T<float> midpoint(v[0].point().x() + (v[2].point().x() - v[0].point().x()) / (v[2].point().y() - v[0].point().y()) * (v[1].point().y() - v[0].point().y()), v[1].point().y(), 0);
-						std::cout << "midpoint " << midpoint << std::endl;
 						float t = (v[0].point() - midpoint).Length() / (v[0].point() - v[2].point()).Length();
 						Point2D_T<float> miduv(t * v[2].uv() + (1-t) * v[0].uv());
 						Vector4D_T<float> midnormal(t * v[2].normal() + (1-t) * v[0].normal());
+						// TODO
+						if(midpoint.x() - v[0].point().x() == 0 || v[0].point().x() - v[2].point().x() == 0)
+						{
+							midpoint.z() = v[0].point().z() + ((midpoint.y() - v[0].point().y()) / (v[0].point().y() - v[2].point().y()) * (v[0].point().z() - v[2].point().z()));
+						}
+						else
+						{
+							midpoint.z() = v[0].point().z() + ((midpoint.x() - v[0].point().x()) / (v[0].point().x() - v[2].point().x()) * (v[0].point().z() - v[2].point().z()));
+						}
 						Vertex midvertex(midpoint, miduv, midnormal);
+						std::cout << "midvertex " << midvertex << std::endl;
 						if(midvertex.point().x() < v[1].point().x())
 						{
 							DrawTopTriangle(v[0], midvertex, v[1], object.texture());

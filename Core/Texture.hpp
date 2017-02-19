@@ -15,7 +15,24 @@ namespace Aurora
 	public:
 		RGB_T<float> Sample(float u, float v) const
 		{
-			return texture_[v / 1.0f * size_ * size_ + u / 1.0f * size_];
+			int width = u / 1.0f * size_, height = v / 1.0f * size_;
+			if(width < 0)
+			{
+				width = 0;
+			}
+			if(width >= size_)
+			{
+				width = size_ - 1;
+			}
+			if(height < 0)
+			{
+				height = 0;
+			}
+			if(height >= size_)
+			{
+				height = size_ - 1;
+			}
+			return texture_[height * size_ + width];
 		}
 		void Load(const std::string &path)
 		{
