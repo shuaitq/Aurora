@@ -16,6 +16,7 @@ namespace Aurora
 			in.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			in >> width >> height;
 			in.ignore(std::numeric_limits<std::streamsize>::max(), '\n');	
+			in.ignore(std::numeric_limits<std::streamsize>::max(), '\n');	
 			int red, green, blue;
 			for(size_t i = 0; i < height * width; ++ i)
 			{

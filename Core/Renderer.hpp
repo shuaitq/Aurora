@@ -151,10 +151,6 @@ namespace Aurora
 							v[i].point().y() *= (height_ / 2);
 							v[i].point().y() += (height_ / 2);
 						}
-						std::cout << v[0] << std::endl;
-						std::cout << v[1] << std::endl;
-						std::cout << v[2] << std::endl;
-						std::cout << "Vertex" << std::endl;
 						Point4D_T<float> midpoint(v[0].point().x() + (v[2].point().x() - v[0].point().x()) / (v[2].point().y() - v[0].point().y()) * (v[1].point().y() - v[0].point().y()), v[1].point().y(), 0);
 						float t = (v[0].point() - midpoint).Length() / (v[0].point() - v[2].point()).Length();
 						Point2D_T<float> miduv(t * v[2].uv() + (1-t) * v[0].uv());
