@@ -12,7 +12,16 @@ int main(int argc, char *argv[])
 	Renderer test;
 	test.Load("Sence/cube.sence");
 	test.Init();
-	test.Render("Image/test.ppm");
+	for(size_t i = 1; i <= 360; ++ i)
+	{
+		std::string str = "Image/";
+		char temp[10];
+		sprintf(temp,"%d",i);
+		str += temp;
+		str += ".ppm";
+		std::cout << str << std::endl;
+		test.Render(str);
+	}
 	std::cout << test;
 	return 0;
 }

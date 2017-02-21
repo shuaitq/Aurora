@@ -116,9 +116,9 @@ namespace Aurora
 		{
 			// make camera matrix
 			Matrix4_T<float> &m = camera_.MakeMatrix();
-			float x, y, z;
-			std::cout << "Please input rotate angle x y z" << std::endl;
-			std::cin >> x >> y >> z;
+			float x=1, y=1, z=1;
+			//std::cout << "Please input rotate angle x y z" << std::endl;
+			//std::cin >> x >> y >> z;
 			x = x * M_PI / 180;
 			y = y * M_PI / 180;
 			z = z * M_PI / 180;
@@ -165,9 +165,9 @@ namespace Aurora
 						}
 						// calc mid vertex
 						Point4D_T<float> midpoint(v[0].point().x() + (v[2].point().x() - v[0].point().x()) / (v[2].point().y() - v[0].point().y()) * (v[1].point().y() - v[0].point().y()), v[1].point().y(), 0);
-						float t = (v[0].point() - midpoint).Length() / (v[0].point() - v[2].point()).Length();
-						Point2D_T<float> miduv(t * v[2].uv() + (1-t) * v[0].uv());
-						Vector4D_T<float> midnormal(t * v[2].normal() + (1-t) * v[0].normal());
+						float t = (midpoint - v[0].point()).Length() / (v[2].point() - v[0].point()).Length();
+						Point2D_T<float> miduv = Interpolation(v[2].uv() / v[2].point().z(), v[0].uv() / v[0].point().z(), t);
+						Vector4D_T<float> midnormal = Interpolation(v[2].normal() / v[2].point().z(), v[0].normal() / v[0].point().z(), t);
 						// TODO
 						if(midpoint.x() - v[0].point().x() == 0 || v[0].point().x() - v[2].point().x() == 0)
 						{
@@ -179,6 +179,8 @@ namespace Aurora
 							midpoint.z() = 1 / v[0].point().z() + ((midpoint.x() - v[0].point().x()) / (v[2].point().x() - v[0].point().x()) * (1 / v[2].point().z() - 1 / v[0].point().z()));
 							midpoint.z() = 1 / midpoint.z();
 						}
+						miduv *= midpoint.z();
+						midnormal *= midpoint.z();
 						Vertex midvertex(midpoint, miduv, midnormal);
 						// draw triangle
 						std::cout << v[0] << std::endl;
