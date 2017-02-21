@@ -13,26 +13,28 @@ namespace Aurora
 	class Texture
 	{
 	public:
+		// u = [0, 1) v = [0, 1)
 		RGB_T<float> Sample(float u, float v) const
 		{
-			int width = u / 1.0f * size_, height = v / 1.0f * size_;
-			if(width < 0)
+			if(u > 1)
 			{
-				width = 0;
+				u = 1;
 			}
-			if(width >= size_)
+			if(u < 0)
 			{
-				width = size_ - 1;
+				u = 0;
 			}
-			if(height < 0)
+			if(v > 1)
 			{
-				height = 0;
+				v = 1;
 			}
-			if(height >= size_)
+			if(v < 0)
 			{
-				height = size_ - 1;
+				v = 0;
 			}
-			return texture_[height * size_ + width];
+			int i = u * size_, j = v * size_;
+			float x = u * size_ - i, y = v * size_ - j;
+			return texture_[j * size_ + i] * (1 - x) * (1 - y) + texture_[(j+1) * size_ + i] * y * (1 - x) + texture_[j * size_ + (i + 1)] * (1 - y) * x + texture_[(j + 1) * size_ + (i + 1)] * y * x;
 		}
 		void Load(const std::string &path)
 		{

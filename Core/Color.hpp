@@ -21,6 +21,17 @@ namespace Aurora
 			return *this;
 		}
 
+		RGB_T<T> operator + (const RGB_T<T> &rgb) const
+		{
+			return RGB_T<T>(red_ + rgb.red_, green_ + rgb.green_, blue_ + rgb.blue_);
+		}
+		RGB_T<T> operator += (const RGB_T<T> &rgb)
+		{
+			red_ += rgb.red_;
+			green_ += rgb.green_;
+			blue_ += rgb.blue_;
+			return *this;
+		}
 		RGB_T<T> operator * (const RGB_T<T> &rgb) const
 		{
 			return RGB_T<T>(red_ * rgb.red_, green_ * rgb.green_, blue_ * rgb.blue_);

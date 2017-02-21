@@ -24,6 +24,8 @@ namespace Aurora
 		}
 		void Init()
 		{
+			Matrix4_T<float> &m = camera_.MakeMatrix();
+			directlight *= m;
 			screen_.resize(width_ * height_);
 			ZBuffer_.resize(width_ * height_);
 		}
@@ -32,7 +34,7 @@ namespace Aurora
 			for(size_t i = top.point().y(); i < left.point().y(); ++ i)
 			{
 				// left and right must be the same height.
-				float t = (left.point().y() - 1 - i) / (left.point().y() - top.point().y() -1);
+				float t = (left.point().y() - i) / (left.point().y() - top.point().y());
 				// point
 				float xs = Interpolation(top.point().x(), left.point().x(), t);
 				float xe = Interpolation(top.point().x(), right.point().x(), t);
@@ -47,7 +49,7 @@ namespace Aurora
 				Point2D_T<float> xuve = Interpolation(top.uv() / top.point().z(), right.uv() / right.point().z(), t);
 				for(size_t j = xs; j < xe; ++ j)
 				{
-					float tt = (xe - 1 - j) / (xe - xs - 1);
+					float tt = (xe - j) / (xe - xs);
 					// normal
 					Vector4D_T<float> point_normal = Interpolation(xns, xne, tt);
 					point_normal /= Interpolation(onezs, oneze, tt);
@@ -73,7 +75,7 @@ namespace Aurora
 			for(size_t i = left.point().y(); i < bottom.point().y(); ++ i)
 			{
 				// left and right must be the same height.
-				float t = (bottom.point().y() - 1 - i) / (bottom.point().y() - left.point().y() -1);
+				float t = (bottom.point().y() - i) / (bottom.point().y() - left.point().y());
 				// point
 				float xs = Interpolation(left.point().x(), bottom.point().x(), t);
 				float xe = Interpolation(right.point().x(), bottom.point().x(), t);
@@ -88,7 +90,7 @@ namespace Aurora
 				Point2D_T<float> xuve = Interpolation(right.uv() / right.point().z(), bottom.uv() / bottom.point().z(), t);
 				for(size_t j = xs; j < xe; ++ j)
 				{
-					float tt = (xe - 1 - j) / (xe - xs - 1);
+					float tt = (xe - j) / (xe - xs);
 					// normal
 					Vector4D_T<float> point_normal = Interpolation(xns, xne, tt);
 					point_normal /= Interpolation(onezs, oneze, tt);
@@ -114,7 +116,12 @@ namespace Aurora
 		{
 			// make camera matrix
 			Matrix4_T<float> &m = camera_.MakeMatrix();
-			directlight *= m;
+			int x, y, z;
+			std::cout << "Please input rotate angle x y z" << std::endl;
+			std::cin >> x >> y >> z;
+			object_[0].RotateX(0.174532925 * x);
+			object_[0].RotateY(0.174532925 * y);
+			object_[0].RotateZ(0.174532925 * z);
 			std::vector<Object> TempObject = object_;
 			for(auto &object : TempObject)
 			{
@@ -127,8 +134,20 @@ namespace Aurora
 				for(auto &triangle : object.triangle())
 				{
 					Vertex v[3] = {object.vertex()[triangle[0]],object.vertex()[triangle[1]],object.vertex()[triangle[2]]};
-					if(0 < Dot(Vector4D_T<float>(0, 0, 1), CalcNormal(v[0].point(), v[1].point(), v[2].point())))
+					if(0 < Dot(v[0].point() - Point4D_T<float>(0,0,0), CalcNormal(v[0].point(), v[1].point(), v[2].point())))
 					{
+						// transform points to screen
+						for(size_t i = 0; i < 3; ++ i)
+						{
+							v[i].point().x() = v[i].point().x() / v[i].point().z();
+							v[i].point().y() = v[i].point().y() / v[i].point().z();
+							v[i].point().x() /= camera_.aspect();
+							v[i].point().x() *= (width_ / 2);
+							v[i].point().x() += (width_ / 2);
+							v[i].point().y() *= (height_ / 2);
+							v[i].point().y() += (height_ / 2);
+						}
+						// sort
 						if(v[0].point().y() > v[1].point().y())
 						{
 							std::swap(v[0], v[1]);
@@ -141,16 +160,7 @@ namespace Aurora
 						{
 							std::swap(v[0], v[1]);
 						}
-						for(size_t i = 0; i < 3; ++ i)
-						{
-							v[i].point().x() = v[i].point().x() / v[i].point().z();
-							v[i].point().y() = v[i].point().y() / v[i].point().z();
-							v[i].point().x() /= camera_.aspect();
-							v[i].point().x() *= (width_ / 2);
-							v[i].point().x() += (width_ / 2);
-							v[i].point().y() *= (height_ / 2);
-							v[i].point().y() += (height_ / 2);
-						}
+						// calc mid vertex
 						Point4D_T<float> midpoint(v[0].point().x() + (v[2].point().x() - v[0].point().x()) / (v[2].point().y() - v[0].point().y()) * (v[1].point().y() - v[0].point().y()), v[1].point().y(), 0);
 						float t = (v[0].point() - midpoint).Length() / (v[0].point() - v[2].point()).Length();
 						Point2D_T<float> miduv(t * v[2].uv() + (1-t) * v[0].uv());
@@ -158,14 +168,20 @@ namespace Aurora
 						// TODO
 						if(midpoint.x() - v[0].point().x() == 0 || v[0].point().x() - v[2].point().x() == 0)
 						{
-							midpoint.z() = v[0].point().z() + ((midpoint.y() - v[0].point().y()) / (v[0].point().y() - v[2].point().y()) * (v[0].point().z() - v[2].point().z()));
+							midpoint.z() = 1 / v[0].point().z() + ((midpoint.y() - v[0].point().y()) / (v[2].point().y() - v[0].point().y()) * (1 / v[2].point().z() - 1 / v[0].point().z()));
+							midpoint.z() = 1 / midpoint.z();
 						}
 						else
 						{
-							midpoint.z() = v[0].point().z() + ((midpoint.x() - v[0].point().x()) / (v[0].point().x() - v[2].point().x()) * (v[0].point().z() - v[2].point().z()));
+							midpoint.z() = 1 / v[0].point().z() + ((midpoint.x() - v[0].point().x()) / (v[2].point().x() - v[0].point().x()) * (1 / v[2].point().z() - 1 / v[0].point().z()));
+							midpoint.z() = 1 / midpoint.z();
 						}
 						Vertex midvertex(midpoint, miduv, midnormal);
-						std::cout << "midvertex " << midvertex << std::endl;
+						// draw triangle
+						std::cout << v[0] << std::endl;
+						std::cout << v[1] << std::endl;
+						std::cout << v[2] << std::endl;
+						std::cout << midvertex << std::endl;
 						if(midvertex.point().x() < v[1].point().x())
 						{
 							DrawTopTriangle(v[0], midvertex, v[1], object.texture());
@@ -179,8 +195,8 @@ namespace Aurora
 					}
 				}
 			}
-			// save ppm file
 			PPM::Save(path, width_, height_, screen_);
+			// save ppm file
 		}
 
 		Camera& camera()

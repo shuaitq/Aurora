@@ -31,6 +31,42 @@ namespace Aurora
 		{
 			ObjectFile::Load(path, vertex_, triangle_, texture_);
 		}
+		void RotateX(const float angle)
+		{
+			Matrix4_T<float> m(1, 0, 0, 0,
+					0, cos(angle), sin(angle), 0,
+					0, -sin(angle), cos(angle), 0,
+					0, 0, 0, 1);
+			for(auto &vertex : vertex_)
+			{
+				vertex.point() *= m;
+				vertex.normal() *= m;
+			}
+		}
+		void RotateY(const float angle)
+		{
+			Matrix4_T<float> m(cos(angle), 0, -sin(angle), 0,
+					0, 1, 0, 0,
+					0, sin(angle), cos(angle), 0,
+					0, 0, 0, 1);
+			for(auto &vertex : vertex_)
+			{
+				vertex.point() *= m;
+				vertex.normal() *= m;
+			}
+		}
+		void RotateZ(const float angle)
+		{
+			Matrix4_T<float> m(cos(angle), sin(angle), 0, 0,
+					-sin(angle), cos(angle), 0, 0,
+					0, 0, 1, 0,
+					0, 0, 0, 1);
+			for(auto &vertex : vertex_)
+			{
+				vertex.point() *= m;
+				vertex.normal() *= m;
+			}
+		}
 
 		std::vector<Triangle>& triangle()
 		{
