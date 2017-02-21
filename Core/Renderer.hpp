@@ -116,12 +116,15 @@ namespace Aurora
 		{
 			// make camera matrix
 			Matrix4_T<float> &m = camera_.MakeMatrix();
-			int x, y, z;
+			float x, y, z;
 			std::cout << "Please input rotate angle x y z" << std::endl;
 			std::cin >> x >> y >> z;
-			object_[0].RotateX(0.174532925 * x);
-			object_[0].RotateY(0.174532925 * y);
-			object_[0].RotateZ(0.174532925 * z);
+			x = x * M_PI / 180;
+			y = y * M_PI / 180;
+			z = z * M_PI / 180;
+			object_[0].RotateX(x);
+			object_[0].RotateY(y);
+			object_[0].RotateZ(z);
 			std::vector<Object> TempObject = object_;
 			for(auto &object : TempObject)
 			{
@@ -141,7 +144,7 @@ namespace Aurora
 						{
 							v[i].point().x() = v[i].point().x() / v[i].point().z();
 							v[i].point().y() = v[i].point().y() / v[i].point().z();
-							v[i].point().x() /= camera_.aspect();
+							v[i].point().y() *= camera_.aspect();
 							v[i].point().x() *= (width_ / 2);
 							v[i].point().x() += (width_ / 2);
 							v[i].point().y() *= (height_ / 2);
