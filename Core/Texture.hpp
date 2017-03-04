@@ -32,8 +32,8 @@ namespace Aurora
 			{
 				v = 0;
 			}
-			int i = u * size_, j = v * size_;
-			float x = u * size_ - i, y = v * size_ - j;
+			int i = u * (size_ - 1), j = v * (size_ - 1);
+			float x = u * (size_  - 1) - i, y = v * (size_ - 1) - j;
 			return texture_[j * size_ + i] * (1 - x) * (1 - y) + texture_[(j+1) * size_ + i] * y * (1 - x) + texture_[j * size_ + (i + 1)] * (1 - y) * x + texture_[(j + 1) * size_ + (i + 1)] * y * x;
 		}
 		void Load(const std::string &path)

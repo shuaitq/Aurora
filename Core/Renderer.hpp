@@ -11,6 +11,7 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include <cstdlib>
 
 namespace Aurora
 {
@@ -28,6 +29,7 @@ namespace Aurora
 			directlight *= m;
 			screen_.resize(width_ * height_);
 			ZBuffer_.resize(width_ * height_);
+			ZFlag_ = 0;
 		}
 		void DrawTopTriangle(Vertex &top, Vertex &left, Vertex &right, Texture &texture)
 		{
@@ -50,12 +52,18 @@ namespace Aurora
 				for(size_t j = xs; j < xe; ++ j)
 				{
 					float tt = (xe - j) / (xe - xs);
+					float onez = Interpolation(onezs, oneze, tt);
+					if(onez + ZFlag_ < ZBuffer_[i * width_ + j])
+					{
+						continue;
+					}
+					ZBuffer_[i * width_ + j] = onez + ZFlag_;
 					// normal
 					Vector4D_T<float> point_normal = Interpolation(xns, xne, tt);
-					point_normal /= Interpolation(onezs, oneze, tt);
+					point_normal /= onez;
 					// uv
 					Point2D_T<float> point_uv = Interpolation(xuvs, xuve, tt);
-					point_uv /= Interpolation(onezs, oneze, tt);
+					point_uv /= onez;
 					// color = texture.color * (normal * light)
 					float PdotD = -Dot(point_normal, directlight);
 					if(PdotD < 0)
@@ -91,12 +99,18 @@ namespace Aurora
 				for(size_t j = xs; j < xe; ++ j)
 				{
 					float tt = (xe - j) / (xe - xs);
+					float onez = Interpolation(onezs, oneze, tt);
+					if(onez + ZFlag_ < ZBuffer_[i * width_ + j])
+					{
+						continue;
+					}
+					ZBuffer_[i * width_ + j] = onez + ZFlag_;
 					// normal
 					Vector4D_T<float> point_normal = Interpolation(xns, xne, tt);
-					point_normal /= Interpolation(onezs, oneze, tt);
+					point_normal /= onez;
 					// uv
 					Point2D_T<float> point_uv = Interpolation(xuvs, xuve, tt);
-					point_uv /= Interpolation(onezs, oneze, tt);
+					point_uv /= onez;
 					float PdotD = -Dot(point_normal, directlight);
 					if(PdotD < 0)
 					{
@@ -116,7 +130,8 @@ namespace Aurora
 		{
 			// make camera matrix
 			Matrix4_T<float> &m = camera_.MakeMatrix();
-			float x=1, y=1, z=1;
+			srand(time(NULL));
+			float x=rand() % 5, y=rand() % 15, z=rand() % 25;
 			//std::cout << "Please input rotate angle x y z" << std::endl;
 			//std::cin >> x >> y >> z;
 			x = x * M_PI / 180;
@@ -200,7 +215,10 @@ namespace Aurora
 					}
 				}
 			}
+			ZFlag_++;
 			PPM::Save(path, width_, height_, screen_);
+			screen_.clear();
+			screen_.resize(width_ * height_);
 			// save ppm file
 		}
 
@@ -257,6 +275,7 @@ namespace Aurora
 		std::vector<RGB_T<float>> screen_;
 		size_t width_;
 		size_t height_;
+		float ZFlag_;
 	};
 }
 
