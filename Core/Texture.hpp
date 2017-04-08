@@ -10,6 +10,7 @@
 
 namespace Aurora
 {
+	template <typename UV = PPM>
 	class Texture
 	{
 	public:
@@ -39,7 +40,7 @@ namespace Aurora
 		void Load(const std::string &path)
 		{
 			size_t width, height;
-			PPM::Load(path, width, height, texture_);
+			UV::Load(path, width, height, texture_);
 			if(width != height)
 			{
 				throw std::runtime_error("Texture width not equals to height");

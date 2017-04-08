@@ -11,6 +11,7 @@
 
 namespace Aurora
 {
+	template <typename Model = ObjectFile>
 	class Object
 	{
 	public:
@@ -29,7 +30,7 @@ namespace Aurora
 		}
 		void Load(const std::string &path)
 		{
-			ObjectFile::Load(path, vertex_, triangle_, texture_);
+			Model::Load(path, vertex_, triangle_, texture_);
 		}
 		void RotateX(const float angle)
 		{
@@ -84,11 +85,11 @@ namespace Aurora
 		{
 			return vertex_;
 		}
-		Texture& texture()
+		Texture<>& texture()
 		{
 			return texture_;
 		}
-		const Texture& texture() const
+		const Texture<>& texture() const
 		{
 			return texture_;
 		}
@@ -160,7 +161,7 @@ namespace Aurora
 		Vector4D_T<float> right_;
 		std::vector<Triangle> triangle_;
 		std::vector<Vertex> vertex_;
-		Texture texture_;
+		Texture<> texture_;
 	};
 }
 

@@ -11,10 +11,11 @@
 
 namespace Aurora
 {
-	namespace SenceFile
+	class SenceFile
 	{
-		void Load(const std::string &path, size_t &width, size_t &height, Camera &camera, std::vector<Object> &object);
-	}
+	public:
+		static void Load(const std::string &path, size_t &width, size_t &height, Camera &camera, std::vector<Object<>> &object);
+	};
 }
 
 #endif //AURORA_SENCE_FILE_HPP_

@@ -16,12 +16,13 @@
 namespace Aurora
 {
 	Vector4D_T<float> directlight(-0.267261, -0.534522, -0.801784);
+	template <typename Sence = SenceFile>
 	class Renderer
 	{
 	public:
 		void Load(const std::string &path)
 		{
-			SenceFile::Load(path, width_, height_, camera_, object_);
+			Sence::Load(path, width_, height_, camera_, object_);
 		}
 		void Init()
 		{
@@ -31,7 +32,7 @@ namespace Aurora
 			ZBuffer_.resize(width_ * height_);
 			ZFlag_ = 0;
 		}
-		void DrawTopTriangle(Vertex &top, Vertex &left, Vertex &right, Texture &texture)
+		void DrawTopTriangle(Vertex &top, Vertex &left, Vertex &right, Texture<> &texture)
 		{
 			for(size_t i = top.point().y(); i < left.point().y(); ++ i)
 			{
@@ -64,19 +65,29 @@ namespace Aurora
 					// uv
 					Point2D_T<float> point_uv = Interpolation(xuvs, xuve, tt);
 					point_uv /= onez;
+					float PdotD = -Dot(point_normal, directlight);
+					if(PdotD < 0)
+					{
+						PdotD = 0;
+					}
+					if(PdotD > 1)
+					{
+						PdotD = 1;
+					}
 					// color = texture.color * (normal * light)
-					Point4D_T<float> position((j - (width_ / 2)) / (width_ / 2) * 1 / onez, (i - (height_ / 2)) / (height_ / 2) / camera_.aspect() * 1 / onez, 1 / onez);
+					screen_[i * width_ + j] = texture.Sample(point_uv.x(), point_uv.y()) * (RGB_T<float>::white * PdotD);
+					// color = texture.color * (normal * light)
+					/*Point4D_T<float> position((j - (width_ / 2)) / (width_ / 2) * 1 / onez, (i - (height_ / 2)) / (height_ / 2) / camera_.aspect() * 1 / onez, 1 / onez);
 					RGB_T<float> temp;
 					for(Light *light : light_)
 					{
-						temp += *light.Sample(position, point_normal);
+						temp += light->Sample(position, point_normal);
 					}
-					screen_[i * width_ + j] = texture.Sample(point_uv.x(), point_uv.y()) * temp;
-					screen_[i * width_ + j] = texture.Sample(point_uv.x(), point_uv.y()) * (RGB_T<float>::white * PdotD);
+					screen_[i * width_ + j] = texture.Sample(point_uv.x(), point_uv.y()) * temp;*/
 				}
 			}
 		}
-		void DrawBottomTriangle(Vertex &bottom, Vertex &left, Vertex &right, Texture &texture)
+		void DrawBottomTriangle(Vertex &bottom, Vertex &left, Vertex &right, Texture<> &texture)
 		{
 			for(size_t i = left.point().y(); i < bottom.point().y(); ++ i)
 			{
@@ -138,7 +149,7 @@ namespace Aurora
 			object_[0].RotateX(x);
 			object_[0].RotateY(y);
 			object_[0].RotateZ(z);
-			std::vector<Object> TempObject = object_;
+			std::vector<Object<>> TempObject = object_;
 			for(auto &object : TempObject)
 			{
 				// transform
@@ -228,11 +239,11 @@ namespace Aurora
 		{
 			return camera_;
 		}
-		std::vector<Object>& object()
+		std::vector<Object<>>& object()
 		{
 			return object_;
 		}
-		const std::vector<Object>& object() const
+		const std::vector<Object<>>& object() const
 		{
 			return object_;
 		}
@@ -275,7 +286,7 @@ namespace Aurora
 		}
 	private:
 		Camera camera_;
-		std::vector<Object> object_;
+		std::vector<Object<>> object_;
 		std::vector<Light*> light_;
 		std::vector<float> ZBuffer_;
 		std::vector<RGB_T<float>> screen_;
