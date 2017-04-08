@@ -16,15 +16,12 @@ namespace Aurora
 			float length2 = (position - position_ * m).Length2();
 			Vector4D_T<float> direction = Normalize(position - position_ * m);
 			float NdotD = Dot(normal, direction);
-			std::cout << normal << position << std::endl;
 			if(NdotD > 0)
 			{
-				std::cout << NdotD << "no" << std::endl;
 				return RGB_T<float>::black;
 			}
 			else
 			{
-				std::cout << NdotD << "yes" << std::endl;
 				return color_ * -NdotD / length2;
 			}
 		}
