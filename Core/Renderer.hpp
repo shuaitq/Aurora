@@ -15,7 +15,7 @@
 
 namespace Aurora
 {
-	Vector4D_T<float> directlight(-0.267261, -0.534522, -0.801784);
+	// Vector4D_T<float> directlight(-0.267261, -0.534522, -0.801784);
 	template <typename Sence = SenceFile>
 	class Renderer
 	{
@@ -26,14 +26,13 @@ namespace Aurora
 		}
 		void Init()
 		{
-			Matrix4_T<float> &m = camera_.MakeMatrix();
-			directlight *= m;
 			screen_.resize(width_ * height_);
 			ZBuffer_.resize(width_ * height_);
 			ZFlag_ = 0;
 		}
 		void DrawTopTriangle(Vertex &top, Vertex &left, Vertex &right, Texture<> &texture)
 		{
+			Matrix4_T<float> &m = camera_.MakeMatrix();
 			for(size_t i = top.point().y(); i < left.point().y(); ++ i)
 			{
 				// left and right must be the same height.
@@ -65,7 +64,7 @@ namespace Aurora
 					// uv
 					Point2D_T<float> point_uv = Interpolation(xuvs, xuve, tt);
 					point_uv /= onez;
-					float PdotD = -Dot(point_normal, directlight);
+					/*float PdotD = -Dot(point_normal, directlight);
 					if(PdotD < 0)
 					{
 						PdotD = 0;
@@ -73,22 +72,23 @@ namespace Aurora
 					if(PdotD > 1)
 					{
 						PdotD = 1;
-					}
+					}*/
 					// color = texture.color * (normal * light)
-					screen_[i * width_ + j] = texture.Sample(point_uv.x(), point_uv.y()) * (RGB_T<float>::white * PdotD);
+					//screen_[i * width_ + j] = texture.Sample(point_uv.x(), point_uv.y()) * (RGB_T<float>::white * PdotD);
 					// color = texture.color * (normal * light)
-					/*Point4D_T<float> position((j - (width_ / 2)) / (width_ / 2) * 1 / onez, (i - (height_ / 2)) / (height_ / 2) / camera_.aspect() * 1 / onez, 1 / onez);
+					Point4D_T<float> position(((float)j - (width_ / 2)) / (width_ / 2) * 1 / onez, ((float)i - (height_ / 2)) / (height_ / 2) / camera_.aspect() * 1 / onez, 1 / onez);
 					RGB_T<float> temp;
 					for(Light *light : light_)
 					{
-						temp += light->Sample(position, point_normal);
+						temp += light->Sample(position, point_normal, m);
 					}
-					screen_[i * width_ + j] = texture.Sample(point_uv.x(), point_uv.y()) * temp;*/
+					screen_[i * width_ + j] = texture.Sample(point_uv.x(), point_uv.y()) * temp;
 				}
 			}
 		}
 		void DrawBottomTriangle(Vertex &bottom, Vertex &left, Vertex &right, Texture<> &texture)
 		{
+			Matrix4_T<float> &m = camera_.MakeMatrix();
 			for(size_t i = left.point().y(); i < bottom.point().y(); ++ i)
 			{
 				// left and right must be the same height.
@@ -120,7 +120,7 @@ namespace Aurora
 					// uv
 					Point2D_T<float> point_uv = Interpolation(xuvs, xuve, tt);
 					point_uv /= onez;
-					float PdotD = -Dot(point_normal, directlight);
+					/*float PdotD = -Dot(point_normal, directlight);
 					if(PdotD < 0)
 					{
 						PdotD = 0;
@@ -128,9 +128,17 @@ namespace Aurora
 					if(PdotD > 1)
 					{
 						PdotD = 1;
-					}
+					}*/
 					// color = texture.color * (normal * light)
-					screen_[i * width_ + j] = texture.Sample(point_uv.x(), point_uv.y()) * (RGB_T<float>::white * PdotD);
+					// screen_[i * width_ + j] = texture.Sample(point_uv.x(), point_uv.y()) * (RGB_T<float>::white * PdotD);
+					// color = texture.color * (normal * light)
+					Point4D_T<float> position(((float)j - (width_ / 2)) / (width_ / 2) * 1 / onez, ((float)i - (height_ / 2)) / (height_ / 2) / camera_.aspect() * 1 / onez, 1 / onez);
+					RGB_T<float> temp;
+					for(Light *light : light_)
+					{
+						temp += light->Sample(position, point_normal, m);
+					}
+					screen_[i * width_ + j] = texture.Sample(point_uv.x(), point_uv.y()) * temp;
 				}
 			}
 		}

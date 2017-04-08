@@ -1,4 +1,4 @@
-usemtl Texture/crate.ppm
+usemtl Texture/chess.ppm
 v -0.500000 -0.500000 0.500000
 v 0.500000 -0.500000 0.500000
 v -0.500000 0.500000 0.500000

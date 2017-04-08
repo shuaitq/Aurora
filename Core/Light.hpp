@@ -10,7 +10,7 @@ namespace Aurora
 	class Light
 	{
 	public:
-		virtual RGB_T<float> Sample(Point4D_T<float> &position, Vector4D_T<float> &normal) = 0;
+		virtual RGB_T<float> Sample(const Point4D_T<float> &position, const Vector4D_T<float> &normal, const Matrix4_T<float> &m) = 0;
 	private:
 	};
 }

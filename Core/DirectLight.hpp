@@ -5,12 +5,13 @@
 
 namespace Aurora
 {
-public:
 	class DirectLight:public Light
 	{
-		RGB_T<float> Sample(Point4D_T<float> position, Vector4D_T<float> normal)
+	public:
+		DirectLight(const Vector4D_T<float> &direction, const RGB_T<float> &color):direction_(direction), color_(color){}
+		RGB_T<float> Sample(const Point4D_T<float> &position, const Vector4D_T<float> &normal, const Matrix4_T<float> &m)
 		{
-			float NdotD = Dot(normal, direction_);
+			float NdotD = Dot(normal, direction_ * m);
 			if(NdotD > 0)
 			{
 				return RGB_T<float>::black;
@@ -20,10 +21,10 @@ public:
 				return color_ * -NdotD;
 			}
 		}
-	}
-private:
-	Vector4D_T<float> direction_;
-	RGB_T<float> color_;
+	private:
+		Vector4D_T<float> direction_;
+		RGB_T<float> color_;
+	};
 }
 
 #endif //AURORA_DIRECT_LIGHT_HPP_
