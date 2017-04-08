@@ -65,16 +65,14 @@ namespace Aurora
 					Point2D_T<float> point_uv = Interpolation(xuvs, xuve, tt);
 					point_uv /= onez;
 					// color = texture.color * (normal * light)
-					float PdotD = -Dot(point_normal, directlight);
-					if(PdotD < 0)
+					Point4D_T<float> position((j - (width_ / 2)) / (width_ / 2) * 1 / onez, (i - (height_ / 2)) / (height_ / 2) / camera_.aspect() * 1 / onez, 1 / onez);
+					RGB_T<float> temp;
+					for(Light *light : light_)
 					{
-						PdotD = 0;
+						temp += *light.Sample(position, point_normal);
 					}
-					if(PdotD > 1)
-					{
-						PdotD = 1;
-					}
-					screen_[i * width_ + j] =  texture.Sample(point_uv.x(), point_uv.y()) * (RGB_T<float>::white * PdotD);
+					screen_[i * width_ + j] = texture.Sample(point_uv.x(), point_uv.y()) * temp;
+					screen_[i * width_ + j] = texture.Sample(point_uv.x(), point_uv.y()) * (RGB_T<float>::white * PdotD);
 				}
 			}
 		}
@@ -121,7 +119,7 @@ namespace Aurora
 						PdotD = 1;
 					}
 					// color = texture.color * (normal * light)
-					screen_[i * width_ + j] =  texture.Sample(point_uv.x(), point_uv.y()) * (RGB_T<float>::white * PdotD);
+					screen_[i * width_ + j] = texture.Sample(point_uv.x(), point_uv.y()) * (RGB_T<float>::white * PdotD);
 				}
 			}
 		}
@@ -237,6 +235,14 @@ namespace Aurora
 		const std::vector<Object>& object() const
 		{
 			return object_;
+		}
+		std::vector<Light*>& light()
+		{
+			return light_;
+		}
+		const std::vector<Light*>& light() const
+		{
+			return light_;
 		}
 		size_t& width()
 		{

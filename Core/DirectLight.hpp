@@ -13,7 +13,7 @@ public:
 			float NdotD = Dot(normal, direction_);
 			if(NdotD > 0)
 			{
-				return RGB_T<float> black();
+				return RGB_T<float>::black;
 			}
 			else
 			{

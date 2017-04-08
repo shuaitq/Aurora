@@ -6,7 +6,7 @@ namespace Aurora
 {
 	namespace PPM
 	{
-		void Load(const std::string &path, size_t &width, size_t &height, std::vector<RGB_T<float>> &ppm)
+		static void Load(const std::string &path, size_t &width, size_t &height, std::vector<RGB_T<float>> &ppm)
 		{
 			std::ifstream in(path);
 			if(!in.is_open())
@@ -25,7 +25,7 @@ namespace Aurora
 			}
 			in.close();
 		}
-		void Save(const std::string &path, const size_t width, const size_t height, const std::vector<RGB_T<float>> &ppm)
+		static void Save(const std::string &path, const size_t width, const size_t height, const std::vector<RGB_T<float>> &ppm)
 		{
 			std::ofstream in(path);
 			if(!in.is_open())
