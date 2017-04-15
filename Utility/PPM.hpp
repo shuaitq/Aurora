@@ -19,13 +19,6 @@ namespace Aurora
 
 		static void Save(const std::string &path, const size_t width, const size_t height, const std::vector<RGB_T<float>> &ppm);
 	private:
-		enum class State
-		{
-			MAGIC_NUMBER,
-			WIDTH_HEIGHT,
-			COLOR_NUMBER,
-			PIXEL,
-		};
 	};
 }
 
