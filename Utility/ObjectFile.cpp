@@ -2,7 +2,7 @@
 
 namespace Aurora
 {
-	void ObjectFile::Load(const std::string &path, std::vector<Vertex> &vertex, std::vector<Triangle> &triangle, Texture<> &texture)
+	void ObjectFile::Load(const std::string &path, Object &object)
 	{
 		std::ifstream in(path);
 		if(!in.is_open())

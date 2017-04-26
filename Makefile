@@ -1,5 +1,5 @@
 PROJECT = Aurora
-CPP = clang++
+CPP = g++
 CPPFLAGS = -std=c++11 -Wall
 ifdef DEBUG
 CPPFLAGS += -g
