@@ -111,10 +111,6 @@ namespace Aurora
 			in >> rgb.red() >> rgb.green() >> rgb.blue();
 			return in;
 		}
-
-		const static RGB_T<T> black;
-		const static RGB_T<T> white;
-
 	private:
 		union
 		{
@@ -217,10 +213,6 @@ namespace Aurora
 			in >> rgba.red() >> rgba.green() >> rgba.blue() >> rgba.alpha();
 			return in;
 		}
-
-		const static RGBA_T<T> black;
-		const static RGBA_T<T> white;
-
 	private:
 		union
 		{

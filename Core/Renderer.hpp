@@ -15,7 +15,6 @@
 
 namespace Aurora
 {
-	// Vector4D_T<float> directlight(-0.267261, -0.534522, -0.801784);
 	template <typename Sence = SenceFile>
 	class Renderer
 	{
