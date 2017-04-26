@@ -15,7 +15,6 @@
 
 namespace Aurora
 {
-	template <typename Sence = SenceFile>
 	class Renderer
 	{
 	public:
@@ -292,13 +291,9 @@ namespace Aurora
 			return out;
 		}
 	private:
-		Camera camera_;
-		std::vector<Object<>> object_;
-		std::vector<Light*> light_;
+		using Sence = SenceFile;
 		std::vector<float> ZBuffer_;
 		std::vector<RGB_T<float>> screen_;
-		size_t width_;
-		size_t height_;
 		float ZFlag_;
 	};
 }

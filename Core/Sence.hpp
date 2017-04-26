@@ -8,7 +8,10 @@ namespace Aurora
     public:
         void Load(const std::string &path);
     private:
-        int 
+		int width_, height_;
+		Camera camera_;
+		std::vector<Object<>> object_;
+		std::vector<Light*> light_;
     };
 }
 
