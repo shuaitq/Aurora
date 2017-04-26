@@ -11,7 +11,6 @@
 
 namespace Aurora
 {
-	template <typename Model = ObjectFile>
 	class Object
 	{
 	public:
@@ -19,9 +18,9 @@ namespace Aurora
 		Object(Point4D_T<float> position, Vector4D_T<float> up, Vector4D_T<float> front, Vector4D_T<float> right);
 		Object& operator = (const Object &object);
 		void Load(const std::string &path);
-		void RotateX(const float angle);
+		/*void RotateX(const float angle);
 		void RotateY(const float angle);
-		void RotateZ(const float angle);
+		void RotateZ(const float angle);*/
 
 		std::vector<Triangle>& triangle();
 		const std::vector<Triangle>& triangle() const;
@@ -36,6 +35,7 @@ namespace Aurora
 		Vector4D_T<float>& right();
 		const Vector4D_T<float>& right() const;
 	private:
+		using Model = ObjectFile;
 		Point4D_T<float> position_;
 		Vector4D_T<float> up_;
 		Vector4D_T<float> front_;

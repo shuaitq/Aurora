@@ -11,21 +11,20 @@ namespace Aurora
         front_ = object.front_;
         right_ = object.right_;
         triangle_ = object.triangle_;
-        vertex_ = object.vertex_;
         texture_ = object.texture_;
         return *this;
     }
     void Object::Load(const std::string &path)
     {
-        Model::Load(path, vertex_, triangle_, texture_);
+        Model::Load(path, *this);
     }
-    void Object::RotateX(const float angle)
+    /*void Object::RotateX(const float angle)
     {
         Matrix4_T<float> m(1, 0, 0, 0,
                 0, cos(angle), sin(angle), 0,
                 0, -sin(angle), cos(angle), 0,
                 0, 0, 0, 1);
-        for(auto &vertex : vertex_)
+        for(auto &vertex : triangle_.vertex())
         {
             vertex.point() *= m;
             vertex.normal() *= m;
@@ -37,7 +36,7 @@ namespace Aurora
                 0, 1, 0, 0,
                 sin(angle), 0, cos(angle), 0,
                 0, 0, 0, 1);
-        for(auto &vertex : vertex_)
+        for(auto &vertex : triangle_.vertex())
         {
             vertex.point() *= m;
             vertex.normal() *= m;
@@ -49,12 +48,12 @@ namespace Aurora
                 -sin(angle), cos(angle), 0, 0,
                 0, 0, 1, 0,
                 0, 0, 0, 1);
-        for(auto &vertex : vertex_)
+        for(auto &vertex : triangle_.vertex())
         {
             vertex.point() *= m;
             vertex.normal() *= m;
         }
-    }
+    }*/
 
     std::vector<Triangle>& Object::triangle()
     {
@@ -63,14 +62,6 @@ namespace Aurora
     const std::vector<Triangle>& Object::triangle() const
     {
         return triangle_;
-    }
-    std::vector<Vertex>& Object::vertex()
-    {
-        return vertex_;
-    }
-    const std::vector<Vertex>& Object::vertex() const
-    {
-        return vertex_;
     }
     Texture<>& Object::texture()
     {

@@ -2,7 +2,7 @@
 
 namespace Aurora
 {
-	void ObjectFile::Load(const std::string &path, Object &object)
+	void ObjectFile::Load(const std::string &path, std::vector<Triangle> &triangle, Texture &texture)
 	{
 		std::ifstream in(path);
 		if(!in.is_open())
@@ -15,7 +15,7 @@ namespace Aurora
 		std::vector<Vector4D_T<float>> NormalMap;
 		float x, y, z;
 		int v, u, n;
-		size_t IndexVertex, IndexTriangle;
+		Triangle tri;
 		while(in >> str)
 		{
 			switch(str[0])
@@ -41,7 +41,6 @@ namespace Aurora
 					}
 					break;
 				case 'f':
-					IndexVertex = vertex.size();
 					for(size_t i = 0; i < 3; ++ i)
 					{
 						char div;
@@ -49,13 +48,9 @@ namespace Aurora
 						-- v;
 						-- u;
 						-- n;
-						vertex.push_back(Vertex(PointMap[v], UVMap[u], NormalMap[n]));
+						tri[i] = Vertex(PointMap[v], UVMap[u], NormalMap[n]);
 					}
-					IndexTriangle = triangle.size();
-					vertex[IndexVertex + 0].index().push_back(IndexTriangle);
-					vertex[IndexVertex + 1].index().push_back(IndexTriangle);
-					vertex[IndexVertex + 2].index().push_back(IndexTriangle);
-					triangle.push_back(Triangle(IndexVertex + 0,IndexVertex + 1,IndexVertex + 2));
+					triangle.push_back(tri);
 					break;
 				case 'u':
 					in >> str;

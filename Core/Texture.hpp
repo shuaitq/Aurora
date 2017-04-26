@@ -10,7 +10,6 @@
 
 namespace Aurora
 {
-	template <typename UV = PPM>
 	class Texture
 	{
 	public:
@@ -48,6 +47,7 @@ namespace Aurora
 			size_ = height;
 		}
 	private:
+		using UV = PPM;
 		std::vector<RGB_T<float>> texture_;
 		size_t size_;
 	};
