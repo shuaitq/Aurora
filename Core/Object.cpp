@@ -2,7 +2,7 @@
 
 namespace Aurora
 {
-    Object::Object() = default;
+    Object::Object():position_(), up_(), front_(), right_(){}
     Object::Object(Point4D_T<float> position, Vector4D_T<float> up, Vector4D_T<float> front, Vector4D_T<float> right):position_(position), up_(up), front_(front), right_(right){}
     Object& Object::operator = (const Object &object)
     {
@@ -18,42 +18,6 @@ namespace Aurora
     {
         Model::Load(path, *this);
     }
-    /*void Object::RotateX(const float angle)
-    {
-        Matrix4_T<float> m(1, 0, 0, 0,
-                0, cos(angle), sin(angle), 0,
-                0, -sin(angle), cos(angle), 0,
-                0, 0, 0, 1);
-        for(auto &vertex : triangle_.vertex())
-        {
-            vertex.point() *= m;
-            vertex.normal() *= m;
-        }
-    }
-    void Object::RotateY(const float angle)
-    {
-        Matrix4_T<float> m(cos(angle), 0, -sin(angle), 0,
-                0, 1, 0, 0,
-                sin(angle), 0, cos(angle), 0,
-                0, 0, 0, 1);
-        for(auto &vertex : triangle_.vertex())
-        {
-            vertex.point() *= m;
-            vertex.normal() *= m;
-        }
-    }
-    void Object::RotateZ(const float angle)
-    {
-        Matrix4_T<float> m(cos(angle), sin(angle), 0, 0,
-                -sin(angle), cos(angle), 0, 0,
-                0, 0, 1, 0,
-                0, 0, 0, 1);
-        for(auto &vertex : triangle_.vertex())
-        {
-            vertex.point() *= m;
-            vertex.normal() *= m;
-        }
-    }*/
 
     std::vector<Triangle>& Object::triangle()
     {
@@ -108,17 +72,17 @@ namespace Aurora
     {
         out << "# Object" << std::endl;
         out << "# position" << std::endl;
-        out << object.position();
+        out << object.position() << std::endl;
         out << "# up" << std::endl;
-        out << object.up();
+        out << object.up() << std::endl;
         out << "# front" << std::endl;
-        out << object.front();
+        out << object.front() << std::endl;
         out << "# right" << std::endl;
-        out << object.right();
+        out << object.right() << std::endl;
         out << "# triangle" << std::endl;
         for(auto it = object.triangle().begin(); it != object.triangle().end(); ++ it)
         {
-            out << *it;
+            out << *it << std::endl;
         }
         return out;
     }

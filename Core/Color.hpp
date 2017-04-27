@@ -103,7 +103,7 @@ namespace Aurora
 
 		friend std::ostream& operator << (std::ostream &out, const RGB_T<T> &rgb)
 		{
-			out << rgb.red() << ' ' << rgb.green() << ' ' << rgb.blue() << std::endl;
+			out << rgb.red() << ' ' << rgb.green() << ' ' << rgb.blue();
 			return out;
 		}
 		friend std::istream& operator >> (std::istream &in, RGB_T<T> &rgb)
@@ -205,7 +205,7 @@ namespace Aurora
 
 		friend std::ostream& operator << (std::ostream &out, const RGBA_T<T> &rgba)
 		{
-			out << rgba.red() << ' ' << rgba.green() << ' ' << rgba.blue() << ' ' << rgba.alpha() << std::endl;
+			out << rgba.red() << ' ' << rgba.green() << ' ' << rgba.blue() << ' ' << rgba.alpha();
 			return out;
 		}
 		friend std::istream& operator >> (std::istream &in, RGBA_T<T> &rgba)

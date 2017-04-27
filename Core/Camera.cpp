@@ -54,18 +54,18 @@ namespace Aurora
     std::ostream& operator << (std::ostream &out, const Camera &camera)
     {
         out << "# Camera" << std::endl;
-        out << "# position" <<std::endl;
-        out << camera.position();
+        out << "# position" << std::endl;
+        out << camera.position() << std::endl;
         out << "# up" << std::endl;
-        out << camera.up();
+        out << camera.up() << std::endl;
         out << "# front" << std::endl;
-        out << camera.front();
+        out << camera.front() << std::endl;
         out << "# right" << std::endl;
-        out << camera.right();
+        out << camera.right() << std::endl;
         out << "# fov" << std::endl;
         out << camera.fov() << std::endl;
         out << "# aspect" << std::endl;
-        out << camera.aspect() << std::endl;
+        out << camera.aspect();
         return out;
     }
     std::istream& operator >> (std::istream &in, Camera &camera)

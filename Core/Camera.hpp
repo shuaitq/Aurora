@@ -22,6 +22,8 @@ namespace Aurora
 		const float& fov() const;
 		float& aspect();
 		const float& aspect() const;
+		friend std::ostream& operator << (std::ostream &out, const Camera &camera);
+		friend std::istream& operator >> (std::istream &in, Camera &camera);
 	private:
 		Point4D_T<float> position_;
 		Vector4D_T<float> up_;
@@ -30,8 +32,6 @@ namespace Aurora
 		float fov_;
 		float aspect_;
 	};
-	std::ostream& operator << (std::ostream &out, const Camera &camera);
-	std::istream& operator >> (std::istream &in, Camera &camera);
 }
 
 #endif //AURORA_CAMERA_HPP_

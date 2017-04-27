@@ -18,14 +18,11 @@ namespace Aurora
 		Object(Point4D_T<float> position, Vector4D_T<float> up, Vector4D_T<float> front, Vector4D_T<float> right);
 		Object& operator = (const Object &object);
 		void Load(const std::string &path);
-		/*void RotateX(const float angle);
-		void RotateY(const float angle);
-		void RotateZ(const float angle);*/
 
 		std::vector<Triangle>& triangle();
 		const std::vector<Triangle>& triangle() const;
-		Texture<>& texture();
-		const Texture<>& texture() const;
+		Texture& texture();
+		const Texture& texture() const;
 		Point4D_T<float>& position();
 		const Point4D_T<float>& position() const;
 		Vector4D_T<float>& up();
@@ -34,6 +31,8 @@ namespace Aurora
 		const Vector4D_T<float>& front() const;
 		Vector4D_T<float>& right();
 		const Vector4D_T<float>& right() const;
+		friend std::ostream& operator << (std::ostream &out, const Object &object);
+		friend std::istream& operator >> (std::istream &in, Object &object);
 	private:
 		using Model = ObjectFile;
 		Point4D_T<float> position_;
@@ -41,10 +40,8 @@ namespace Aurora
 		Vector4D_T<float> front_;
 		Vector4D_T<float> right_;
 		std::vector<Triangle> triangle_;
-		Texture<> texture_;
+		Texture texture_;
 	};
-	std::ostream& operator << (std::ostream &out, const Object &object);
-	std::istream& operator >> (std::istream &in, Object &object);
 }
 
 #endif //AURORA_OBJECT_HPP_
