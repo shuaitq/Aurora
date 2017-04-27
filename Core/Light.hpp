@@ -2,8 +2,7 @@
 #define AURORA_LIGHT_HPP_
 
 #include "Color.hpp"
-#include "../Math/Vector.hpp"
-#include "../Math/Point.hpp"
+#include "../Math/Math.hpp"
 
 namespace Aurora
 {

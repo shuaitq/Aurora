@@ -13,13 +13,14 @@ namespace Aurora
     class Texture
     {
     public:
+        Texture(const std::string &path);
         // u = [0, 1) v = [0, 1)
         RGB_T<float> Sample(float u, float v) const;
-        void Load(const std::string &path);
+
+        std::vector<RGB_T<float>> pixels;
+        size_t size;
     private:
         using UV = PPM;
-        std::vector<RGB_T<float>> texture_;
-        size_t size_;
     };
 }
 

@@ -2,7 +2,7 @@
 
 namespace Aurora
 {
-    Triangle::Triangle(){}
+    Triangle::Triangle()vertex[0](), vertex[1](), vertex[2](){}
     Triangle::Triangle(const Vertex &v1, const Vertex &v2, const Vertex &v3)
     {
         vertex[0] = v1;

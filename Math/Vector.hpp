@@ -5,7 +5,7 @@
 
 #include <cmath>
 #include <iostream>
-#include <utility>
+//#include <utility>
 
 namespace Aurora
 {
@@ -239,10 +239,9 @@ namespace Aurora
     template <typename T>
     Vector3D_T<T> Cross(const Vector3D_T<T> &lhs, const Vector3D_T<T> &rhs)
     {
-        return Vector3D_T<T>(
-            lhs.y * rhs.z - lhs.z * rhs.y,
-            lhs.z * rhs.x - lhs.x * rhs.z,
-            lhs.x * rhs.y - lhs.y * rhs.x);
+        return Vector3D_T<T>(lhs.y * rhs.z - lhs.z * rhs.y,
+                             lhs.z * rhs.x - lhs.x * rhs.z,
+                             lhs.x * rhs.y - lhs.y * rhs.x);
     }
     template <typename T>
     T Dot(const Vector3D_T<T> &lhs, const Vector3D_T<T> &rhs)
@@ -380,10 +379,9 @@ namespace Aurora
     template <typename T>
     Vector4D_T<T> Cross(const Vector4D_T<T> &lhs, const Vector4D_T<T> &rhs)
     {
-        return Vector4D_T<T>(
-            lhs.y * rhs.z - lhs.z * rhs.y,
-            lhs.z * rhs.x - lhs.x * rhs.z,
-            lhs.x * rhs.y - lhs.y * rhs.x);
+        return Vector4D_T<T>(lhs.y * rhs.z - lhs.z * rhs.y,
+                             lhs.z * rhs.x - lhs.x * rhs.z,
+                             lhs.x * rhs.y - lhs.y * rhs.x);
 
     }
     template <typename T>

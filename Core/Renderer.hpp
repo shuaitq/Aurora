@@ -23,17 +23,6 @@ namespace Aurora
 
         void Render(const std::string &path);
 
-        Camera& camera();
-        const Camera& camera() const;
-        std::vector<Object<>>& object();
-        const std::vector<Object<>>& object() const;
-        std::vector<Light*>& light();
-        const std::vector<Light*>& light() const;
-        size_t& width();
-        const size_t& width() const;
-        size_t& height();
-        const size_t& height() const;
-
         friend std::ostream& operator << (std::ostream &out, const Renderer &r);
     private:
         using Sence = SenceFile;

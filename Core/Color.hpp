@@ -1,7 +1,6 @@
 #ifndef AURORA_COLOR_HPP_
 #define AURORA_COLOR_HPP_
 
-#include <cstdio>
 #include <iostream>
 
 namespace Aurora

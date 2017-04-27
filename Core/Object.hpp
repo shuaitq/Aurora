@@ -14,10 +14,8 @@ namespace Aurora
     class Object
     {
     public:
-        Object();
-        Object(Point4D_T<float> p, Vector4D_T<float> u, Vector4D_T<float> f, Vector4D_T<float> r);
+        Object(const std::string &path);
         Object& operator = (const Object &object);
-        void Load(const std::string &path);
 
         Point4D_T<float> position;
         Vector4D_T<float> up;

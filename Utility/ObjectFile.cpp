@@ -2,7 +2,7 @@
 
 namespace Aurora
 {
-    void ObjectFile::Load(const std::string &path, std::vector<Triangle> &triangle, Texture &texture)
+    void ObjectFile::Load(const std::string &path, Object &object)
     {
         std::ifstream in(path);
         if(!in.is_open())
@@ -45,10 +45,7 @@ namespace Aurora
                     {
                         char div;
                         in >> v >> div >> u >> div >> n;
-                        -- v;
-                        -- u;
-                        -- n;
-                        tri[i] = Vertex(PointMap[v], UVMap[u], NormalMap[n]);
+                        tri[i] = Vertex(PointMap[v - 1], UVMap[u - 1], NormalMap[n - 1]);
                     }
                     triangle.push_back(tri);
                     break;

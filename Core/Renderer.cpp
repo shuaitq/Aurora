@@ -218,47 +218,6 @@ namespace Aurora
         // save ppm file
     }
 
-    Camera& camera()
-    {
-        return camera_;
-    }
-    const Camera& camera() const
-    {
-        return camera_;
-    }
-    std::vector<Object<>>& object()
-    {
-        return object_;
-    }
-    const std::vector<Object<>>& object() const
-    {
-        return object_;
-    }
-    std::vector<Light*>& light()
-    {
-        return light_;
-    }
-    const std::vector<Light*>& light() const
-    {
-        return light_;
-    }
-    size_t& width()
-    {
-        return width_;
-    }
-    const size_t& width() const
-    {
-        return width_;
-    }
-    size_t& height()
-    {
-        return height_;
-    }
-    const size_t& height() const
-    {
-        return height_;
-    }
-    
     std::ostream& operator << (std::ostream &out, const Renderer &r)
     {
         out << "# Renderer" << std::endl;
