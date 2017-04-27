@@ -11,7 +11,7 @@
 template <typename T, typename U>
 T Interpolation(const T &t1, const T &t2, const U u)
 {
-	return t1 * u + t2 * (1 - u);
+    return t1 * u + t2 * (1 - u);
 }
 
 #endif //AURORA_MATH_HPP_

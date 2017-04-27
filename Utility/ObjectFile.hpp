@@ -12,11 +12,11 @@
 
 namespace Aurora
 {
-	class ObjectFile
-	{
-	public:
-		static void Load(const std::string &path, std::vector<Triangle> &triangle, Texture &texture);
-	};
+    class ObjectFile
+    {
+    public:
+        static void Load(const std::string &path, std::vector<Triangle> &triangle, Texture &texture);
+    };
 }
 
 #endif //AURORA_OBJECT_FILE_HPP_

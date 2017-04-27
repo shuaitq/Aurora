@@ -2,93 +2,20 @@
 
 namespace Aurora
 {
-    Object::Object():position_(), up_(), front_(), right_(){}
-    Object::Object(Point4D_T<float> position, Vector4D_T<float> up, Vector4D_T<float> front, Vector4D_T<float> right):position_(position), up_(up), front_(front), right_(right){}
+    Object::Object():position(), up(), front(), right(){}
+    Object::Object(Point4D_T<float> p, Vector4D_T<float> u, Vector4D_T<float> f, Vector4D_T<float> r):position(p), up(u), front(f), right(r){}
     Object& Object::operator = (const Object &object)
     {
-        position_ = object.position_;
-        up_ = object.up_;
-        front_ = object.front_;
-        right_ = object.right_;
-        triangle_ = object.triangle_;
-        texture_ = object.texture_;
+        position = object.position;
+        up = object.up;
+        front = object.front;
+        right = object.right;
+        triangle = object.triangle;
+        texture = object.texture;
         return *this;
     }
     void Object::Load(const std::string &path)
     {
         Model::Load(path, *this);
-    }
-
-    std::vector<Triangle>& Object::triangle()
-    {
-        return triangle_;
-    }
-    const std::vector<Triangle>& Object::triangle() const
-    {
-        return triangle_;
-    }
-    Texture<>& Object::texture()
-    {
-        return texture_;
-    }
-    const Texture<>& Object::texture() const
-    {
-        return texture_;
-    }
-    Point4D_T<float>& Object::position()
-    {
-        return position_;
-    }
-    const Point4D_T<float>& Object::position() const
-    {
-        return position_;
-    }
-    Vector4D_T<float>& Object::up()
-    {
-        return up_;
-    }
-    const Vector4D_T<float>& Object::up() const
-    {
-        return up_;
-    }
-    Vector4D_T<float>& Object::front()
-    {
-        return front_;
-    }
-    const Vector4D_T<float>& Object::front() const
-    {
-        return front_;
-    }
-    Vector4D_T<float>& Object::right()
-    {
-        return right_;
-    }
-    const Vector4D_T<float>& Object::right() const
-    {
-        return right_;
-    }
-
-    std::ostream& operator << (std::ostream &out, const Object &object)
-    {
-        out << "# Object" << std::endl;
-        out << "# position" << std::endl;
-        out << object.position() << std::endl;
-        out << "# up" << std::endl;
-        out << object.up() << std::endl;
-        out << "# front" << std::endl;
-        out << object.front() << std::endl;
-        out << "# right" << std::endl;
-        out << object.right() << std::endl;
-        out << "# triangle" << std::endl;
-        for(auto it = object.triangle().begin(); it != object.triangle().end(); ++ it)
-        {
-            out << *it << std::endl;
-        }
-        return out;
-    }
-    std::istream& operator >> (std::istream &in, Object &object)
-    {
-        in >> object.position() >> object.up() >> object.front() >> object.right();
-        return in;
     }
 }

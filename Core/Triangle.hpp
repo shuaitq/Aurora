@@ -10,20 +10,16 @@
 
 namespace Aurora
 {
-	class Triangle
-	{
-	public:
-		Triangle();
-		Triangle(const Vertex &v1, const Vertex &v2, const Vertex &v3);
-		Triangle& operator=(const Triangle &tri);
-		
-		Vertex& operator [] (size_t index);
-		const Vertex& operator [] (size_t index) const;
-	private:
-		Vertex vertex_[3];
-	};
-	std::ostream& operator << (std::ostream& out, const Triangle &triangle);
-	std::istream& operator >> (std::istream& in, Triangle &triangle);
+    class Triangle
+    {
+    public:
+        Triangle();
+        Triangle(const Vertex &v1, const Vertex &v2, const Vertex &v3);
+        Triangle& operator=(const Triangle &tri);
+
+        Vertex vertex[3];
+    private:
+    };
 }
 
 #endif //AURORA_TRIANGLE_HPP_

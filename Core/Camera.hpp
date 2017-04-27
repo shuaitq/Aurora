@@ -7,31 +7,17 @@
 
 namespace Aurora
 {
-	class Camera
-	{
-	public:
-		Point4D_T<float>& position();
-		const Point4D_T<float>& position() const;
-		Vector4D_T<float>& up();
-		const Vector4D_T<float>& up() const;
-		Vector4D_T<float>& front();
-		const Vector4D_T<float>& front() const;
-		Vector4D_T<float>& right();
-		const Vector4D_T<float>& right() const;
-		float& fov();
-		const float& fov() const;
-		float& aspect();
-		const float& aspect() const;
-		friend std::ostream& operator << (std::ostream &out, const Camera &camera);
-		friend std::istream& operator >> (std::istream &in, Camera &camera);
-	private:
-		Point4D_T<float> position_;
-		Vector4D_T<float> up_;
-		Vector4D_T<float> front_;
-		Vector4D_T<float> right_;
-		float fov_;
-		float aspect_;
-	};
+    class Camera
+    {
+    public:
+        Point4D_T<float> position;
+        Vector4D_T<float> up;
+        Vector4D_T<float> front;
+        Vector4D_T<float> right;
+        float fov;
+        float aspect;
+    private:
+    };
 }
 
 #endif //AURORA_CAMERA_HPP_

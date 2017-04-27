@@ -14,33 +14,33 @@
 
 namespace Aurora
 {
-	class Renderer
-	{
-	public:
-		Renderer(const std::string &path);
-		void DrawTopTriangle(Vertex &top, Vertex &left, Vertex &right, Texture<> &texture);
-		void DrawBottomTriangle(Vertex &bottom, Vertex &left, Vertex &right, Texture<> &texture);
+    class Renderer
+    {
+    public:
+        Renderer(const std::string &path);
+        void DrawTopTriangle(Vertex &top, Vertex &left, Vertex &right, Texture<> &texture);
+        void DrawBottomTriangle(Vertex &bottom, Vertex &left, Vertex &right, Texture<> &texture);
 
-		void Render(const std::string &path);
+        void Render(const std::string &path);
 
-		Camera& camera();
-		const Camera& camera() const;
-		std::vector<Object<>>& object();
-		const std::vector<Object<>>& object() const;
-		std::vector<Light*>& light();
-		const std::vector<Light*>& light() const;
-		size_t& width();
-		const size_t& width() const;
-		size_t& height();
-		const size_t& height() const;
+        Camera& camera();
+        const Camera& camera() const;
+        std::vector<Object<>>& object();
+        const std::vector<Object<>>& object() const;
+        std::vector<Light*>& light();
+        const std::vector<Light*>& light() const;
+        size_t& width();
+        const size_t& width() const;
+        size_t& height();
+        const size_t& height() const;
 
-		friend std::ostream& operator << (std::ostream &out, const Renderer &r);
-	private:
-		using Sence = SenceFile;
-		std::vector<float> ZBuffer_;
-		std::vector<RGB_T<float>> screen_;
-		float ZFlag_;
-	};
+        friend std::ostream& operator << (std::ostream &out, const Renderer &r);
+    private:
+        using Sence = SenceFile;
+        std::vector<float> ZBuffer_;
+        std::vector<RGB_T<float>> screen_;
+        float ZFlag_;
+    };
 }
 
 #endif //AURORA_RENDERER_HPP_

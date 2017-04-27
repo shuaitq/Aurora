@@ -7,22 +7,12 @@ namespace Aurora
     {
     public:
         Sence(const std::string &path);
-        int& width();
-        const int& width() const;
-        int& height();
-        const int& height() const;
-        Camera& camera();
-        const Camera& camera() const;
-        std::vector<Object>& object();
-        const std::vector<Object>& object() const;
-        std::vector<Light *>& light();
-        const std::vector<Light *>& light() const;
+        int width, height;
+        Camera camera;
+        std::vector<Object> object;
+        std::vector<Light *> light;
     private:
         using Loader = SenceFile;
-		int width_, height_;
-		Camera camera_;
-		std::vector<Object> object_;
-		std::vector<Light *> light_;
     };
 }
 
