@@ -29,4 +29,11 @@ namespace Aurora
         float x = u * (size_  - 1) - i, y = v * (size_ - 1) - j;
         return texture_[j * size_ + i] * (1 - x) * (1 - y) + texture_[(j+1) * size_ + i] * y * (1 - x) + texture_[j * size_ + (i + 1)] * (1 - y) * x + texture_[(j + 1) * size_ + (i + 1)] * y * x;
     }
+
+    std::ostream& operator << (std::ostream &out, const Texture &texture)
+    {
+        out << "Size" << std::endl;
+        out << size;
+        return out;
+    }
 }

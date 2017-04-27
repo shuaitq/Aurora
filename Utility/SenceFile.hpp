@@ -5,6 +5,8 @@
 
 #include <fstream>
 
+class Sence;
+
 namespace Aurora
 {
     class SenceFile

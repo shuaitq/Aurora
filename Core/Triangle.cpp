@@ -16,4 +16,15 @@ namespace Aurora
         vertex[2] = tri.vertex[2];
         return *this;
     }
+
+    std::ostream& operator << (std::ostream &out, const Triangle &triangle)
+    {
+        out << "Vertex 1" << std::endl;
+        out << vertex[0] << std::endl;
+        out << "Vertex 2" << std::endl;
+        out << vertex[1] << std::endl;
+        out << "Vertex 3" << std::endl;
+        out << vertex[2];
+        return out;
+    }
 }

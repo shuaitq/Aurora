@@ -7,6 +7,9 @@ namespace Aurora
     {
     public:
         Sence(const std::string &path);
+
+        friend std::ostream& operator << (std::ostream &out, const Sence &sence) const;
+
         int width, height;
         Camera camera;
         std::vector<Object> object;

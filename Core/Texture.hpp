@@ -17,6 +17,8 @@ namespace Aurora
         // u = [0, 1) v = [0, 1)
         RGB_T<float> Sample(float u, float v) const;
 
+        friend std::ostream& operator << (std::ostream &out, const Texture &texture);
+
         std::vector<RGB_T<float>> pixels;
         size_t size;
     private:

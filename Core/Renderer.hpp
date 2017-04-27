@@ -5,6 +5,7 @@
 #include "Color.hpp"
 #include "../Math/Math.hpp"
 #include "Light.hpp"
+#include "../Utility/SenceFile.hpp"
 
 #include <memory>
 #include <vector>
@@ -18,14 +19,14 @@ namespace Aurora
     {
     public:
         Renderer(const std::string &path);
-        void DrawTopTriangle(Vertex &top, Vertex &left, Vertex &right, Texture<> &texture);
-        void DrawBottomTriangle(Vertex &bottom, Vertex &left, Vertex &right, Texture<> &texture);
 
         void Render(const std::string &path);
 
         friend std::ostream& operator << (std::ostream &out, const Renderer &r);
     private:
         using Sence = SenceFile;
+        void DrawTopTriangle(Vertex &top, Vertex &left, Vertex &right, Texture &texture);
+        void DrawBottomTriangle(Vertex &bottom, Vertex &left, Vertex &right, Texture &texture);
         std::vector<float> ZBuffer_;
         std::vector<RGB_T<float>> screen_;
         float ZFlag_;

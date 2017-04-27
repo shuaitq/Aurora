@@ -66,7 +66,13 @@ namespace Aurora
         {
             return operator *= (T(1) / u);
         }
-        
+
+        friend std::ostream& operator << (std::ostream &out, const RGB_T<T> &rgb)
+        {
+            out << rgb.red << ' ' << rgb.green << ' ' << rgb.blue;
+            return out;
+        }
+
         union
         {
             struct
@@ -116,6 +122,12 @@ namespace Aurora
         RGBA_T<T>& operator /= (const U u)
         {
             return operator *= (T(1) / u);
+        }
+
+        friend std::ostream& operator << (std::ostream &out, const RGBA_T<T> &rgba)
+        {
+            out << rgba.red << ' ' << rgba.green << ' ' << rgba.blue << ' ' << rgba.alpha;
+            return out;
         }
 
         union

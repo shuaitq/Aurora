@@ -16,6 +16,7 @@ namespace Aurora
     public:
         Object(const std::string &path);
         Object& operator = (const Object &object);
+        friend std::ostream& operator << (std::ostream &out, const Object &object);
 
         Point4D_T<float> position;
         Vector4D_T<float> up;

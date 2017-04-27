@@ -3,9 +3,6 @@
 #include "Core/Object.hpp"
 #include "Core/Renderer.hpp"
 
-#include "Core/DirectLight.hpp"
-#include "Core/PointLight.hpp"
-
 #include <cstdio>
 #include <vector>
 
@@ -14,8 +11,7 @@ int main(int argc, char *argv[])
     using namespace Aurora;
     if(argc != 2)
     {
-        printf("Please input right path!\n");
-        return 0;
+        throw std::runtime_error("Please input right path!");
     }
     Renderer render(argv[1]);
     for(size_t i = 1; i <= 360; ++ i)
@@ -26,8 +22,8 @@ int main(int argc, char *argv[])
         str += temp;
         str += ".ppm";
         std::cout << str << std::endl;
-        test.Render(str);
+        render.Render(str);
     }
-    std::cout << test;
+    std::cout << render;
     return 0;
 }

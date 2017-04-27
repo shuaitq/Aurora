@@ -16,6 +16,8 @@ namespace Aurora
         Vertex(const Vertex &ver);
         Vertex& operator = (const Vertex &ver);
 
+        friend std::ostream& operator << (std::ostream &out, const Vertex &vertex);
+
         Point4D_T<float> point;
         Point2D_T<float> uv;
         Vector4D_T<float> normal;

@@ -2,13 +2,14 @@
 #define AURORA_PPM_HPP_
 
 #include "../Core/Color.hpp"
+#include "../Core/Texture.hpp"
 
-#include <vector>
 #include <string>
 #include <fstream>
 #include <limits>
 #include <stdexcept>
-#include <sstream>
+
+class Texture;
 
 namespace Aurora
 {

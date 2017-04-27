@@ -255,7 +255,7 @@ namespace Aurora
     public:
         Vector4D_T(const T t = 0, const T w_ = 0):x(t), y(t), z(t), w(w_){}
         Vector4D_T(const T x_, const T y_, const T z_, const T w_ = 0):x(x_), y(y_), z(z_), w(w_){}
-        Vector4D_T(const Vector4D_T<T> &v):x_(v.x_), y_(v.y_), z_(v.z_), w_(v.w_){}
+        Vector4D_T(const Vector4D_T<T> &v):x(v.x), y(v.y), z(v.z), w(v.w){}
         Vector4D_T<T>& operator = (const Vector4D_T<T> &v)
         {
             x = v.x;

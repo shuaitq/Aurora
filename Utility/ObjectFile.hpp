@@ -8,6 +8,8 @@
 #include <string>
 #include <fstream>
 
+class Object;
+
 namespace Aurora
 {
     class ObjectFile

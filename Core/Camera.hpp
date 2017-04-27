@@ -10,6 +10,8 @@ namespace Aurora
     class Camera
     {
     public:
+        friend std::ostream& operator << (std::ostream &out, const Camera &camera);
+
         Point4D_T<float> position;
         Vector4D_T<float> up;
         Vector4D_T<float> front;
