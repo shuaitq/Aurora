@@ -4,8 +4,6 @@
 #include "../Math/Math.hpp"
 #include "Vertex.hpp"
 
-#include <cstdio>
-#include <vector>
 #include <iostream>
 
 namespace Aurora
@@ -15,7 +13,8 @@ namespace Aurora
     public:
         Triangle();
         Triangle(const Vertex &v1, const Vertex &v2, const Vertex &v3);
-        Triangle& operator=(const Triangle &tri);
+        Triangle& operator = (const Triangle &tri);
+        Triangle& operator *= (const Matrix4_T<float> &m);
 
         friend std::ostream& operator << (std::ostream &out, const Triangle &triangle);
 

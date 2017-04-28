@@ -19,6 +19,8 @@ namespace Aurora
         Object(const std::string &path);
         Object(const Object &object);
         Object& operator = (const Object &object);
+        Object& operator *= (const Matrix4_T<float> &m);
+        void ObjectToWorld();
 
         friend std::ostream& operator << (std::ostream &out, const Object &object);
 

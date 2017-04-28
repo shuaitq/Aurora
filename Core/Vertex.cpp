@@ -12,6 +12,12 @@ namespace Aurora
         normal = ver.normal;
         return *this;
     }
+    Vertex& Vertex::operator *= (const Matrix4_T<float> &m)
+    {
+        point *= m;
+        normal *= m;
+        return *this;
+    }
 
      std::ostream& operator << (std::ostream &out, const Vertex &vertex)
      {

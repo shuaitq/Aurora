@@ -17,6 +17,27 @@ namespace Aurora
         texture = object.texture;
         return *this;
     }
+    Object& Object::operator *= (const Matrix4_T<float> &m)
+    {
+        for(Triangle &tri : triangle)
+        {
+            tri *= m;
+        }
+        position *= m;
+        up *= m;
+        front *= m;
+        right *= m;
+        return *this;
+    }
+    void Object::ObjectToWorld()
+    {
+        // TODO
+        Matrix4_T<float> m;
+        for(Triangle &tri : triangle)
+        {
+            tri *= m;
+        }
+    }
     std::ostream& operator << (std::ostream &out, const Object &object)
     {
         out << "Position" << std::endl;
@@ -33,7 +54,7 @@ namespace Aurora
             out << *it << std::endl;
         }
         out << "Texture" << std::endl;
-        out << object.texture; 
+        out << object.texture;
         return out;
     }
 }

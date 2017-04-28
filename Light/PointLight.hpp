@@ -3,8 +3,6 @@
 
 #include "../Core/Light.hpp"
 
-#include <iostream>
-
 namespace Aurora
 {
     class PointLight:public Light

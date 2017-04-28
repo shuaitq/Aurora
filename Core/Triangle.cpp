@@ -9,11 +9,18 @@ namespace Aurora
         vertex[1] = v2;
         vertex[2] = v3;
     }
-    Triangle& Triangle::operator=(const Triangle &tri)
+    Triangle& Triangle::operator = (const Triangle &tri)
     {
         vertex[0] = tri.vertex[0];
         vertex[1] = tri.vertex[1];
         vertex[2] = tri.vertex[2];
+        return *this;
+    }
+    Triangle& Triangle::operator *= (const Matrix4_T<float> &m)
+    {
+        vertex[0] *= m;
+        vertex[1] *= m;
+        vertex[2] *= m;
         return *this;
     }
 
