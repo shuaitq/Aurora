@@ -11,11 +11,15 @@
 
 namespace Aurora
 {
+    class ObjectFile;
+
     class Object
     {
     public:
         Object(const std::string &path);
+        Object(const Object &object);
         Object& operator = (const Object &object);
+
         friend std::ostream& operator << (std::ostream &out, const Object &object);
 
         Point4D_T<float> position;

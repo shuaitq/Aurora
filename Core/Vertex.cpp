@@ -16,11 +16,11 @@ namespace Aurora
      std::ostream& operator << (std::ostream &out, const Vertex &vertex)
      {
          out << "Point" << std::endl;
-         out << point << std::endl;
+         out << vertex.point << std::endl;
          out << "UV" << std::endl;
-         out << uv << std::endl;
+         out << vertex.uv << std::endl;
          out << "Normal" << std::endl;
-         out << normal;
+         out << vertex.normal;
          return out;
      }
 }

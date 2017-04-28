@@ -45,13 +45,13 @@ namespace Aurora
                     {
                         char div;
                         in >> v >> div >> u >> div >> n;
-                        tri[i] = Vertex(PointMap[v - 1], UVMap[u - 1], NormalMap[n - 1]);
+                        tri.vertex[i] = Vertex(PointMap[v - 1], UVMap[u - 1], NormalMap[n - 1]);
                     }
-                    triangle.push_back(tri);
+                    object.triangle.push_back(tri);
                     break;
                 case 'u':
                     in >> str;
-                    texture.Load(str);
+                    object.texture.Load(str);
                     break;
                 case '#':
                     break;

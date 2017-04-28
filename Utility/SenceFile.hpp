@@ -2,13 +2,14 @@
 #define AURORA_SENCEFILE_HPP_
 
 #include "json.hpp"
+#include "../Core/Sence.hpp"
 
 #include <fstream>
 
-class Sence;
-
 namespace Aurora
 {
+    class Sence;
+
     class SenceFile
     {
     public:

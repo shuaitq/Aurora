@@ -2,7 +2,7 @@
 
 namespace Aurora
 {
-    static void SenceFile::Load(const std::string &path, Sence &sence)
+    void SenceFile::Load(const std::string &path, Sence &sence)
     {
         nlohmann::json j;
         std::ifstream in(path);

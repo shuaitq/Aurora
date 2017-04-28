@@ -6,6 +6,7 @@ namespace Aurora
     {
         Model::Load(path, *this);
     }
+    Object::Object(const Object &object):position(object.position), up(object.up), front(object.front), right(object.right), triangle(object.triangle), texture(object.texture){}
     Object& Object::operator = (const Object &object)
     {
         position = object.position;

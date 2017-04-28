@@ -2,7 +2,7 @@
 
 namespace Aurora
 {
-    Triangle::Triangle()vertex[0](), vertex[1](), vertex[2](){}
+    Triangle::Triangle(){}
     Triangle::Triangle(const Vertex &v1, const Vertex &v2, const Vertex &v3)
     {
         vertex[0] = v1;
@@ -20,11 +20,11 @@ namespace Aurora
     std::ostream& operator << (std::ostream &out, const Triangle &triangle)
     {
         out << "Vertex 1" << std::endl;
-        out << vertex[0] << std::endl;
+        out << triangle.vertex[0] << std::endl;
         out << "Vertex 2" << std::endl;
-        out << vertex[1] << std::endl;
+        out << triangle.vertex[1] << std::endl;
         out << "Vertex 3" << std::endl;
-        out << vertex[2];
+        out << triangle.vertex[2];
         return out;
     }
 }
