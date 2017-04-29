@@ -11,7 +11,13 @@ namespace Aurora
     }
     void Render(const std::string &path)
     {
-
+        Init();
+        ObjectToWorld();
+        WorldToCamera();
+        CameraToCVV();
+        Clip();
+        CVVToScreen();
+        Rasterization();
     }
 
     void ObjectToWorld()
@@ -38,6 +44,18 @@ namespace Aurora
         }
     }
     void CameraToCVV()
+    {
+
+    }
+    void Clip()
+    {
+
+    }
+    void CVVToScreen()
+    {
+
+    }
+    void Rasterization()
     {
 
     }

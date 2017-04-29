@@ -23,20 +23,13 @@ namespace Aurora
         {
             tri *= m;
         }
-        position *= m;
-        up *= m;
-        front *= m;
-        right *= m;
         return *this;
     }
     void Object::ObjectToWorld()
     {
         // TODO
         Matrix4_T<float> m;
-        for(Triangle &tri : triangle)
-        {
-            tri *= m;
-        }
+        *this *= m;
     }
     std::ostream& operator << (std::ostream &out, const Object &object)
     {

@@ -27,6 +27,9 @@ namespace Aurora
         void ObjectToWorld();
         void WorldToCamera();
         void CameraToCVV();
+        void Clip();
+        void CVVToScreen();
+        void Rasterization();
         void Init();
 
         Sence sence, render_sence;
