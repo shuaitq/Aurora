@@ -12,7 +12,6 @@ namespace Aurora
     {
     public:
         Light();
-        Light& operator *= (const Matrix4_T<float> &m);
         virtual RGB_T<float> Sample(const Point4D_T<float> &p, const Vector4D_T<float> &n) = 0;
 
         friend std::ostream& operator << (std::ostream &out, const Light &light);

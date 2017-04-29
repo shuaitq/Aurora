@@ -3,6 +3,14 @@
 namespace Aurora
 {
     Sence::Sence(){}
+    Sence& Sence::operator = (const Sence &sence)
+    {
+        width = sence.width;
+        height = sence.height;
+        camera = sence.camera;
+        
+        return *this;
+    }
 
     std::ostream& operator << (std::ostream &out, const Sence &sence)
     {

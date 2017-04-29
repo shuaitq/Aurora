@@ -15,6 +15,7 @@ namespace Aurora
         Clip();
         CVVToScreen();
         Rasterization();
+        Save(path);
     }
 
     std::ostream& operator << (std::ostream &out, const Renderer &renderer)
@@ -45,7 +46,11 @@ namespace Aurora
     }
     void Renderer::CameraToCVV()
     {
-        
+        Matrix4_T<float> m = sence.camera.CameraToCVV();
+        for()
+        {
+            
+        }
     }
     void Renderer::Clip()
     {
@@ -61,6 +66,10 @@ namespace Aurora
     }
     void Renderer::Init()
     {
-       // render_sence = sence;
+        render_sence = sence;
+    }
+    void Renderer::Save(const std::string &path)
+    {
+
     }
 }

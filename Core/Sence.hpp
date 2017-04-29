@@ -16,6 +16,7 @@ namespace Aurora
     {
     public:
         Sence();
+        Sence& operator = (const Sence &sence);
 
         friend std::ostream& operator << (std::ostream &out, const Sence &sence);
 

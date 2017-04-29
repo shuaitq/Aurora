@@ -33,6 +33,7 @@ namespace Aurora
         void CVVToScreen();
         void Rasterization();
         void Init();
+        void Save(const std::string &path);
 
         Sence sence, render_sence;
     };

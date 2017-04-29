@@ -11,6 +11,7 @@ namespace Aurora
     {
     public:
         Matrix4_T<float> WorldToCamera();
+        Matrix4_T<float> CameraToCVV();
         friend std::ostream& operator << (std::ostream &out, const Camera &camera);
 
         Point4D_T<float> position;
@@ -18,6 +19,7 @@ namespace Aurora
         Vector4D_T<float> front;
         Vector4D_T<float> right;
         float fov;
+        float near, far;
         float aspect;
     private:
     };

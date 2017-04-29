@@ -9,6 +9,7 @@ namespace Aurora
         direction *= m;
         return *this;
     }
+
     std::ostream& operator << (std::ostream &out, const Light &light)
     {
         out << "Direction" << std::endl;
