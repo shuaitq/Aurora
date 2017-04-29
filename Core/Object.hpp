@@ -16,10 +16,11 @@ namespace Aurora
     class Object
     {
     public:
-        Object(const std::string &path);
+        Object();
         Object(const Object &object);
         Object& operator = (const Object &object);
         Object& operator *= (const Matrix4_T<float> &m);
+        void Load(const std::string &path);
         void ObjectToWorld();
 
         friend std::ostream& operator << (std::ostream &out, const Object &object);

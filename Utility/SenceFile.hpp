@@ -3,8 +3,12 @@
 
 #include "json.hpp"
 #include "../Core/Sence.hpp"
+#include "../Light/DirectLight.hpp"
+#include "../Light/PointLight.hpp"
+#include "../Core/Object.hpp"
 
 #include <fstream>
+#include <memory>
 
 namespace Aurora
 {

@@ -2,10 +2,7 @@
 
 namespace Aurora
 {
-    Sence::Sence(const std::string &path)
-    {
-        Loader::Load(path, *this);
-    }
+    Sence::Sence(){}
 
     std::ostream& operator << (std::ostream &out, const Sence &sence)
     {
@@ -16,14 +13,14 @@ namespace Aurora
         out << "Camera" << std::endl;
         out << sence.camera << std::endl;
         out << "Objects" << std::endl;
-        for(auto it = sence.object.begin(); it != sence.object.end(); ++ it)
+        for(auto &it : sence.object)
         {
             out << *it << std::endl;
         }
         out << "Lights";
-        for(auto it = sence.light.begin(); it != sence.light.end(); ++ it)
+        for(auto &it : sence.light)
         {
-          //  out << std::endl << **it;
+            out << std::endl << *it;
         }
         return out;
     }

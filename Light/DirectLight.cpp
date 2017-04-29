@@ -2,10 +2,9 @@
 
 namespace Aurora
 {
-    DirectLight::DirectLight(const Vector4D_T<float> &direction, const RGB_T<float> &color):direction_(direction), color_(color){}
-    RGB_T<float> DirectLight::Sample(const Point4D_T<float> &position, const Vector4D_T<float> &normal)
+    RGB_T<float> DirectLight::Sample(const Point4D_T<float> &p, const Vector4D_T<float> &n)
     {
-        float NdotD = Dot(normal, direction_ * m);
-        return color_ * std::max(0.0f, -NdotD);
+        float NdotD = Dot(n, direction);
+        return color * std::max(0.0f, -NdotD);
     }
 }

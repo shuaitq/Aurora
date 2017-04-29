@@ -1,5 +1,5 @@
 {
-    "weight" : 1920,
+    "width" : 1920,
     "height" : 1080,
     "camera" :{
         "position" : [2.000000, 2.000000, 2.000000],
@@ -20,12 +20,14 @@
     "light" :[
         {
             "type" : "directlight",
+            "position" : [0, 0, 0],
             "direction" : [-0.267261, -0.534522, -0.801784],
             "color" : [0.35, 0.15, 0.15]
         },
         {
             "type" : "pointlight",
             "position" : [1, 1, 1],
+            "direction" : [0, 0, 0],
             "color" : [0.25, 0.25, 0.75]
         }
     ]

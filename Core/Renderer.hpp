@@ -22,8 +22,10 @@ namespace Aurora
 
         void Render(const std::string &path);
 
+        friend std::ostream& operator << (std::ostream &out, const Renderer &renderer);
+
     private:
-        using Sence = SenceFile;
+        using Loader = SenceFile;
         void ObjectToWorld();
         void WorldToCamera();
         void CameraToCVV();
@@ -33,9 +35,6 @@ namespace Aurora
         void Init();
 
         Sence sence, render_sence;
-        std::vector<float> ZBuffer_;
-        std::vector<RGB_T<float>> screen_;
-        float ZFlag_;
     };
 }
 

@@ -4,12 +4,9 @@ namespace Aurora
 {
     Renderer::Renderer(const std::string &path)
     {
-        Sence::Load(path, width_, height_, camera_, object_);
-        screen_.resize(width_ * height_);
-        ZBuffer_.resize(width_ * height_);
-        ZFlag_ = 0;
+        Loader::Load(path, sence);
     }
-    void Render(const std::string &path)
+    void Renderer::Render(const std::string &path)
     {
         Init();
         ObjectToWorld();
@@ -20,47 +17,50 @@ namespace Aurora
         Rasterization();
     }
 
-    void ObjectToWorld()
+    std::ostream& operator << (std::ostream &out, const Renderer &renderer)
     {
-        for(Object &o : render_sence.object)
+        out << "Sence" << std::endl;
+        out << renderer.sence;
+        return out;
+    }
+
+    void Renderer::ObjectToWorld()
+    {
+        for(std::shared_ptr<Object> &o : render_sence.object)
         {
-            o.ObjectToWorld();
-        }
-        for(Light &l : render_sence.light)
-        {
-            l.LightToWorld();
+            o->ObjectToWorld();
         }
     }
-    void WorldToCamera()
+    void Renderer::WorldToCamera()
     {
-        Martix4_T<float> m = sence.camera.WorldToCamera();
-        for(Object &o : render_sence.object)
+        Matrix4_T<float> m = sence.camera.WorldToCamera();
+        for(std::shared_ptr<Object> &o : render_sence.object)
         {
-            o *= m;
+            *o *= m;
         }
-        for(Light &l : render_sence.light)
+        for(std::shared_ptr<Light> &l : render_sence.light)
         {
-            l *= m;
+            *l *= m;
         }
     }
-    void CameraToCVV()
+    void Renderer::CameraToCVV()
+    {
+        
+    }
+    void Renderer::Clip()
     {
 
     }
-    void Clip()
+    void Renderer::CVVToScreen()
     {
 
     }
-    void CVVToScreen()
+    void Renderer::Rasterization()
     {
 
     }
-    void Rasterization()
+    void Renderer::Init()
     {
-
-    }
-    void Init()
-    {
-        render_sence = sence;
+       // render_sence = sence;
     }
 }

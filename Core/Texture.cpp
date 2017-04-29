@@ -2,6 +2,7 @@
 
 namespace Aurora
 {
+    Texture::Texture():size(){}
     // u = [0, 1) v = [0, 1)
     RGB_T<float> Texture::Sample(float u, float v) const
     {

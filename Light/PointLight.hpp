@@ -8,7 +8,7 @@ namespace Aurora
     class PointLight:public Light
     {
     public:
-        RGB_T<float> Sample(const Point4D_T<float> &position, const Vector4D_T<float> &normal);
+        RGB_T<float> Sample(const Point4D_T<float> &p, const Vector4D_T<float> &n);
     private:
     };
 }

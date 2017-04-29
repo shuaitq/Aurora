@@ -12,21 +12,18 @@
 
 namespace Aurora
 {
-    class SenceFile;
-
     class Sence
     {
     public:
-        Sence(const std::string &path);
+        Sence();
 
         friend std::ostream& operator << (std::ostream &out, const Sence &sence);
 
         int width, height;
         Camera camera;
-        std::vector<Object> object;
-        std::vector<Light *> light;
+        std::vector<std::shared_ptr<Object>> object;
+        std::vector<std::shared_ptr<Light>> light;
     private:
-        using Loader = SenceFile;
     };
 }
 

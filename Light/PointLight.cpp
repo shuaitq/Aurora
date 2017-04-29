@@ -2,12 +2,11 @@
 
 namespace Aurora
 {
-    PointLight::PointLight(const Point4D_T<float> &position, const RGB_T<float> &color):position_(position), color_(color){}
-    RGB_T<float> PointLight::Sample(const Point4D_T<float> &position, const Vector4D_T<float> &normal)
+    RGB_T<float> PointLight::Sample(const Point4D_T<float> &p, const Vector4D_T<float> &n)
     {
-        float length2 = (position - position_ * m).Length2();
-        Vector4D_T<float> direction = Normalize(position - position_ * m);
-        float NdotD = Dot(normal, direction);
-        return color_ * std::max(0.0f, -NdotD) / length2;
+        float length2 = (p - position).Length2();
+        Vector4D_T<float> direction = Normalize(p - position);
+        float NdotD = Dot(n, direction);
+        return color * std::max(0.0f, -NdotD) / length2;
     }
 }

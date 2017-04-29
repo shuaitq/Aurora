@@ -9,8 +9,8 @@ int main(int argc, char *argv[])
     {
         throw std::runtime_error("Please input right path!");
     }
-    //Renderer render(argv[1]);
-    for(size_t i = 1; i <= 360; ++ i)
+    Renderer render(argv[1]);
+    /*for(size_t i = 1; i <= 360; ++ i)
     {
         std::string str = "Image/";
         char temp[10];
@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
         str += ".ppm";
         std::cout << str << std::endl;
         //render.Render(str);
-    }
-    //std::cout << render;
+    }*/
+    std::cout << render << std::endl;
     return 0;
 }
