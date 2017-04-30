@@ -11,13 +11,12 @@ namespace Aurora
     class Light
     {
     public:
-        Light();
-        virtual RGB_T<float> Sample(const Point4D_T<float> &p, const Vector4D_T<float> &n) = 0;
+        virtual RGB_T<float> Sample(const Point3D_T<float> &p, const Vector3D_T<float> &n) = 0;
 
         friend std::ostream& operator << (std::ostream &out, const Light &light);
 
-        Vector4D_T<float> direction;
-        Point4D_T<float> position;
+        Vector3D_T<float> direction;
+        Point3D_T<float> position;
         RGB_T<float> color;
     private:
     };

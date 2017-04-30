@@ -16,21 +16,12 @@ namespace Aurora
     class Object
     {
     public:
-        Object();
-        Object(const Object &object);
-        Object& operator = (const Object &object);
-        Object& operator *= (const Matrix4_T<float> &m);
-        void Load(const std::string &path);
-        void ObjectToWorld();
-
         friend std::ostream& operator << (std::ostream &out, const Object &object);
 
-        Point4D_T<float> position;
-        Vector4D_T<float> up;
-        Vector4D_T<float> front;
-        Vector4D_T<float> right;
         std::vector<Triangle> triangle;
         Texture texture;
+        Point3D_T<float> position;
+        float rotatex, rotatey, rotatez;
     private:
         using Model = ObjectFile;
     };

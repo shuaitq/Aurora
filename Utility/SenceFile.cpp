@@ -16,6 +16,8 @@ namespace Aurora
         sence.camera.aspect = static_cast<float>(sence.width) / sence.height;
 
         const nlohmann::json &camera = j["camera"];
+        sence.camera.near = camera["near"];
+        sence.camera.far = camera["far"];
         const nlohmann::json &position = camera["position"];
         sence.camera.position.x = position[0];
         sence.camera.position.y = position[1];

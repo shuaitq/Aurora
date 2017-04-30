@@ -2,14 +2,6 @@
 
 namespace Aurora
 {
-    Light::Light():direction(), position(), color(){}
-    Light& Light::operator *= (const Matrix4_T<float> &m)
-    {
-        position *= m;
-        direction *= m;
-        return *this;
-    }
-
     std::ostream& operator << (std::ostream &out, const Light &light)
     {
         out << "Direction" << std::endl;

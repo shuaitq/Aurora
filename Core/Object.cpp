@@ -2,53 +2,23 @@
 
 namespace Aurora
 {
-    Object::Object():position(), up(), front(), right(), triangle(), texture(){}
-    Object::Object(const Object &object):position(object.position), up(object.up), front(object.front), right(object.right), triangle(object.triangle), texture(object.texture){}
-    Object& Object::operator = (const Object &object)
-    {
-        position = object.position;
-        up = object.up;
-        front = object.front;
-        right = object.right;
-        triangle = object.triangle;
-        texture = object.texture;
-        return *this;
-    }
-    Object& Object::operator *= (const Matrix4_T<float> &m)
-    {
-        for(Triangle &tri : triangle)
-        {
-            tri *= m;
-        }
-        return *this;
-    }
-    void Object::Load(const std::string &path)
-    {
-        Model::Load(path, *this);
-    }
-    void Object::ObjectToWorld()
-    {
-        // TODO
-        Matrix4_T<float> m;
-        *this *= m;
-    }
     std::ostream& operator << (std::ostream &out, const Object &object)
     {
-        out << "Position" << std::endl;
-        out << object.position << std::endl;
-        out << "Up" << std::endl;
-        out << object.up << std::endl;
-        out << "Front" << std::endl;
-        out << object.front << std::endl;
-        out << "Right" << std::endl;
-        out << object.right << std::endl;
         out << "Triangle" << std::endl;
         for(auto it = object.triangle.begin(); it != object.triangle.end(); ++ it)
         {
             out << *it << std::endl;
         }
         out << "Texture" << std::endl;
-        out << object.texture;
+        out << object.texture << std::endl;
+        out << "Position" << std::endl;
+        out << object.position << std::endl;
+        out << "RotateX" << std::endl;
+        out << object.rotatex << std::endl;
+        out << "RotateY" << std::endl;
+        out << object.rotatey << std::endl;
+        out << "RotateZ" << std::endl;
+        out << object.rotatez;
         return out;
     }
 }

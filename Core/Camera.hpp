@@ -10,14 +10,10 @@ namespace Aurora
     class Camera
     {
     public:
-        Matrix4_T<float> WorldToCamera();
-        Matrix4_T<float> CameraToCVV();
         friend std::ostream& operator << (std::ostream &out, const Camera &camera);
 
-        Point4D_T<float> position;
-        Vector4D_T<float> up;
-        Vector4D_T<float> front;
-        Vector4D_T<float> right;
+        Point3D_T<float> position;
+        float rotatex, rotatey, rotatez;
         float fov;
         float near, far;
         float aspect;

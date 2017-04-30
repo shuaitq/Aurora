@@ -13,10 +13,8 @@ namespace Aurora
     class Texture
     {
     public:
-        Texture();
         // u = [0, 1) v = [0, 1)
         RGB_T<float> Sample(float u, float v) const;
-        void Load(const std::string &path);
 
         friend std::ostream& operator << (std::ostream &out, const Texture &texture);
 

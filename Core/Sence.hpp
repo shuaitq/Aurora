@@ -15,15 +15,12 @@ namespace Aurora
     class Sence
     {
     public:
-        Sence();
-        Sence& operator = (const Sence &sence);
-
         friend std::ostream& operator << (std::ostream &out, const Sence &sence);
 
-        int width, height;
-        Camera camera;
         std::vector<std::shared_ptr<Object>> object;
         std::vector<std::shared_ptr<Light>> light;
+        Camera camera;
+        int width, height;
     private:
     };
 }

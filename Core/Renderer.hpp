@@ -11,7 +11,6 @@
 #include <vector>
 #include <string>
 #include <algorithm>
-#include <cstdlib>
 
 namespace Aurora
 {
@@ -20,22 +19,10 @@ namespace Aurora
     public:
         Renderer(const std::string &path);
 
-        void Render(const std::string &path);
-
         friend std::ostream& operator << (std::ostream &out, const Renderer &renderer);
-
     private:
         using Loader = SenceFile;
-        void ObjectToWorld();
-        void WorldToCamera();
-        void CameraToCVV();
-        void Clip();
-        void CVVToScreen();
-        void Rasterization();
-        void Init();
-        void Save(const std::string &path);
-
-        Sence sence, render_sence;
+        Sence sence;
     };
 }
 
