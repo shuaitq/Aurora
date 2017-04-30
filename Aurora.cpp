@@ -1,4 +1,4 @@
-#include "Core/Renderer.hpp"
+#include "Core/Render.hpp"
 
 #include <cstdio>
 
@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
     {
         throw std::runtime_error("Please input right path!");
     }
-    Renderer render(argv[1]);
+    Render render(argv[1]);
     /*for(size_t i = 1; i <= 360; ++ i)
     {
         std::string str = "Image/";

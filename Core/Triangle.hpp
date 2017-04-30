@@ -11,6 +11,7 @@ namespace Aurora
     class Triangle
     {
     public:
+        Triangle();
         friend std::ostream& operator << (std::ostream &out, const Triangle &triangle);
 
         Vertex vertex[3];

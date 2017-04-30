@@ -19,8 +19,6 @@ namespace Aurora
 
         std::vector<std::shared_ptr<Object>> object;
         std::vector<std::shared_ptr<Light>> light;
-        Camera camera;
-        int width, height;
     private:
     };
 }

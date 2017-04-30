@@ -14,6 +14,10 @@ namespace Aurora
         out << camera.rotatez << std::endl;
         out << "Fov" << std::endl;
         out << camera.fov << std::endl;
+        out << "Near" << std::endl;
+        out << camera.near << std::endl;
+        out << "Far" << std::endl;
+        out << camera.far << std::endl;
         out << "Aspect" << std::endl;
         out << camera.aspect;
         return out;

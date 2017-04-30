@@ -9,17 +9,11 @@ namespace Aurora
         {
             out << *it << std::endl;
         }
-        out << "Lights" << std::endl;
+        out << "Lights";
         for(auto &it : sence.light)
         {
-            out << *it << std::endl;
+            out << std::endl << *it;
         }
-        out << "Camera" << std::endl;
-        out << sence.camera << std::endl;
-        out << "Width" << std::endl;
-        out << sence.width << std::endl;
-        out << "Height" << std::endl;
-        out << sence.height;
         return out;
     }
 }

@@ -16,12 +16,14 @@ namespace Aurora
     class Object
     {
     public:
+        void Load(const std::string &path);
+
         friend std::ostream& operator << (std::ostream &out, const Object &object);
 
-        std::vector<Triangle> triangle;
-        Texture texture;
         Point3D_T<float> position;
         float rotatex, rotatey, rotatez;
+        std::vector<Triangle> triangle;
+        Texture texture;
     private:
         using Model = ObjectFile;
     };

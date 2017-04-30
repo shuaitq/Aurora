@@ -10,9 +10,9 @@ namespace Aurora
             throw std::runtime_error("Object " + path + " doesn't exist!");
         }
         std::string str;
-        std::vector<Point4D_T<float>> PointMap;
+        std::vector<Point3D_T<float>> PointMap;
         std::vector<Point2D_T<float>> UVMap;
-        std::vector<Vector4D_T<float>> NormalMap;
+        std::vector<Vector3D_T<float>> NormalMap;
         float x, y, z;
         int v, u, n;
         Triangle tri;
@@ -25,7 +25,7 @@ namespace Aurora
                     {
                         case '\0': //Vector
                             in >> x >> y >> z;
-                            PointMap.push_back(Point4D_T<float>(x, y, z));
+                            PointMap.push_back(Point3D_T<float>(x, y, z));
                             break;
                         case 't': //Texture
                             in >> x >> y;
@@ -33,7 +33,7 @@ namespace Aurora
                             break;
                         case 'n': //Normal
                             in >> x >> y >> z;
-                            NormalMap.push_back(Vector4D_T<float>(x, y, z));
+                            NormalMap.push_back(Vector3D_T<float>(x, y, z));
                             break;
                         default:
                             throw std::runtime_error("Error! Unexpect Value!");
@@ -45,7 +45,7 @@ namespace Aurora
                     {
                         char div;
                         in >> v >> div >> u >> div >> n;
-                        tri.vertex[i] = Vertex(PointMap[v - 1], UVMap[u - 1], NormalMap[n - 1]);
+                        tri.vertex[i] = Vertex(PointMap[v - 1], NormalMap[n - 1], UVMap[u - 1]);
                     }
                     object.triangle.push_back(tri);
                     break;

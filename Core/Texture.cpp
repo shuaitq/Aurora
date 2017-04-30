@@ -2,6 +2,16 @@
 
 namespace Aurora
 {
+    void Texture::Load(const std::string &path)
+    {
+        size_t width, height;
+        UV::Load(path, width, height, pixels);
+        if(width != height)
+        {
+            throw std::runtime_error("Texture width not equals to height");
+        }
+        size = height;
+    }
     // u = [0, 1) v = [0, 1)
     RGB_T<float> Texture::Sample(float u, float v) const
     {

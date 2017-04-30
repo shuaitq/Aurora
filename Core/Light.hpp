@@ -15,8 +15,8 @@ namespace Aurora
 
         friend std::ostream& operator << (std::ostream &out, const Light &light);
 
-        Vector3D_T<float> direction;
         Point3D_T<float> position;
+        Vector3D_T<float> direction;
         RGB_T<float> color;
     private:
     };

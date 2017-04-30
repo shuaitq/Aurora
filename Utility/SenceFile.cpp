@@ -2,7 +2,7 @@
 
 namespace Aurora
 {
-    void SenceFile::Load(const std::string &path, Sence &sence)
+    void SenceFile::Load(const std::string &path, Sence &sence, int &width, int &height, Camera &camera)
     {
         nlohmann::json j;
         std::ifstream in(path);
@@ -11,53 +11,35 @@ namespace Aurora
             throw std::runtime_error("Object " + path + " doesn't exist!");
         }
         in >> j;
-        sence.width = j["width"];
-        sence.height = j["height"];
-        sence.camera.aspect = static_cast<float>(sence.width) / sence.height;
+        width = j["width"];
+        height = j["height"];
+        camera.aspect = static_cast<float>(width) / height;
 
-        const nlohmann::json &camera = j["camera"];
-        sence.camera.near = camera["near"];
-        sence.camera.far = camera["far"];
-        const nlohmann::json &position = camera["position"];
-        sence.camera.position.x = position[0];
-        sence.camera.position.y = position[1];
-        sence.camera.position.z = position[2];
-        const nlohmann::json &up = camera["up"];
-        sence.camera.up.x = up[0];
-        sence.camera.up.y = up[1];
-        sence.camera.up.z = up[2];
-        const nlohmann::json &front = camera["front"];
-        sence.camera.front.x = front[0];
-        sence.camera.front.y = front[1];
-        sence.camera.front.z = front[2];
-        const nlohmann::json &right = camera["right"];
-        sence.camera.right.x = right[0];
-        sence.camera.right.y = right[1];
-        sence.camera.right.z = right[2];
-        sence.camera.fov = camera["fov"];
+        const nlohmann::json &c = j["camera"];
+        camera.near = c["near"];
+        camera.far = c["far"];
+        camera.rotatex = c["rotatex"];
+        camera.rotatey = c["rotatey"];
+        camera.rotatez = c["rotatez"];
+        camera.fov = c["fov"];
+        const nlohmann::json &position = c["position"];
+        camera.position.x = position[0];
+        camera.position.y = position[1];
+        camera.position.z = position[2];
 
         const nlohmann::json &object = j["object"];
         for(auto &it : object)
         {
-            std::shared_ptr<Object> temp = std::make_shared<Object>();
-            temp->Load(it["path"]);
+            std::shared_ptr<Object> o = std::make_shared<Object>();
+            o->Load(it["path"]);
             const nlohmann::json &position = it["position"];
-            temp->position.x = position[0];
-            temp->position.y = position[1];
-            temp->position.z = position[2];
-            const nlohmann::json &up = it["up"];
-            temp->up.x = up[0];
-            temp->up.y = up[1];
-            temp->up.z = up[2];
-            const nlohmann::json &front = it["front"];
-            temp->front.x = front[0];
-            temp->front.y = front[1];
-            temp->front.z = front[2];
-            const nlohmann::json &right = it["right"];
-            temp->right.x = right[0];
-            temp->right.y = right[1];
-            temp->right.z = right[2];
-            sence.object.push_back(temp);
+            o->position.x = position[0];
+            o->position.y = position[1];
+            o->position.z = position[2];
+            o->rotatex = it["rotatex"];
+            o->rotatey = it["rotatey"];
+            o->rotatez = it["rotatez"];
+            sence.object.push_back(o);
         }
 
         const nlohmann::json &light = j["light"];

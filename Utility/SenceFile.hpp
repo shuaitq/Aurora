@@ -17,7 +17,7 @@ namespace Aurora
     class SenceFile
     {
     public:
-        static void Load(const std::string &path, Sence &sence);
+        static void Load(const std::string &path, Sence &sence, int &width, int &height, Camera &camera);
     private:
     };
 }

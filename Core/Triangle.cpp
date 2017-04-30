@@ -2,6 +2,7 @@
 
 namespace Aurora
 {
+    Triangle::Triangle(){}
     std::ostream& operator << (std::ostream &out, const Triangle &triangle)
     {
         out << "Vertex 1" << std::endl;

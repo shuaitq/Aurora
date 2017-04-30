@@ -1,5 +1,5 @@
-#ifndef AURORA_RENDERER_HPP_
-#define AURORA_RENDERER_HPP_
+#ifndef AURORA_RENDER_HPP_
+#define AURORA_RENDER_HPP_
 
 #include "Camera.hpp"
 #include "Color.hpp"
@@ -14,16 +14,19 @@
 
 namespace Aurora
 {
-    class Renderer
+    class Render
     {
     public:
-        Renderer(const std::string &path);
+        Render(const std::string &path);
 
-        friend std::ostream& operator << (std::ostream &out, const Renderer &renderer);
+        friend std::ostream& operator << (std::ostream &out, const Render &render);
     private:
         using Loader = SenceFile;
+        int width, height;
+        Camera camera;
         Sence sence;
+
     };
 }
 
-#endif //AURORA_RENDERER_HPP_
+#endif //AURORA_RENDER_HPP_

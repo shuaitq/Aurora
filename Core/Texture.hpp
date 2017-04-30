@@ -13,6 +13,7 @@ namespace Aurora
     class Texture
     {
     public:
+        void Load(const std::string &path);
         // u = [0, 1) v = [0, 1)
         RGB_T<float> Sample(float u, float v) const;
 
