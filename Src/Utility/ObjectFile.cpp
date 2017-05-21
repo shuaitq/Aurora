@@ -2,7 +2,7 @@
 
 namespace Aurora
 {
-    void ObjectFile::Load(const std::string &path)
+    void ObjectFile::Load(const std::string &path, std::vector<Vector4D_T<float> &point, std::vector<Vector4D_T<float>> &normal, std::vector<Vector2D_T<float>> &uv, std::vector<Face> &face, Texture)
     {
         std::ifstream in(path);
         if(!in.is_open())
@@ -10,13 +10,8 @@ namespace Aurora
             throw std::runtime_error("Object " + path + " doesn't exist!");
         }
         std::string str;
-        std::vector<size_t> index;
-        Texture texture;
         float x, y, z;
-        int v, u, n;
-        size_t PointSize = PointList.size();
-        size_t NormalSize = NormalList.size();
-        size_t UVSize = UVList.size();
+        Face temp;
         while(in >> str)
         {
             switch(str[0])
@@ -26,15 +21,15 @@ namespace Aurora
                     {
                         case '\0': //Vector
                             in >> x >> y >> z;
-                            PointList.push_back(Vector4D_T<float>(x, y, z, 1));
+                            point.push_back(Vector4D_T<float>(x, y, z, 1));
                             break;
                         case 't': //UV
                             in >> x >> y;
-                            UVList.push_back(Vector2D_T<float>(x, y));
+                            uv.push_back(Vector2D_T<float>(x, y));
                             break;
                         case 'n': //Normal
                             in >> x >> y >> z;
-                            NormalList.push_back(Vector4D_T<float>(x, y, z, 0));
+                            normal.push_back(Vector4D_T<float>(x, y, z, 0));
                             break;
                         default:
                             throw std::runtime_error("Error! Unexpect Value!");
@@ -45,12 +40,12 @@ namespace Aurora
                     for(size_t i = 0; i < 3; ++ i)
                     {
                         char div;
-                        in >> v >> div >> u >> div >> n;
-                        VertexList.push_back(Vertex(PointSize + v - 1, NormalSize + n - 1, UVSize + u - 1));
+                        in >> temp.PointIndex[i] >> div >> temp.UVIndex[i] >> div >> temp.NormalIndex[i];
+                        -- temp.PointIndex[i];
+                        -- temp.UVIndex[i];
+                        -- temp.NormalIndex[i];
                     }
-                    sizt_t VertexSize = VertexList.size();
-                    FaceList.push_back(Face(VertexSize - 3, VertexSize - 2, VertexSize - 1));
-                    index.push_back(Face.size() - 1);
+                    face.push_back(Face);
                     break;
                 case 'u':
                     in >> str;
@@ -63,7 +58,6 @@ namespace Aurora
                     break;
             }
         }
-        ObjectList.push_back(Object());
         in.close();
     }
 }

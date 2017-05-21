@@ -1,0 +1,36 @@
+{
+    "width" : 1920,
+    "height" : 1080,
+    "camera" :{
+        "position" : [2.000000, 2.000000, 2.000000],
+        "u" : [],
+        "v" : [],
+        "n" : [],
+        "fov" : 90,
+        "near" : 1,
+        "far" : 1000
+    },
+    "object" :[
+        {
+            "path" : "Object/cube.obj",
+            "position" : [0.000000, 0.000000, 0.000000],
+            "u" : [],
+            "v" : [],
+            "n" : []
+        }
+    ],
+    "light" :[
+        {
+            "type" : "directlight",
+            "position" : [0, 0, 0],
+            "direction" : [-0.267261, -0.534522, -0.801784],
+            "color" : [0.35, 0.15, 0.15]
+        },
+        {
+            "type" : "pointlight",
+            "position" : [1, 1, 1],
+            "direction" : [0, 0, 0],
+            "color" : [0.25, 0.25, 0.75]
+        }
+    ]
+}

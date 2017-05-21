@@ -1,12 +1,7 @@
 #ifndef AURORA_TEXTURE_HPP_
 #define AURORA_TEXTURE_HPP_
 
-#include "Color.hpp"
 #include "../Utility/PPM.hpp"
-
-#include <vector>
-#include <string>
-#include <stdexcept>
 
 namespace Aurora
 {
