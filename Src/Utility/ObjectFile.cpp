@@ -2,7 +2,7 @@
 
 namespace Aurora
 {
-    void ObjectFile::Load(const std::string &path, std::vector<Vector4D_T<float> &point, std::vector<Vector4D_T<float>> &normal, std::vector<Vector2D_T<float>> &uv, std::vector<Face> &face, Texture)
+    void ObjectFile::Load(const std::string &path, std::vector<Vector4D_T<float>> &point, std::vector<Vector4D_T<float>> &normal, std::vector<Vector2D_T<float>> &uv, std::vector<Face> &face, Texture &texture)
     {
         std::ifstream in(path);
         if(!in.is_open())
@@ -45,7 +45,7 @@ namespace Aurora
                         -- temp.UVIndex[i];
                         -- temp.NormalIndex[i];
                     }
-                    face.push_back(Face);
+                    face.push_back(temp);
                     break;
                 case 'u':
                     in >> str;

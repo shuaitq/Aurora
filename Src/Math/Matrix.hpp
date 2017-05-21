@@ -48,7 +48,7 @@ namespace Aurora
             return *this = operator * (matrix);
         }
 
-        friend std::ostream& operator << (std::ostream &out, const Matrix4X3_T<T> &m)
+        friend std::ostream& operator << (std::ostream &out, const Matrix4X4_T<T> &m)
         {
             out << m[0][0] << ' ' << m[0][1] << ' ' << m[0][2] << ' ' << m[0][3] << std::endl;
             out << m[1][0] << ' ' << m[1][1] << ' ' << m[1][2] << ' ' << m[1][3] << std::endl;
@@ -56,7 +56,7 @@ namespace Aurora
             out << m[3][0] << ' ' << m[3][1] << ' ' << m[3][2] << ' ' << m[3][3];
             return out;
         }
-        friend std::istream& operator >> (std::istream &in, Matrix4X3_T<T> &m)
+        friend std::istream& operator >> (std::istream &in, Matrix4X4_T<T> &m)
         {
             in >> m[0][0] >> m[0][1] >> m[0][2] >> m[0][3];
             in >> m[1][0] >> m[1][1] >> m[1][2] >> m[1][3];

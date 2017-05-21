@@ -2,22 +2,24 @@
 
 namespace Aurora
 {
-    RGB_T<float> PointLight::Sample(const Point3D_T<float> &p, const Vector3D_T<float> &n)
+    PointLight():position(0, 1), color(){}
+    RGB_T<float> PointLight::Sample(const Vector4D_T<float> &p, const Vector4D_T<float> &n)
     {
         float length2 = (p - position).Length2();
-        Vector3D_T<float> direction = Normalize(p - position);
+        Vector4D_T<float> direction = Normalize(p - position);
         float NdotD = Dot(n, direction);
         return color * std::max(0.0f, -NdotD) / length2;
     }
-    void PointLight::SetLight(const nlohmann::json &json)
+    void PointLight::Set(const nlohmann::json &json)
     {
-        const nlohmann::json &position = json["position"];
-        position.x = position[0];
-        position.y = position[1];
-        position.z = position[2];
-        const nlohmann::json &color = json["color"];
-        color.red = color[0];
-        color.green = color[1];
-        color.blue = color[2];
+        const nlohmann::json &Position = json["position"];
+        position.x = Position[0];
+        position.y = Position[1];
+        position.z = Position[2];
+        position.w = 1;
+        const nlohmann::json &Color = json["color"];
+        color.red = Color[0];
+        color.green = Color[1];
+        color.blue = Color[2];
     }
 }

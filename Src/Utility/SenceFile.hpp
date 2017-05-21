@@ -2,6 +2,11 @@
 #define AURORA_SENCE_FILE_HPP_
 
 #include "json.hpp"
+#include "../Core/Camera.hpp"
+#include "../Object/Object.hpp"
+#include "../Light/Light.hpp"
+#include "../Light/DirectLight.hpp"
+#include "../Light/PointLight.hpp"
 
 #include <fstream>
 #include <memory>

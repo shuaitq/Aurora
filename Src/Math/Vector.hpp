@@ -339,13 +339,13 @@ namespace Aurora
     template <typename T>
     Vector4D_T<T> Cross(const Vector4D_T<T> &lhs, const Vector4D_T<T> &rhs)
     {
-        return Vector3D_T<T>(lhs.y * rhs.z - lhs.z * rhs.y,
+        return Vector4D_T<T>(lhs.y * rhs.z - lhs.z * rhs.y,
                              lhs.z * rhs.x - lhs.x * rhs.z,
                              lhs.x * rhs.y - lhs.y * rhs.x,
                              0);
     }
     template <typename T>
-    T Dot(const Vector3D_T<T> &lhs, const Vector3D_T<T> &rhs)
+    T Dot(const Vector4D_T<T> &lhs, const Vector4D_T<T> &rhs)
     {
         return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z + lhs.w * rhs.w;
     }
