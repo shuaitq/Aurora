@@ -1,9 +1,10 @@
-#include "Object.hpp"
+#include "Model.hpp"
 
 namespace Aurora
 {
-    Object::Object():position(0, 1), u(0, 0), v(0, 0), n(0, 0), texture(), point(), normal(), uv(), face(){}
-    void Object::Set(const nlohmann::json &json)
+    std::vector<std::shared_ptr<Model>> ModelList;
+    Model::Model():position(0, 1), u(0, 0), v(0, 0), n(0, 0), texture(), vertex(), face(){}
+    void Model::Set(const nlohmann::json &json)
     {
         Load(json["path"]);
         const nlohmann::json &Position = json["position"];
@@ -27,9 +28,16 @@ namespace Aurora
         n.z = N[2];
         n.w = 0;
     }
-
-    void Object::Load(const std::string &path)
+    Matrix4X4_T<float> Model::ModelMatrix()
     {
-        Loader::Load(path, point, normal, uv, face, texture);
+        return Matrix4X4_T<float>(u.x, u.y, u.z, 0,
+                                  v.x, v.y, v.z, 0,
+                                  n.x, n.y, n.z, 0,
+                                  position.x, position.y, position.z, 1);
+    }
+
+    void Model::Load(const std::string &path)
+    {
+        Loader::Load(path, vertex, face, texture);
     }
 }

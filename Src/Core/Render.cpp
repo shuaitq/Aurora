@@ -4,19 +4,13 @@ namespace Aurora
 {
     Render::Render(const std::string &path)
     {
-        Loader::Load(path, sence, width, height, camera);
+        Loader::Load(path);
         screen.resize(width * height);
         depth.resize(width * height);
     }
 
-    std::vector<RGB_T<float>>& Render::Work()
+    std::vector<RGBA_T<float>>& Render::Work(const std::string &path)
     {
-        
         return screen;
-    }
-
-    void Render::ObjectToWorld()
-    {
-
     }
 }

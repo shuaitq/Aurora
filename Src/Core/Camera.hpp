@@ -8,12 +8,13 @@
 
 namespace Aurora
 {
-    int height, width;
     class Camera
     {
     public:
         Camera();
         void Set(const nlohmann::json &json);
+        Matrix4X4_T<float> ViewMatrix();
+        Matrix4X4_T<float> ProjMatrix();
 
         Vector4D_T<float> position;
         Vector4D_T<float> u, v, n;
@@ -22,7 +23,8 @@ namespace Aurora
         float aspect;
     private:
     };
-    Camera camera;
+    extern int height, width;
+    extern Camera camera;
 }
 
 #endif //AURORA_CAMERA_HPP_

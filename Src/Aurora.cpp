@@ -10,16 +10,6 @@ int main(int argc, char *argv[])
         throw std::runtime_error("Please input right path!");
     }
     Render render(argv[1]);
-    /*for(size_t i = 1; i <= 360; ++ i)
-    {
-        std::string str = "Image/";
-        char temp[10];
-        sprintf(temp,"%zu",i);
-        str += temp;
-        str += ".ppm";
-        std::cout << str << std::endl;
-        //render.Render(str);
-    }*/
-    std::cout << render << std::endl;
+    render.Work("text.ppm");
     return 0;
 }

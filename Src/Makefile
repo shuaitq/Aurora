@@ -7,9 +7,10 @@ else
 CPPFLAGS += -O2
 endif
 SRCS = Aurora.cpp \
-       Core/Camera.cpp Core/Object.cpp Core/Sence.cpp Core/Texture.cpp Core/Triangle.cpp Core/Vertex.cpp Core/Light.cpp Core/Render.cpp \
+       Core/Camera.cpp Core/Render.cpp \
        Utility/PPM.cpp Utility/ObjectFile.cpp Utility/SenceFile.cpp \
-	   Light/DirectLight.cpp Light/PointLight.cpp
+	   Light/DirectLight.cpp Light/PointLight.cpp Light/Light.cpp \
+	   Model/Model.cpp Model/Texture.cpp Model/Face.cpp Model/Vertex.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 $(PROJECT): $(OBJS)

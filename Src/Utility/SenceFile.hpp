@@ -3,7 +3,7 @@
 
 #include "json.hpp"
 #include "../Core/Camera.hpp"
-#include "../Object/Object.hpp"
+#include "../Model/Model.hpp"
 #include "../Light/Light.hpp"
 #include "../Light/DirectLight.hpp"
 #include "../Light/PointLight.hpp"

@@ -5,8 +5,6 @@
 #include "../Math/Math.hpp"
 #include "../Utility/json.hpp"
 
-#include <iostream>
-
 namespace Aurora
 {
     class Light
@@ -16,7 +14,7 @@ namespace Aurora
         virtual void Set(const nlohmann::json &json) = 0;
     private:
     };
-    std::vector<std::shared_ptr<Light>> LightList;
+    extern std::vector<std::shared_ptr<Light>> LightList;
 }
 
 #endif //AURORA_LIGHT_HPP_

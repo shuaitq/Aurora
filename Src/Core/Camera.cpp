@@ -2,6 +2,8 @@
 
 namespace Aurora
 {
+    Camera camera;
+    int width, height;
     Camera::Camera():position(0, 1), u(0, 0), v(0, 0), n(0, 0), fov(), near(), far(), aspect(){}
     void Camera::Set(const nlohmann::json &json)
     {
@@ -31,5 +33,16 @@ namespace Aurora
         fov = json["fov"];
         near = json["near"];
         far = json["far"];
+    }
+    Matrix4X4_T<float> Camera::ViewMatrix()
+    {
+        return Matrix4X4_T<float>(u.x, v.x, n.x, 0,
+                                  u.y, v.y, n.y, 0,
+                                  u.z, v.z, n.z, 0,
+                                  -Dot(position, u), -Dot(position, v), -Dot(position, n), 1);
+    }
+    Matrix4X4_T<float> Camera::ProjMatrix()
+    {
+        return Matrix4X4_T<float>();
     }
 }

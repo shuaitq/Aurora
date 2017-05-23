@@ -1,5 +1,5 @@
-#ifndef AURORA_OBJECT_HPP_
-#define AURORA_OBJECT_HPP_
+#ifndef AURORA_MODEL_HPP_
+#define AURORA_MODEL_HPP_
 
 #include "../Math/Math.hpp"
 #include "../Utility/json.hpp"
@@ -11,24 +11,23 @@
 
 namespace Aurora
 {
-    class Object
+    class Model
     {
     public:
-        Object();
+        Model();
         void Set(const nlohmann::json &json);
+        Matrix4X4_T<float> ModelMatrix();
 
         Vector4D_T<float> position;
         Vector4D_T<float> u, v, n;
         Texture texture;
-        std::vector<Vector4D_T<float>> point;
-        std::vector<Vector4D_T<float>> normal;
-        std::vector<Vector2D_T<float>> uv;
+        std::vector<Vertex> vertex;
         std::vector<Face> face;
     private:
         using Loader = ObjectFile;
         void Load(const std::string &path);
     };
-    std::vector<std::shared_ptr<Object>> ObjectList;
+    extern std::vector<std::shared_ptr<Model>> ModelList;
 };
 
-#endif // AURORA_OBJECT_HPP_
+#endif // AURORA_MODEL_HPP_

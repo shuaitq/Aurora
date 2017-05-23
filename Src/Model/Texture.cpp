@@ -2,7 +2,7 @@
 
 namespace Aurora
 {
-    Texture():pixels(), size(){}
+    Texture::Texture():pixels(), size(){}
     void Texture::Load(const std::string &path)
     {
         size_t width, height;

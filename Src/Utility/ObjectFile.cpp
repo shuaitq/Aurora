@@ -2,7 +2,7 @@
 
 namespace Aurora
 {
-    void ObjectFile::Load(const std::string &path, std::vector<Vector4D_T<float>> &point, std::vector<Vector4D_T<float>> &normal, std::vector<Vector2D_T<float>> &uv, std::vector<Face> &face, Texture &texture)
+    void ObjectFile::Load(const std::string &path, std::vector<Vertex> &vertex, std::vector<Face> &face, Texture &texture)
     {
         std::ifstream in(path);
         if(!in.is_open())
@@ -11,7 +11,9 @@ namespace Aurora
         }
         std::string str;
         float x, y, z;
-        Face temp;
+        std::vector<Vector4D_T<float>> PointList;
+        std::vector<Vector4D_T<float>> NormalList;
+        std::vector<Vector2D_T<float>> UVList;
         while(in >> str)
         {
             switch(str[0])
@@ -21,15 +23,15 @@ namespace Aurora
                     {
                         case '\0': //Vector
                             in >> x >> y >> z;
-                            point.push_back(Vector4D_T<float>(x, y, z, 1));
+                            PointList.push_back(Vector4D_T<float>(x, y, z, 1));
                             break;
                         case 't': //UV
                             in >> x >> y;
-                            uv.push_back(Vector2D_T<float>(x, y));
+                            UVList.push_back(Vector2D_T<float>(x, y));
                             break;
                         case 'n': //Normal
                             in >> x >> y >> z;
-                            normal.push_back(Vector4D_T<float>(x, y, z, 0));
+                            NormalList.push_back(Vector4D_T<float>(x, y, z, 0));
                             break;
                         default:
                             throw std::runtime_error("Error! Unexpect Value!");
@@ -40,12 +42,11 @@ namespace Aurora
                     for(size_t i = 0; i < 3; ++ i)
                     {
                         char div;
-                        in >> temp.PointIndex[i] >> div >> temp.UVIndex[i] >> div >> temp.NormalIndex[i];
-                        -- temp.PointIndex[i];
-                        -- temp.UVIndex[i];
-                        -- temp.NormalIndex[i];
+                        size_t v, u, n;
+                        in >> v >> div >> u >> div >> n;
+                        vertex.push_back(Vertex(PointList[v - 1], NormalList[n - 1], UVList[u - 1]));
                     }
-                    face.push_back(temp);
+                    face.push_back(Face(vertex.size() - 3, vertex.size() - 2, vertex.size() - 1));
                     break;
                 case 'u':
                     in >> str;

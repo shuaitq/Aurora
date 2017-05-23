@@ -33,15 +33,15 @@ namespace Aurora
 
         Matrix4X4_T<T> operator * (const Matrix4X4_T<T> &matrix) const
         {
-            Matrix4X4_T<T> m;
+            Matrix4X4_T<T> ret;
             for(size_t i = 0; i < 4; ++ i)
             {
                 for(size_t j = 0; j < 4; ++ j)
                 {
-                     m.m[i][j] = m[i][0] * matrix.m[0][j] + m[i][1] * matrix.m[1][j] + m[i][2] * matrix.m[2][j] + m[i][3] * matrix.m[3][j];
+                     ret.m[i][j] = m[i][0] * matrix.m[0][j] + m[i][1] * matrix.m[1][j] + m[i][2] * matrix.m[2][j] + m[i][3] * matrix.m[3][j];
                 }
             }
-            return m;
+            return ret;
         }
         Matrix4X4_T<T>& operator *= (const Matrix4X4_T<T> &matrix)
         {
@@ -50,18 +50,18 @@ namespace Aurora
 
         friend std::ostream& operator << (std::ostream &out, const Matrix4X4_T<T> &m)
         {
-            out << m[0][0] << ' ' << m[0][1] << ' ' << m[0][2] << ' ' << m[0][3] << std::endl;
-            out << m[1][0] << ' ' << m[1][1] << ' ' << m[1][2] << ' ' << m[1][3] << std::endl;
-            out << m[2][0] << ' ' << m[2][1] << ' ' << m[2][2] << ' ' << m[2][3] << std::endl;
-            out << m[3][0] << ' ' << m[3][1] << ' ' << m[3][2] << ' ' << m[3][3];
+            out << m.m[0][0] << ' ' << m.m[0][1] << ' ' << m.m[0][2] << ' ' << m.m[0][3] << std::endl;
+            out << m.m[1][0] << ' ' << m.m[1][1] << ' ' << m.m[1][2] << ' ' << m.m[1][3] << std::endl;
+            out << m.m[2][0] << ' ' << m.m[2][1] << ' ' << m.m[2][2] << ' ' << m.m[2][3] << std::endl;
+            out << m.m[3][0] << ' ' << m.m[3][1] << ' ' << m.m[3][2] << ' ' << m.m[3][3];
             return out;
         }
         friend std::istream& operator >> (std::istream &in, Matrix4X4_T<T> &m)
         {
-            in >> m[0][0] >> m[0][1] >> m[0][2] >> m[0][3];
-            in >> m[1][0] >> m[1][1] >> m[1][2] >> m[1][3];
-            in >> m[2][0] >> m[2][1] >> m[2][2] >> m[2][3];
-            in >> m[3][0] >> m[3][1] >> m[3][2] >> m[3][3];
+            in >> m.m[0][0] >> m.m[0][1] >> m.m[0][2] >> m.m[0][3];
+            in >> m.m[1][0] >> m.m[1][1] >> m.m[1][2] >> m.m[1][3];
+            in >> m.m[2][0] >> m.m[2][1] >> m.m[2][2] >> m.m[2][3];
+            in >> m.m[3][0] >> m.m[3][1] >> m.m[3][2] >> m.m[3][3];
             return in;
         }
 
