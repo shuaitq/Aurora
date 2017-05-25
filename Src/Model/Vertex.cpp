@@ -12,4 +12,9 @@ namespace Aurora
         uv = v.uv;
         return *this;
     }
+    Vertex& Vertex::operator * (const Matrix4X4_T<float> &m) const
+    {
+        return Vertex(po);
+    }
+    std::vector<Vertex> VertexList;
 }

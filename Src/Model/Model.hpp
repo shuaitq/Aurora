@@ -21,7 +21,6 @@ namespace Aurora
         Vector4D_T<float> position;
         Vector4D_T<float> u, v, n;
         Texture texture;
-        std::vector<Vertex> vertex;
         std::vector<Face> face;
     private:
         using Loader = ObjectFile;

@@ -3,7 +3,7 @@
 namespace Aurora
 {
     std::vector<std::shared_ptr<Model>> ModelList;
-    Model::Model():position(0, 1), u(0, 0), v(0, 0), n(0, 0), texture(), vertex(), face(){}
+    Model::Model():position(0, 1), u(0, 0), v(0, 0), n(0, 0), texture(), face(){}
     void Model::Set(const nlohmann::json &json)
     {
         Load(json["path"]);
@@ -38,6 +38,6 @@ namespace Aurora
 
     void Model::Load(const std::string &path)
     {
-        Loader::Load(path, vertex, face, texture);
+        Loader::Load(path, face, texture);
     }
 }

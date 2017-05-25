@@ -7,6 +7,7 @@
 
 #include <string>
 #include <vector>
+#include <algorithm>
 
 namespace Aurora
 {
@@ -15,10 +16,13 @@ namespace Aurora
     public:
         Render(const std::string &path);
 
-        std::vector<RGBA_T<float>>& Work(const std::string &path);
+        std::vector<RGB_T<float>>& Work(const std::string &path);
     private:
+        bool IsBackFace(const Vertex &v1, const Vertex &v2, const Vertex &v3);
+        void FillFace(const Vertex &v1, const Vertex &v2, const Vertex &v3, const Texture &texture);
+
         using Loader = SenceFile;
-        std::vector<RGBA_T<float>> screen;
+        std::vector<RGB_T<float>> screen;
         std::vector<float> depth;
     };
 }

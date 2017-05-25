@@ -14,7 +14,7 @@ namespace Aurora
         size = height;
     }
     // u = [0, 1) v = [0, 1)
-    RGBA_T<float> Texture::Sample(float u, float v) const
+    RGB_T<float> Texture::Sample(float u, float v) const
     {
         u = std::max(0.0f, std::min(1.0f, u));
         v = std::max(0.0f, std::min(1.0f, v));

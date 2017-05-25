@@ -11,8 +11,9 @@ namespace Aurora
         PointLight();
         RGB_T<float> Sample(const Vector4D_T<float> &p, const Vector4D_T<float> &n);
         void Set(const nlohmann::json &json);
+        void Transform(const Matrix4X4_T<float> &m);
     private:
-        Vector4D_T<float> position;
+        Vector4D_T<float> position, VP;
         RGB_T<float> color;
     };
 }

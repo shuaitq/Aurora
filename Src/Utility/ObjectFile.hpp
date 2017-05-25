@@ -14,7 +14,7 @@ namespace Aurora
     class ObjectFile
     {
     public:
-        static void Load(const std::string &path, std::vector<Vertex> &vertex, std::vector<Face> &face, Texture &texture);
+        static void Load(const std::string &path, std::vector<Face> &face, Texture &texture);
     };
 }
 

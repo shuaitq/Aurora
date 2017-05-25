@@ -13,9 +13,9 @@ namespace Aurora
         Texture();
         void Load(const std::string &path);
         // u = [0, 1) v = [0, 1)
-        RGBA_T<float> Sample(float u, float v) const;
+        RGB_T<float> Sample(float u, float v) const;
 
-        std::vector<RGBA_T<float>> pixels;
+        std::vector<RGB_T<float>> pixels;
         size_t size;
     private:
         using UV = PPM;

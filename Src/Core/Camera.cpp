@@ -43,6 +43,17 @@ namespace Aurora
     }
     Matrix4X4_T<float> Camera::ProjMatrix()
     {
-        return Matrix4X4_T<float>();
+        float cot = 1 / tan(fov * 0.5f);
+        return Matrix4X4_T<float>(cot / aspect, 0, 0, 0,
+                                  0, cot, 0, 0,
+                                  0, 0, far /(far - near), 0,
+                                  0, 0, far * near / (near - far), 0);
+    }
+    Matrix4X4_T<float> Camera::WindMatrix()
+    {
+        return Matrix4X4_T<float>(width / 2, 0, 0, 0,
+                                  0, -height / 2, 0, 0,
+                                  0, 0, 1, 0,
+                                  width / 2, height / 2, 0, 1);
     }
 }
