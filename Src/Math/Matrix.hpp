@@ -23,7 +23,7 @@ namespace Aurora
                     m30(m30_), m31(m31_), m32(m32_), m33(m33_){}
         Matrix4X4_T(const Matrix4X4_T<T> &matrix)
         {
-            memcpy(this -> m, matrix.m, sizeof(m));
+            memcpy(m, matrix.m, sizeof(m));
         }
         Matrix4X4_T<T>& operator = (const Matrix4X4_T<T> &matrix)
         {

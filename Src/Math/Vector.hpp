@@ -106,7 +106,7 @@ namespace Aurora
     template <typename T>
     Vector2D_T<T> Normalize(const Vector2D_T<T> &v)
     {
-        return v / v.Length2();
+        return v / v.Length();
     }
     template <typename T>
     T Dot(const Vector2D_T<T> &lhs, const Vector2D_T<T> &rhs)
@@ -229,11 +229,6 @@ namespace Aurora
     {
         return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z;
     }
-    template <typename T>
-    Vector3D_T<T> CalcNormal(const Vector3D_T<T> &v1, const Vector3D_T<T> &v2, const Vector3D_T<T> &v3)
-    {
-        return Cross(v3 - v2, v2 - v1);
-    }
 
     template <typename T>
     class Vector4D_T
@@ -299,16 +294,16 @@ namespace Aurora
 
         Vector4D_T<T> operator * (const Matrix4X4_T<float> &m) const
         {
-            Vector4D_T<float> v;
-            v.x = x * m.m[0][0] + y * m.m[0][1] + z * m.m[0][2] + w * m.m[0][3];
-            v.y = x * m.m[1][0] + y * m.m[1][1] + z * m.m[1][2] + w * m.m[1][3];
-            v.z = x * m.m[2][0] + y * m.m[2][1] + z * m.m[2][2] + w * m.m[2][3];
-            v.w = x * m.m[3][0] + y * m.m[3][1] + z * m.m[3][2] + w * m.m[3][3];
+            Vector4D_T<float> v(0, 0);
+            v.x = x * m.m[0][0] + y * m.m[1][0] + z * m.m[2][0] + w * m.m[3][0];
+            v.y = x * m.m[0][1] + y * m.m[1][1] + z * m.m[2][1] + w * m.m[3][1];
+            v.z = x * m.m[0][2] + y * m.m[1][2] + z * m.m[2][2] + w * m.m[3][2];
+            v.w = x * m.m[0][3] + y * m.m[1][3] + z * m.m[2][3] + w * m.m[3][3];
             return v;
         }
         Vector4D_T<T>& operator *= (const Matrix4X4_T<float> &m)
         {
-            return operator * (m);
+            return *this = operator * (m);
         }
 
         Vector4D_T<T> operator - () const
@@ -367,11 +362,6 @@ namespace Aurora
     T Dot(const Vector4D_T<T> &lhs, const Vector4D_T<T> &rhs)
     {
         return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z + lhs.w * rhs.w;
-    }
-    template <typename T>
-    Vector4D_T<T> CalcNormal(const Vector4D_T<T> &v1, const Vector4D_T<T> &v2, const Vector4D_T<T> &v3)
-    {
-        return Cross(v3 - v2, v2 - v1);
     }
 }
 

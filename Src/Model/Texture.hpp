@@ -3,7 +3,7 @@
 
 #include "../Utility/PPM.hpp"
 
-#include <algorithm>
+#include <cmath>
 
 namespace Aurora
 {
@@ -12,13 +12,13 @@ namespace Aurora
     public:
         Texture();
         void Load(const std::string &path);
-        // u = [0, 1) v = [0, 1)
         RGB_T<float> Sample(float u, float v) const;
+
+    private:
+        using UV = PPM;
 
         std::vector<RGB_T<float>> pixels;
         size_t size;
-    private:
-        using UV = PPM;
     };
 }
 

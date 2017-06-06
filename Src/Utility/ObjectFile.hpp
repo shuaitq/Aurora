@@ -3,18 +3,18 @@
 
 #include "../Math/Math.hpp"
 #include "../Model/Texture.hpp"
-#include "../Model/Face.hpp"
 #include "../Model/Vertex.hpp"
 
 #include <vector>
 #include <string>
+#include <array>
 
 namespace Aurora
 {
     class ObjectFile
     {
     public:
-        static void Load(const std::string &path, std::vector<Face> &face, Texture &texture);
+        static void Load(const std::string &path, std::vector<std::array<size_t, 3>> &face, Texture &texture);
     };
 }
 

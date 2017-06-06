@@ -2,7 +2,7 @@
 
 namespace Aurora
 {
-    DirectLight::DirectLight():direction(0, 0), color(){}
+    DirectLight::DirectLight():direction(0, 0), VD(0, 0), color(){}
     RGB_T<float> DirectLight::Sample(const Vector4D_T<float> &p, const Vector4D_T<float> &n)
     {
         float NdotD = Dot(n, VD);

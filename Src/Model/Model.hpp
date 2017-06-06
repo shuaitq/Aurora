@@ -4,10 +4,10 @@
 #include "../Math/Math.hpp"
 #include "../Utility/json.hpp"
 #include "../Utility/ObjectFile.hpp"
-#include "Face.hpp"
 #include "Texture.hpp"
 
 #include <vector>
+#include <array>
 
 namespace Aurora
 {
@@ -21,7 +21,7 @@ namespace Aurora
         Vector4D_T<float> position;
         Vector4D_T<float> u, v, n;
         Texture texture;
-        std::vector<Face> face;
+        std::vector<std::array<size_t, 3>> face;
     private:
         using Loader = ObjectFile;
         void Load(const std::string &path);

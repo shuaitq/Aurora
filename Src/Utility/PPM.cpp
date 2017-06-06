@@ -17,7 +17,7 @@ namespace Aurora
         for(size_t i = 0; i < height * width; ++ i)
         {
             in >> red >> green >> blue;
-            ppm.push_back(RGBA_T<float>(red / 255.0, green / 255.0, blue / 255.0));
+            ppm.push_back(RGB_T<float>(red / 255.0, green / 255.0, blue / 255.0));
         }
         in.close();
     }

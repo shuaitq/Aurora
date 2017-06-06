@@ -10,6 +10,6 @@ int main(int argc, char *argv[])
         throw std::runtime_error("Please input right path!");
     }
     Render render(argv[1]);
-    render.Work("text.ppm");
+    render.Work("output.ppm");
     return 0;
 }

@@ -2,7 +2,7 @@
 
 namespace Aurora
 {
-    void ObjectFile::Load(const std::string &path, std::vector<Face> &face, Texture &texture)
+    void ObjectFile::Load(const std::string &path, std::vector<std::array<size_t, 3>> &face, Texture &texture)
     {
         std::ifstream in(path);
         if(!in.is_open())
@@ -46,7 +46,7 @@ namespace Aurora
                         in >> v >> div >> u >> div >> n;
                         VertexList.push_back(Vertex(PointList[v - 1], NormalList[n - 1], UVList[u - 1]));
                     }
-                    face.push_back(Face(VertexList.size() - 3, VertexList.size() - 2, VertexList.size() - 1));
+                    face.push_back({VertexList.size() - 3, VertexList.size() - 2, VertexList.size() - 1});
                     break;
                 case 'u':
                     in >> str;

@@ -15,7 +15,6 @@ namespace Aurora
         void Set(const nlohmann::json &json);
         Matrix4X4_T<float> ViewMatrix();
         Matrix4X4_T<float> ProjMatrix();
-        Matrix4X4_T<float> WindMatrix();
 
         Vector4D_T<float> position;
         Vector4D_T<float> u, v, n;

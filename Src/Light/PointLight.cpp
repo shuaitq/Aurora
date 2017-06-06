@@ -2,7 +2,7 @@
 
 namespace Aurora
 {
-    PointLight::PointLight():position(0, 1), color(){}
+    PointLight::PointLight():position(0, 1), VP(0, 1), color(){}
     RGB_T<float> PointLight::Sample(const Vector4D_T<float> &p, const Vector4D_T<float> &n)
     {
         float length2 = (p - VP).Length2();
