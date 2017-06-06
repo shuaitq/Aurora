@@ -12,9 +12,7 @@ namespace Aurora
     void Render::Work(const std::string &path)
     {
         Matrix4X4_T<float> View = camera.ViewMatrix();
-        std::cout << View << std::endl;
         Matrix4X4_T<float> Proj = camera.ProjMatrix();
-        std::cout << Proj << std::endl;
         Vertex RenderVertex[3];
 
         std::fill(screen.begin(), screen.end(), RGB_T<float>());
@@ -59,7 +57,6 @@ namespace Aurora
 
                     RenderVertex[i].uv /= RenderVertex[i].point.z;
                     RenderVertex[i].normal /= RenderVertex[i].point.z;
-                    std::cout << RenderVertex[i].point << std::endl;
                 }
                 if(!flag)
                 {
@@ -105,9 +102,10 @@ namespace Aurora
                     {
                         depth[y * width + x] = oneofz;
                         Vector2D_T<float> uv = v0.uv * f0 + v1.uv * f1 + v2.uv * f2;
+                        Vector4D_T<float> normal = v0.normal * f0 + v1.normal * f1 + v2.normal * f2;
                         uv /= oneofz;
+                        normal /= oneofz;
                         screen[y * width + x] = texture.Sample(uv.x, uv.y);
-                        std::cout << screen[y * width + x] << std::endl;
                     }
                 }
             }

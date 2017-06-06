@@ -18,7 +18,6 @@ namespace Aurora
         // (-inf, +inf)
         u *= size;
         v *= size;
-        printf("%f %f\n", u, v);
         // (-inf * size, +inf * size)
         auto f = [&](float a, float b)
         {
