@@ -64,6 +64,21 @@ namespace Aurora
                 }
             }
         }
+        auto ACESToneMapping = [](float x)
+        {
+            x = (x * (2.51f * x + 0.03f)) / (x * (2.43f * x + 0.59f) + 0.14f);
+            x = std::max(0.0f, std::min(1.0f, x));
+            return x;
+        };
+        for(int x = 0; x < width; ++ x)
+        {
+            for(int y = 0; y < height; ++ y)
+            {
+                screen[y * width + x].red = ACESToneMapping(screen[y * width + x].red);
+                screen[y * width + x].green = ACESToneMapping(screen[y * width + x].green);
+                screen[y * width + x].blue = ACESToneMapping(screen[y * width + x].blue);
+            }
+        }
         Saver::Save(path, width, height, screen);
     }
 
