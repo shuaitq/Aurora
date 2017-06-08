@@ -4,8 +4,6 @@
 #include "../Math/Math.hpp"
 #include "../Utility/json.hpp"
 
-#include <iostream>
-
 namespace Aurora
 {
     class Camera

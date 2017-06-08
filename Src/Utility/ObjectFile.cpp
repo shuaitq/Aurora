@@ -41,10 +41,37 @@ namespace Aurora
                 case 'f':
                     for(size_t i = 0; i < 3; ++ i)
                     {
-                        char div;
-                        size_t v, u, n;
-                        in >> v >> div >> u >> div >> n;
-                        VertexList.push_back(Vertex(PointList[v - 1], NormalList[n - 1], UVList[u - 1]));
+                        size_t v = 0, u = 0, n = 0, pos = 0;
+                        std::string temp;
+                        in >> temp;
+                        while(temp[pos] != '/' && pos < temp.length())
+                        {
+                            v *= 10;
+                            v += temp[pos] - '0';
+                            ++ pos;
+                        }
+                        ++ pos;
+                        while(temp[pos] != '/' && pos < temp.length())
+                        {
+                            u *= 10;
+                            u += temp[pos] - '0';
+                            ++ pos;
+                        }
+                        ++ pos;
+                        while(pos < temp.length())
+                        {
+                            n *= 10;
+                            n += temp[pos] - '0';
+                            ++ pos;
+                        }
+                        if(u == 0)
+                        {
+                            VertexList.push_back(Vertex(PointList[v - 1], NormalList[n - 1], Vector2D_T<float>()));
+                        }
+                        else
+                        {
+                            VertexList.push_back(Vertex(PointList[v - 1], NormalList[n - 1], UVList[u - 1]));
+                        }
                     }
                     face.push_back({VertexList.size() - 3, VertexList.size() - 2, VertexList.size() - 1});
                     break;
@@ -55,7 +82,7 @@ namespace Aurora
                 case '#':
                     break;
                 default:
-                    throw std::runtime_error("Error! Unexpect Value!");
+                    throw std::runtime_error("Error! Unexpect Value!" + str);
                     break;
             }
         }

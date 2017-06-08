@@ -13,15 +13,5 @@ namespace Aurora
         return *this;
     }
 
-    Vertex Vertex::operator * (const Matrix4X4_T<float> &m) const
-    {
-        return Vertex(point * m, normal * m, uv);
-    }
-    Vertex& Vertex::operator *= (const Matrix4X4_T<float> &m)
-    {
-        point *= m;
-        normal *= m;
-        return *this;
-    }
     std::vector<Vertex> VertexList;
 }

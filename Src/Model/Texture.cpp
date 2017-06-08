@@ -15,6 +15,10 @@ namespace Aurora
     }
     RGB_T<float> Texture::Sample(float u, float v) const
     {
+        if(pixels.empty())
+        {
+            return RGB_T<float>(0.9f);
+        }
         // (-inf, +inf)
         u *= size;
         v *= size;

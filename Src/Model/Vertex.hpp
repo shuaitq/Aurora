@@ -15,9 +15,6 @@ namespace Aurora
         Vertex(const Vertex &v);
         Vertex& operator = (const Vertex &v);
 
-        Vertex operator * (const Matrix4X4_T<float> &m) const;
-        Vertex& operator *= (const Matrix4X4_T<float> &m);
-
         Vector4D_T<float> point;
         Vector4D_T<float> normal;
         Vector2D_T<float> uv;
