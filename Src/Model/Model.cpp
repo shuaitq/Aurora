@@ -28,12 +28,12 @@ namespace Aurora
         n.z = N[2];
         n.w = 0;
     }
-    Matrix4X4_T<float> Model::ModelMatrix()
+    Matrix4X4_T<double> Model::ModelMatrix()
     {
-        return Matrix4X4_T<float>(u.x, u.y, u.z, 0,
-                                  v.x, v.y, v.z, 0,
-                                  n.x, n.y, n.z, 0,
-                                  position.x, position.y, position.z, 1);
+        return Matrix4X4_T<double>(u.x, u.y, u.z, 0,
+                                   v.x, v.y, v.z, 0,
+                                   n.x, n.y, n.z, 0,
+                                   position.x, position.y, position.z, 1);
     }
 
     void Model::Load(const std::string &path)

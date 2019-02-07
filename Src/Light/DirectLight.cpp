@@ -3,10 +3,10 @@
 namespace Aurora
 {
     DirectLight::DirectLight():direction(0, 0), VD(0, 0), color(){}
-    RGB_T<float> DirectLight::Sample(const Vector4D_T<float> &p, const Vector4D_T<float> &n)
+    RGB_T<double> DirectLight::Sample(const Vector4D_T<double> &p, const Vector4D_T<double> &n)
     {
-        float NdotD = Dot(n, VD);
-        return color * std::max(0.0f, -NdotD);
+        double NdotD = Dot(n, VD);
+        return color * std::max(0.0, -NdotD);
     }
     void DirectLight::Set(const nlohmann::json &json)
     {
@@ -20,7 +20,7 @@ namespace Aurora
         color.green = Color[1];
         color.blue = Color[2];
     }
-    void DirectLight::Transform(const Matrix4X4_T<float> &m)
+    void DirectLight::Transform(const Matrix4X4_T<double> &m)
     {
         VD = direction * m;
     }

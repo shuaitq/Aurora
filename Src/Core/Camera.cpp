@@ -7,7 +7,7 @@ namespace Aurora
     Camera::Camera():position(0, 1), u(0, 0), v(0, 0), n(0, 0), fov(), near(), far(), aspect(){}
     void Camera::Set(const nlohmann::json &json)
     {
-        aspect = static_cast<float>(width) / height;
+        aspect = static_cast<double>(width) / height;
 
         const nlohmann::json &Position = json["position"];
         position.x = Position[0];
@@ -32,23 +32,23 @@ namespace Aurora
 
         fov = json["fov"];
         fov *= M_PI;
-        fov /= 180.0f;
+        fov /= 180.0;
         near = json["near"];
         far = json["far"];
     }
-    Matrix4X4_T<float> Camera::ViewMatrix()
+    Matrix4X4_T<double> Camera::ViewMatrix()
     {
-        return Matrix4X4_T<float>(u.x, v.x, n.x, 0,
-                                  u.y, v.y, n.y, 0,
-                                  u.z, v.z, n.z, 0,
-                                  -Dot(position, u), -Dot(position, v), -Dot(position, n), 1);
+        return Matrix4X4_T<double>(u.x, v.x, n.x, 0,
+                                   u.y, v.y, n.y, 0,
+                                   u.z, v.z, n.z, 0,
+                                   -Dot(position, u), -Dot(position, v), -Dot(position, n), 1);
     }
-    Matrix4X4_T<float> Camera::ProjMatrix()
+    Matrix4X4_T<double> Camera::ProjMatrix()
     {
-        float cot = 1 / tan(fov * 0.5f);
-        return Matrix4X4_T<float>(cot / aspect, 0, 0, 0,
-                                  0, cot, 0, 0,
-                                  0, 0, far /(far - near), 1,
-                                  0, 0, far * near / (near - far), 0);
+        double cot = 1 / tan(fov * 0.5);
+        return Matrix4X4_T<double>(cot / aspect, 0, 0, 0,
+                                   0, cot, 0, 0,
+                                   0, 0, far /(far - near), 1,
+                                   0, 0, far * near / (near - far), 0);
     }
 }

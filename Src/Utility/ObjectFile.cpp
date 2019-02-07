@@ -10,10 +10,10 @@ namespace Aurora
             throw std::runtime_error("Object " + path + " doesn't exist!");
         }
         std::string str;
-        float x, y, z;
-        std::vector<Vector4D_T<float>> PointList;
-        std::vector<Vector4D_T<float>> NormalList;
-        std::vector<Vector2D_T<float>> UVList;
+        double x, y, z;
+        std::vector<Vector4D_T<double>> PointList;
+        std::vector<Vector4D_T<double>> NormalList;
+        std::vector<Vector2D_T<double>> UVList;
         while(in >> str)
         {
             switch(str[0])
@@ -23,15 +23,15 @@ namespace Aurora
                     {
                         case '\0': //Vector
                             in >> x >> y >> z;
-                            PointList.push_back(Vector4D_T<float>(x, y, z, 1));
+                            PointList.push_back(Vector4D_T<double>(x, y, z, 1));
                             break;
                         case 't': //UV
                             in >> x >> y;
-                            UVList.push_back(Vector2D_T<float>(x, y));
+                            UVList.push_back(Vector2D_T<double>(x, y));
                             break;
                         case 'n': //Normal
                             in >> x >> y >> z;
-                            NormalList.push_back(Vector4D_T<float>(x, y, z, 0));
+                            NormalList.push_back(Vector4D_T<double>(x, y, z, 0));
                             break;
                         default:
                             throw std::runtime_error("Error! Unexpect Value!");
@@ -66,7 +66,7 @@ namespace Aurora
                         }
                         if(u == 0)
                         {
-                            VertexList.push_back(Vertex(PointList[v - 1], NormalList[n - 1], Vector2D_T<float>()));
+                            VertexList.push_back(Vertex(PointList[v - 1], NormalList[n - 1], Vector2D_T<double>()));
                         }
                         else
                         {

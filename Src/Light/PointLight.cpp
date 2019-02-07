@@ -3,12 +3,12 @@
 namespace Aurora
 {
     PointLight::PointLight():position(0, 1), VP(0, 1), color(){}
-    RGB_T<float> PointLight::Sample(const Vector4D_T<float> &p, const Vector4D_T<float> &n)
+    RGB_T<double> PointLight::Sample(const Vector4D_T<double> &p, const Vector4D_T<double> &n)
     {
-        float length2 = (p - VP).Length2();
-        Vector4D_T<float> direction = Normalize(p - VP);
-        float NdotD = Dot(n, direction);
-        return color * std::max(0.0f, -NdotD) / length2;
+        double length2 = (p - VP).Length2();
+        Vector4D_T<double> direction = Normalize(p - VP);
+        double NdotD = Dot(n, direction);
+        return color * std::max(0.0, -NdotD) / length2;
     }
     void PointLight::Set(const nlohmann::json &json)
     {
@@ -22,7 +22,7 @@ namespace Aurora
         color.green = Color[1];
         color.blue = Color[2];
     }
-    void PointLight::Transform(const Matrix4X4_T<float> &m)
+    void PointLight::Transform(const Matrix4X4_T<double> &m)
     {
         VP = position * m;
     }

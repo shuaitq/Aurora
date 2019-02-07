@@ -11,14 +11,14 @@ namespace Aurora
     public:
         Camera();
         void Set(const nlohmann::json &json);
-        Matrix4X4_T<float> ViewMatrix();
-        Matrix4X4_T<float> ProjMatrix();
+        Matrix4X4_T<double> ViewMatrix();
+        Matrix4X4_T<double> ProjMatrix();
 
-        Vector4D_T<float> position;
-        Vector4D_T<float> u, v, n;
-        float fov;
-        float near, far;
-        float aspect;
+        Vector4D_T<double> position;
+        Vector4D_T<double> u, v, n;
+        double fov;
+        double near, far;
+        double aspect;
     private:
     };
     extern int height, width;

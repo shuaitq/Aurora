@@ -12,12 +12,12 @@ namespace Aurora
     public:
         Texture();
         void Load(const std::string &path);
-        RGB_T<float> Sample(float u, float v) const;
+        RGB_T<double> Sample(double u, double v) const;
 
     private:
         using UV = PPM;
 
-        std::vector<RGB_T<float>> pixels;
+        std::vector<RGB_T<double>> pixels;
         size_t size;
     };
 }

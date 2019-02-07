@@ -2,7 +2,7 @@
 
 namespace Aurora
 {
-    void PPM::Load(const std::string &path, size_t &width, size_t &height, std::vector<RGB_T<float>> &ppm)
+    void PPM::Load(const std::string &path, size_t &width, size_t &height, std::vector<RGB_T<double>> &ppm)
     {
         std::ifstream in(path);
         if(!in.is_open())
@@ -17,11 +17,11 @@ namespace Aurora
         for(size_t i = 0; i < height * width; ++ i)
         {
             in >> red >> green >> blue;
-            ppm.push_back(RGB_T<float>(red / 255.0, green / 255.0, blue / 255.0));
+            ppm.push_back(RGB_T<double>(red / 255.0, green / 255.0, blue / 255.0));
         }
         in.close();
     }
-    void PPM::Save(const std::string &path, const size_t width, const size_t height, const std::vector<RGB_T<float>> &ppm)
+    void PPM::Save(const std::string &path, const size_t width, const size_t height, const std::vector<RGB_T<double>> &ppm)
     {
         std::ofstream in(path);
         if(!in.is_open())

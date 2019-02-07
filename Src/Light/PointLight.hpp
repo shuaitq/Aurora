@@ -9,12 +9,12 @@ namespace Aurora
     {
     public:
         PointLight();
-        RGB_T<float> Sample(const Vector4D_T<float> &p, const Vector4D_T<float> &n);
+        RGB_T<double> Sample(const Vector4D_T<double> &p, const Vector4D_T<double> &n);
         void Set(const nlohmann::json &json);
-        void Transform(const Matrix4X4_T<float> &m);
+        void Transform(const Matrix4X4_T<double> &m);
     private:
-        Vector4D_T<float> position, VP;
-        RGB_T<float> color;
+        Vector4D_T<double> position, VP;
+        RGB_T<double> color;
     };
 }
 

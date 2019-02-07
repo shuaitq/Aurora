@@ -16,10 +16,10 @@ namespace Aurora
     public:
         Model();
         void Set(const nlohmann::json &json);
-        Matrix4X4_T<float> ModelMatrix();
+        Matrix4X4_T<double> ModelMatrix();
 
-        Vector4D_T<float> position;
-        Vector4D_T<float> u, v, n;
+        Vector4D_T<double> position;
+        Vector4D_T<double> u, v, n;
         Texture texture;
         std::vector<std::array<size_t, 3>> face;
     private:

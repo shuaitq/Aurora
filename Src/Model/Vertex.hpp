@@ -11,13 +11,13 @@ namespace Aurora
     {
     public:
         Vertex();
-        Vertex(const Vector4D_T<float> &p, const Vector4D_T<float> &n, const Vector2D_T<float> &u);
+        Vertex(const Vector4D_T<double> &p, const Vector4D_T<double> &n, const Vector2D_T<double> &u);
         Vertex(const Vertex &v);
         Vertex& operator = (const Vertex &v);
 
-        Vector4D_T<float> point;
-        Vector4D_T<float> normal;
-        Vector2D_T<float> uv;
+        Vector4D_T<double> point;
+        Vector4D_T<double> normal;
+        Vector2D_T<double> uv;
     };
     extern std::vector<Vertex> VertexList;
 };

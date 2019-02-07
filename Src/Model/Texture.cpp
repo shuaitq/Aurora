@@ -13,28 +13,28 @@ namespace Aurora
         }
         size = height;
     }
-    RGB_T<float> Texture::Sample(float u, float v) const
+    RGB_T<double> Texture::Sample(double u, double v) const
     {
         if(pixels.empty())
         {
-            return RGB_T<float>(0.9f);
+            return RGB_T<double>(0.9);
         }
         // (-inf, +inf)
         u *= size;
         v *= size;
         // (-inf * size, +inf * size)
-        auto f = [&](float a, float b)
+        auto f = [&](double a, double b)
         {
             int x = floor(u + a);
             int y = floor(v + b);
             x = ((x % size) + size) % size;
             y = ((y % size) + size) % size;
-            return pixels[size * y + x] * fabs((u + a) - floor(u + 0.5f)) * fabs((v + b) - floor(v + 0.5f));
+            return pixels[size * y + x] * fabs((u + a) - floor(u + 0.5)) * fabs((v + b) - floor(v + 0.5));
         };
-        RGB_T<float> ret = f(0.5f, 0.5f);
-        ret += f(0.5f, -0.5f);
-        ret += f(-0.5f, 0.5f);
-        ret += f(-0.5f, -0.5f);
+        RGB_T<double> ret = f(0.5, 0.5);
+        ret += f(0.5, -0.5);
+        ret += f(-0.5, 0.5);
+        ret += f(-0.5, -0.5);
         return ret;
     }
 }

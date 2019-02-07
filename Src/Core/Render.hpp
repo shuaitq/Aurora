@@ -25,19 +25,19 @@ namespace Aurora
         public:
             RenderVertex();
 
-            Vector4D_T<float> point;
-            Vector4D_T<float> view;
-            Vector4D_T<float> normal;
-            Vector2D_T<float> uv;
+            Vector4D_T<double> point;
+            Vector4D_T<double> view;
+            Vector4D_T<double> normal;
+            Vector2D_T<double> uv;
         };
 
-        bool IsBackFace(const Vector4D_T<float> &v1, const Vector4D_T<float> &v2, const Vector4D_T<float> &v3);
+        bool IsBackFace(const Vector4D_T<double> &v1, const Vector4D_T<double> &v2, const Vector4D_T<double> &v3);
         void FillFace(const RenderVertex &v1, const RenderVertex &v2, const RenderVertex &v3, const Texture &texture);
 
         using Loader = SenceFile;
         using Saver = PPM;
-        std::vector<RGB_T<float>> screen;
-        std::vector<float> depth;
+        std::vector<RGB_T<double>> screen;
+        std::vector<double> depth;
     };
 }
 
