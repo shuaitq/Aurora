@@ -13,7 +13,7 @@ namespace Aurora
 
         if(!in.is_open())
         {
-            throw std::runtime_error("Object " + path + " doesn't exist!");
+            throw std::runtime_error("OBJ File " + path + " can't open!");
         }
         
         std::string str;
@@ -48,28 +48,30 @@ namespace Aurora
                 case 'f':
                     for(size_t i = 0; i < 3; ++ i)
                     {
-                        size_t v = 0, u = 0, n = 0, pos = 0;
+                        size_t v = 0, u = 0, n = 0;
                         std::string temp;
                         in >> temp;
-                        while(temp[pos] != '/' && pos < temp.length())
+
+                        auto it = temp.cbegin();
+                        while(*it != '/' && it != temp.cend())
                         {
                             v *= 10;
-                            v += temp[pos] - '0';
-                            ++ pos;
+                            v += *it - '0';
+                            ++ it;
                         }
-                        ++ pos;
-                        while(temp[pos] != '/' && pos < temp.length())
+                        ++ it;
+                        while(*it != '/' && it != temp.cend())
                         {
                             u *= 10;
-                            u += temp[pos] - '0';
-                            ++ pos;
+                            u += *it - '0';
+                            ++ it;
                         }
-                        ++ pos;
-                        while(pos < temp.length())
+                        ++ it;
+                        while(it != temp.cend())
                         {
                             n *= 10;
-                            n += temp[pos] - '0';
-                            ++ pos;
+                            n += *it - '0';
+                            ++ it;
                         }
                         if(u == 0)
                         {
