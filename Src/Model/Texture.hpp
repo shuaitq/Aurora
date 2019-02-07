@@ -1,9 +1,10 @@
 #ifndef AURORA_TEXTURE_HPP_
 #define AURORA_TEXTURE_HPP_
 
-#include "../Utility/PPM.hpp"
+#include "../Core/Color.hpp"
 
-#include <cmath>
+#include <string>
+#include <vector>
 
 namespace Aurora
 {
@@ -15,8 +16,6 @@ namespace Aurora
         RGB_T<double> Sample(double u, double v) const;
 
     private:
-        using UV = PPM;
-
         std::vector<RGB_T<double>> pixels;
         size_t size;
     };

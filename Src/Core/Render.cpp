@@ -1,10 +1,20 @@
 #include "Render.hpp"
 
+#include "../Utility/SenceFile.hpp"
+#include "../Utility/PPM.hpp"
+#include "../Light/Light.hpp"
+#include "../Model/Model.hpp"
+#include "../Model/Vertex.hpp"
+#include "Camera.hpp"
+
+#include <algorithm>
+#include <array>
+
 namespace Aurora
 {
     Render::Render(const std::string &path)
     {
-        Loader::Load(path);
+        SenceFile::Load(path);
         screen.resize(width * height);
         depth.resize(width * height);
     }
@@ -83,7 +93,7 @@ namespace Aurora
             }
         }
 
-        Saver::Save(path, width, height, screen);
+        PPM::Save(path, width, height, screen);
     }
 
     bool Render::IsBackFace(const Vector4D_T<double> &v0, const Vector4D_T<double> &v1, const Vector4D_T<double> &v2)

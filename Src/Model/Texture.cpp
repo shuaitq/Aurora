@@ -1,12 +1,16 @@
 #include "Texture.hpp"
 
+#include "../Utility/PPM.hpp"
+
+#include <cmath>
+
 namespace Aurora
 {
     Texture::Texture():pixels(), size(){}
     void Texture::Load(const std::string &path)
     {
         size_t width, height;
-        UV::Load(path, width, height, pixels);
+        PPM::Load(path, width, height, pixels);
         if(width != height)
         {
             throw std::runtime_error("Texture width not equals to height");

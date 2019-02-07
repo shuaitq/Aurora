@@ -3,11 +3,8 @@
 
 #include "../Core/Color.hpp"
 
-#include <string>
 #include <vector>
-#include <fstream>
-#include <limits>
-#include <stdexcept>
+#include <string>
 
 namespace Aurora
 {

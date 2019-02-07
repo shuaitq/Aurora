@@ -1,5 +1,7 @@
 #include "Model.hpp"
 
+#include "../Utility/ObjectFile.hpp"
+
 namespace Aurora
 {
     std::vector<std::shared_ptr<Model>> ModelList;
@@ -38,6 +40,6 @@ namespace Aurora
 
     void Model::Load(const std::string &path)
     {
-        Loader::Load(path, face, texture);
+        ObjectFile::Load(path, face, texture);
     }
 }

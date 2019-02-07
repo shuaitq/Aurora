@@ -1,5 +1,15 @@
 #include "SenceFile.hpp"
 
+#include "json.hpp"
+#include "../Core/Camera.hpp"
+#include "../Model/Model.hpp"
+#include "../Light/Light.hpp"
+#include "../Light/DirectLight.hpp"
+#include "../Light/PointLight.hpp"
+
+#include <fstream>
+#include <memory>
+
 namespace Aurora
 {
     void SenceFile::Load(const std::string &path)

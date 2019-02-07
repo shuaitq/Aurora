@@ -1,9 +1,7 @@
 #ifndef AURORA_OBJECT_FILE_HPP_
 #define AURORA_OBJECT_FILE_HPP_
 
-#include "../Math/Math.hpp"
 #include "../Model/Texture.hpp"
-#include "../Model/Vertex.hpp"
 
 #include <vector>
 #include <string>

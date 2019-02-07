@@ -1,14 +1,21 @@
 #include "ObjectFile.hpp"
 
+#include "../Model/Vertex.hpp"
+#include "../Math/Math.hpp"
+
+#include <fstream>
+
 namespace Aurora
 {
     void ObjectFile::Load(const std::string &path, std::vector<std::array<size_t, 3>> &face, Texture &texture)
     {
         std::ifstream in(path);
+
         if(!in.is_open())
         {
             throw std::runtime_error("Object " + path + " doesn't exist!");
         }
+        
         std::string str;
         double x, y, z;
         std::vector<Vector4D_T<double>> PointList;

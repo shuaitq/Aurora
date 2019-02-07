@@ -3,13 +3,10 @@
 
 #include "Color.hpp"
 #include "../Math/Math.hpp"
-#include "../Utility/SenceFile.hpp"
-#include "../Utility/PPM.hpp"
+#include "../Model/Texture.hpp"
 
 #include <string>
 #include <vector>
-#include <algorithm>
-#include <array>
 
 namespace Aurora
 {
@@ -34,8 +31,6 @@ namespace Aurora
         bool IsBackFace(const Vector4D_T<double> &v1, const Vector4D_T<double> &v2, const Vector4D_T<double> &v3);
         void FillFace(const RenderVertex &v1, const RenderVertex &v2, const RenderVertex &v3, const Texture &texture);
 
-        using Loader = SenceFile;
-        using Saver = PPM;
         std::vector<RGB_T<double>> screen;
         std::vector<double> depth;
     };
