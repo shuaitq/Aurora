@@ -9,6 +9,7 @@ namespace Aurora
     {
     public:
         DirectLight();
+        ~DirectLight() = default;
         RGB_T<double> Sample(const Vector4D_T<double> &p, const Vector4D_T<double> &n);
         void Set(const nlohmann::json &json);
         void Transform(const Matrix4X4_T<double> &m);

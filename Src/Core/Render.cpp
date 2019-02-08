@@ -55,7 +55,6 @@ namespace Aurora
                         OutOfRange = true;
                         break;
                     }
-
                 }
                 if(OutOfRange || IsBackFace(v[0].view, v[1].view, v[2].view))
                 {
