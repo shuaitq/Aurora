@@ -25,6 +25,11 @@
 
 <a target="_blank" rel="noopener noreferrer" href="https://github.com/shuaitq/Aurora/blob/master/Image/bunny.png"><img src="https://github.com/shuaitq/Aurora/blob/master/Image/bunny.png" width="400pt" height="225pt"></a>
 
+## 不同光源
+
+<a target="_blank" rel="noopener noreferrer" href="https://github.com/shuaitq/Aurora/blob/master/Image/direct_light_bunny.png"><img src="https://github.com/shuaitq/Aurora/blob/master/Image/direct_light_bunny.png" width="400pt" height="225pt"></a>
+<a target="_blank" rel="noopener noreferrer" href="https://github.com/shuaitq/Aurora/blob/master/Image/point_light_bunny.png"><img src="https://github.com/shuaitq/Aurora/blob/master/Image/point_light_bunny" width="400pt" height="225pt"></a>
+
 # 怎么构建
 
 **请确认您已经安装了make和支持C++11的C++编译器（默认使用g++，可以在Makefile修改）**
