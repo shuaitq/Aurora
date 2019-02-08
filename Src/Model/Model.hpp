@@ -22,7 +22,7 @@ namespace Aurora
         Texture texture;
         std::vector<std::array<size_t, 3>> face;
     private:
-        void Load(const std::string &path);
+        void Load(const std::string &root, const std::string &name);
     };
     extern std::vector<std::shared_ptr<Model>> ModelList;
 };

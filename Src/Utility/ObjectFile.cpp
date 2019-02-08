@@ -7,13 +7,13 @@
 
 namespace Aurora
 {
-    void ObjectFile::Load(const std::string &path, std::vector<std::array<size_t, 3>> &face, Texture &texture)
+    void ObjectFile::Load(const std::string &root, const std::string &name, std::vector<std::array<size_t, 3>> &face, Texture &texture)
     {
-        std::ifstream in(path);
+        std::ifstream in(root + name);
 
         if(!in.is_open())
         {
-            throw std::runtime_error("OBJ File " + path + " can't open!");
+            throw std::runtime_error("OBJ File " + root + name + " can't open!");
         }
         
         std::string str;
@@ -86,7 +86,7 @@ namespace Aurora
                     break;
                 case 'u':
                     in >> str;
-                    texture.Load(str);
+                    texture.Load(root + str);
                     break;
                 case '#':
                     break;

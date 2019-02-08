@@ -12,7 +12,7 @@ namespace Aurora
     class ObjectFile
     {
     public:
-        static void Load(const std::string &path, std::vector<std::array<size_t, 3>> &face, Texture &texture);
+        static void Load(const std::string &root, const std::string &name, std::vector<std::array<size_t, 3>> &face, Texture &texture);
     };
 }
 

@@ -9,7 +9,7 @@ namespace Aurora
     void Model::Set(const nlohmann::json &json, const std::string &root)
     {
         std::string name = json["path"];
-        Load(root + name);
+        Load(root, name);
         const nlohmann::json &Position = json["position"];
         position.x = Position[0];
         position.y = Position[1];
@@ -39,8 +39,8 @@ namespace Aurora
                                    position.x, position.y, position.z, 1);
     }
 
-    void Model::Load(const std::string &path)
+    void Model::Load(const std::string &root, const std::string &name)
     {
-        ObjectFile::Load(path, face, texture);
+        ObjectFile::Load(root, name, face, texture);
     }
 }

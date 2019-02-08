@@ -9,7 +9,6 @@
 
 #include <fstream>
 #include <memory>
-#include <iostream>
 
 namespace Aurora
 {
@@ -21,8 +20,6 @@ namespace Aurora
         {
             root.pop_back();
         }
-
-        std::cout << root << std::endl;
 
         std::ifstream in(path);
 
