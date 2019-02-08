@@ -30,7 +30,7 @@
 <a target="_blank" rel="noopener noreferrer" href="https://github.com/shuaitq/Aurora/blob/master/Image/direct_light_bunny.png"><img src="https://github.com/shuaitq/Aurora/blob/master/Image/direct_light_bunny.png" width="400pt" height="225pt"></a>
 <a target="_blank" rel="noopener noreferrer" href="https://github.com/shuaitq/Aurora/blob/master/Image/point_light_bunny.png"><img src="https://github.com/shuaitq/Aurora/blob/master/Image/point_light_bunny.png" width="400pt" height="225pt"></a>
 
-## 彩色光源叠加 (左边黄色平行光，右边蓝色点光源
+## 彩色光源叠加 （左边黄色平行光，右边蓝色点光源
 
 <a target="_blank" rel="noopener noreferrer" href="https://github.com/shuaitq/Aurora/blob/master/Image/colorful_bunny.png"><img src="https://github.com/shuaitq/Aurora/blob/master/Image/colorful_bunny.png" width="400pt" height="225pt"></a>
 
