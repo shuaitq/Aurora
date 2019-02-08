@@ -14,7 +14,7 @@ namespace Aurora
     {
     public:
         Model();
-        void Set(const nlohmann::json &json);
+        void Set(const nlohmann::json &json, const std::string &root);
         Matrix4X4_T<double> ModelMatrix();
 
         Vector4D_T<double> position;

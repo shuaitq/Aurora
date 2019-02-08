@@ -9,17 +9,28 @@
 
 #include <fstream>
 #include <memory>
+#include <iostream>
 
 namespace Aurora
 {
     void SenceFile::Load(const std::string &path)
     {
         nlohmann::json j;
+        std::string root(path);
+        while(!root.empty() && root.back() != '/')
+        {
+            root.pop_back();
+        }
+
+        std::cout << root << std::endl;
+
         std::ifstream in(path);
+
         if(!in.is_open())
         {
             throw std::runtime_error("Object " + path + " doesn't exist!");
         }
+
         in >> j;
 
         width = j["width"];
@@ -31,7 +42,7 @@ namespace Aurora
         for(auto &it : model)
         {
             std::shared_ptr<Model> m = std::make_shared<Model>();
-            m->Set(it);
+            m->Set(it, root);
             ModelList.push_back(m);
         }
 

@@ -6,9 +6,10 @@ namespace Aurora
 {
     std::vector<std::shared_ptr<Model>> ModelList;
     Model::Model():position(0, 1), u(0, 0), v(0, 0), n(0, 0), texture(), face(){}
-    void Model::Set(const nlohmann::json &json)
+    void Model::Set(const nlohmann::json &json, const std::string &root)
     {
-        Load(json["path"]);
+        std::string name = json["path"];
+        Load(root + name);
         const nlohmann::json &Position = json["position"];
         position.x = Position[0];
         position.y = Position[1];
