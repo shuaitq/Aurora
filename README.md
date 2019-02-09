@@ -94,4 +94,4 @@ Example:
 
 # 参考
 
-[3D游戏编程大师技巧](https://www.amazon.cn/dp/B008IBDL68)
+[《3D游戏编程大师技巧》](https://www.amazon.cn/dp/B008IBDL68)
