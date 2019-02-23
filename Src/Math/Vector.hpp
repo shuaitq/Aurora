@@ -66,7 +66,7 @@ namespace Aurora
 
         Vector2D_T<T> operator - () const
         {
-            return Vector2D_T<T> (-x, -y);
+            return Vector2D_T<T>(-x, -y);
         }
 
         T Length2() const
